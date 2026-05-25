@@ -313,7 +313,36 @@ async function handleCommand(msg) {
       }
 
       default:
-        await sendMessage(chatId, `Bilinmeyen komut: ${command}\n/yardim yazarak komutları görebilirsin.`);
+        // AI fallback — send any unrecognized message to Groq
+        const groqKey = process.env.GROQ_API_KEY;
+        if (groqKey && text.length > 3) {
+          try {
+            const aiRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + groqKey },
+              body: JSON.stringify({
+                model: 'llama-3.3-70b-versatile',
+                messages: [
+                  { role: 'system', content: 'Sen Crosslane Global adli uluslararasi bir tedarik ve ihale danismanlik firmasinin AI asistanisin. ABD ve Kanada kamu ihaleleri, sirket kurma, yatirim danismanligi konularinda yardimci oluyorsun. Kisa, profesyonel, net cevaplar ver. Turkce sorulara Turkce, Ingilizce sorulara Ingilizce cevap ver. 3-4 cumleden fazla yazma.' },
+                  { role: 'user', content: text }
+                ],
+                max_tokens: 250, temperature: 0.5,
+              }),
+              signal: AbortSignal.timeout(15000),
+            });
+            const aiData = await aiRes.json();
+            const reply = aiData.choices?.[0]?.message?.content;
+            if (reply) {
+              await sendMessage(chatId, reply);
+            } else {
+              await sendMessage(chatId, 'Anlayamadim. /yardim yazarak komutlari gorebilirsiniz.');
+            }
+          } catch (e) {
+            await sendMessage(chatId, 'AI yanit veremedi. /yardim yazarak komutlari gorebilirsiniz.');
+          }
+        } else {
+          await sendMessage(chatId, '/yardim yazarak komutlari gorebilirsiniz.');
+        }
     }
   } catch (err) {
     console.error('[telegramBot] Command error:', err);
