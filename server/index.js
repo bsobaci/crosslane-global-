@@ -11,6 +11,7 @@ const { startPolling } = require('./workers/samPoller');
 const { startPolling: startCanadaPolling } = require('./workers/canadaBuysPoller');
 const { startPolling: startMacroPolling } = require('./workers/macroAgent');
 const { startPolling: startUKPolling } = require('./workers/ukPoller');
+const { startPolling: startUAPolling } = require('./workers/uaPoller');
 const { startBot } = require('./workers/telegramBot');
 
 const app = express();
@@ -68,6 +69,7 @@ app.listen(PORT, () => {
     startPolling();
     startCanadaPolling();
     startUKPolling();
+    startUAPolling();
     startMacroPolling();
     startBot();
   }
