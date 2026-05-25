@@ -10,6 +10,7 @@ const adminRoute = require('./routes/admin');
 const { startPolling } = require('./workers/samPoller');
 const { startPolling: startCanadaPolling } = require('./workers/canadaBuysPoller');
 const { startPolling: startMacroPolling } = require('./workers/macroAgent');
+const { startPolling: startUKPolling } = require('./workers/ukPoller');
 const { startBot } = require('./workers/telegramBot');
 
 const app = express();
@@ -66,6 +67,7 @@ app.listen(PORT, () => {
   if (config.nodeEnv !== 'test') {
     startPolling();
     startCanadaPolling();
+    startUKPolling();
     startMacroPolling();
     startBot();
   }

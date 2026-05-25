@@ -312,10 +312,134 @@ async function handleCommand(msg) {
         break;
       }
 
-      default:
-        // AI fallback — send any unrecognized message to Groq
+        // Translate Turkish location names to English for DB search
+        const LOCATION_MAP = {
+          'almanya': 'Germany', 'alman': 'Germany',
+          'japonya': 'Japan', 'japon': 'Japan',
+          'italya': 'Italy', 'italyan': 'Italy',
+          'fransa': 'France', 'fransiz': 'France',
+          'ingiltere': 'United Kingdom', 'ingiliz': 'United Kingdom',
+          'ispanya': 'Spain', 'ispanyol': 'Spain',
+          'cin': 'China', 'cince': 'China',
+          'guney kore': 'South Korea', 'kore': 'Korea',
+          'suudi arabistan': 'Saudi Arabia', 'suudi': 'Saudi Arabia',
+          'bae': 'United Arab Emirates', 'birlesik arap': 'United Arab Emirates',
+          'kanada': 'Canada',
+          'meksika': 'Mexico',
+          'brezilya': 'Brazil',
+          'hindistan': 'India',
+          'rusya': 'Russia',
+          'avustralya': 'Australia',
+          'hollanda': 'Netherlands',
+          'belcika': 'Belgium',
+          'isvec': 'Sweden',
+          'norvec': 'Norway',
+          'danimarka': 'Denmark',
+          'finlandiya': 'Finland',
+          'polonya': 'Poland',
+          'yunanistan': 'Greece',
+          ' Portekiz': 'Portugal',
+        };
+        const lowerText = text.toLowerCase();
+        // Detect Turkish location names and replace in text for intent detection
+        for (const [tr, en] of Object.entries(LOCATION_MAP)) {
+          if (lowerText.includes(tr)) {
+            text = text.replace(new RegExp(tr, 'i'), en);
+          }
+        }
+
+      default: {
         const groqKey = process.env.GROQ_API_KEY;
-        if (groqKey && text.length > 3) {
+        if (!groqKey || text.length < 3) {
+          await sendMessage(chatId, '/yardim yazarak komutlari gorebilirsiniz.');
+          break;
+        }
+        // Step 1: Intent detection via Groq
+        let intent;
+        try {
+          const ir = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + groqKey },
+            body: JSON.stringify({
+              model: 'llama-3.3-70b-versatile',
+              messages: [{ role: 'system', content: 'Classify this user message into ONE intent. Return ONLY valid JSON with no markdown:\n{\"intent\":\"ekonomi|lokasyon|ihale|benzin|savunma|durum|sohbet\",\"country\":\"TR|US|DE etc or null\",\"location\":\"city/state or null\",\"sector\":\"sector name or null\"}\n\nIntents:\n- ekonomi: economic data, GDP, inflation questions\n- lokasyon: tenders in a specific location\n- ihale: tenders by sector/industry\n- benzin: oil/fuel price forecast\n- savunma: military/defense spending\n- durum: status/stats of the system\n- sohbet: casual conversation, greetings, general questions' }, { role: 'user', content: text }],
+              max_tokens: 100, temperature: 0.1,
+            }),
+            signal: AbortSignal.timeout(10000),
+          });
+          const idata = await ir.json();
+          const raw = idata.choices?.[0]?.message?.content || '';
+          const m = raw.match(/\{[\s\S]*\}/);
+          intent = m ? JSON.parse(m[0]) : { intent: 'sohbet' };
+        } catch (e) { intent = { intent: 'sohbet' }; }
+
+        // Step 2: Route to handler
+        if (intent.intent === 'ekonomi' && intent.country) {
+          const { runMacroPoll } = require('./macroAgent');
+          await sendMessage(chatId, '📊 Ekonomik veriler getiriliyor...');
+          const result = await runMacroPoll(intent.country.toUpperCase());
+          const ind = result.indicators || {};
+          const fmt = v => v ? (v>=1e12?(v/1e12).toFixed(2)+'T':v>=1e9?(v/1e9).toFixed(1)+'B':v>=1e6?(v/1e6).toFixed(0)+'M':v.toLocaleString()) : '—';
+          const v = code => ind[code];
+          const msg = '<b>📊 ' + intent.country.toUpperCase() + ' Ekonomik Rapor</b>\n\n' +
+            '• GDP: $' + fmt(v('NY.GDP.MKTP.CD')?.latest_value) + ' (' + (v('NY.GDP.MKTP.KD.ZG')?.latest_value?.toFixed(1)||'—') + '% buyume)\n' +
+            '• Enflasyon: ' + (v('FP.CPI.TOTL.ZG')?.latest_value?.toFixed(1)||'—') + '%\n' +
+            '• Issizlik: ' + (v('SL.UEM.TOTL.ZS')?.latest_value?.toFixed(1)||'—') + '%\n' +
+            '• Ihracat: $' + fmt(v('NE.EXP.GNFS.CD')?.latest_value) + '\n' +
+            '• Askeri Harcama: ' + (v('MS.MIL.XPND.GD.ZS')?.latest_value?.toFixed(1)||'—') + '% GDP\n\n' +
+            '<i>World Bank · ECB</i>';
+          await sendMessage(chatId, msg);
+        } else if (intent.intent === 'lokasyon' && intent.location) {
+          const db = await getDb();
+          const results = db.prepare(`SELECT title, procurement_category, performance_location, budget_min, budget_max, deadline FROM opportunities WHERE status='draft' AND (performance_location LIKE ? OR location_display LIKE ?) LIMIT 10`).all('%'+intent.location+'%', '%'+intent.location+'%');
+          if (results.length === 0) { await sendMessage(chatId, intent.location + ' icin ihale bulunamadi.'); break; }
+          let msg = '<b>📍 ' + intent.location + ' — ' + results.length + ' ihale</b>\n\n';
+          results.slice(0, 6).forEach(r => {
+            const b = r.budget_min ? ' $'+(r.budget_min/1e6).toFixed(1)+'M-$'+(r.budget_max/1e6).toFixed(1)+'M' : '';
+            msg += '• ' + (r.title||'').substring(0, 60) + b + '\n  📍 ' + (r.performance_location||'?') + ' | 📅 ' + (r.deadline||'?') + '\n\n';
+          });
+          await sendMessage(chatId, msg);
+        } else if (intent.intent === 'ihale' && intent.sector) {
+          const db = await getDb();
+          const results = db.prepare(`SELECT title, performance_location, budget_min, budget_max, deadline FROM opportunities WHERE procurement_category LIKE ? AND status='draft' LIMIT 8`).all('%'+intent.sector+'%');
+          if (results.length === 0) { await sendMessage(chatId, intent.sector + ' sektorunde ihale bulunamadi.'); break; }
+          let msg = '<b>📋 ' + intent.sector + ' — ' + results.length + ' ihale</b>\n\n';
+          results.slice(0, 5).forEach(r => {
+            const b = r.budget_min ? ' $'+(r.budget_min/1e6).toFixed(1)+'M-$'+(r.budget_max/1e6).toFixed(1)+'M' : '';
+            msg += '• ' + (r.title||'').substring(0, 60) + b + '\n  📍 ' + (r.performance_location||'?') + ' | 📅 ' + (r.deadline||'?') + '\n\n';
+          });
+          await sendMessage(chatId, msg);
+        } else if (intent.intent === 'benzin') {
+          const { fuelForecast } = require('./macroAgent');
+          await sendMessage(chatId, '🛢️ Petrol tahmini hazirlaniyor...');
+          const fc = await fuelForecast('TR');
+          if (fc) {
+            let msg = '<b>🛢️ Brent Petrol Tahmini</b>\n\n';
+            msg += 'Su An: ~$' + fc.brent_now + '/bbl\n';
+            msg += '2027 Sonu: $' + fc.brent_2027 + '/bbl (' + (fc.change_pct>0?'+':'') + fc.change_pct + '%)\n\n';
+            if (fc.reasoning_tr) msg += fc.reasoning_tr + '\n\n';
+            if (fc.advice_tr) msg += '💡 ' + fc.advice_tr;
+            await sendMessage(chatId, msg);
+          }
+        } else if (intent.intent === 'savunma') {
+          await sendMessage(chatId, '🛡️ Askeri harcamalar getiriliyor...');
+          let msg = '<b>🛡️ Askeri Harcamalar (% GDP)</b>\n\n';
+          const { runMacroPoll } = require('./macroAgent');
+          for (const c of ['US','TR','DE','CN','JP','GB','KR']) {
+            const r = await runMacroPoll(c);
+            const mil = r.indicators?.['MS.MIL.XPND.GD.ZS'];
+            msg += c + ': ' + (mil?.latest_value?.toFixed(1)||'—') + '%\n';
+            await new Promise(x=>setTimeout(x,300));
+          }
+          await sendMessage(chatId, msg);
+        } else if (intent.intent === 'durum') {
+          const db = await getDb();
+          const t = db.prepare('SELECT COUNT(*) as c FROM opportunities').get();
+          const d = db.prepare("SELECT COUNT(*) as c FROM opportunities WHERE status='draft'").get();
+          const p = db.prepare("SELECT COUNT(*) as c FROM opportunities WHERE status='published'").get();
+          await sendMessage(chatId, '<b>📊 Crosslane Global</b>\n\nToplam: ' + t.c + ' ihale\nYayinda: ' + p.c + '\nDraft: ' + d.c + '\n\nSunucu: crosslane-global-production.up.railway.app');
+        } else {
+          // Step 3: Conversational fallback
           try {
             const aiRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
               method: 'POST',
@@ -323,26 +447,22 @@ async function handleCommand(msg) {
               body: JSON.stringify({
                 model: 'llama-3.3-70b-versatile',
                 messages: [
-                  { role: 'system', content: 'Sen Crosslane Global adli uluslararasi bir tedarik ve ihale danismanlik firmasinin AI asistanisin. ABD ve Kanada kamu ihaleleri, sirket kurma, yatirim danismanligi konularinda yardimci oluyorsun. Kisa, profesyonel, net cevaplar ver. Turkce sorulara Turkce, Ingilizce sorulara Ingilizce cevap ver. 3-4 cumleden fazla yazma.' },
+                  { role: 'system', content: 'Sen Crosslane Global adli uluslararasi bir tedarik ve ihale danismanlik firmasinin AI asistanisin. ABD ve Kanada kamu ihaleleri, sirket kurma, yatirim danismanligi konularinda yardimci oluyorsun. Kisa, profesyonel, net cevaplar ver. Turkce sorulara Turkce, Ingilizce sorulara Ingilizce cevap ver. Komutlari da hatirlat: ekonomi verisi /rapor, ihale /lokasyon veya /ihale, petrol /benzin ile sorgulanir.' },
                   { role: 'user', content: text }
                 ],
-                max_tokens: 250, temperature: 0.5,
+                max_tokens: 300, temperature: 0.5,
               }),
               signal: AbortSignal.timeout(15000),
             });
             const aiData = await aiRes.json();
             const reply = aiData.choices?.[0]?.message?.content;
-            if (reply) {
-              await sendMessage(chatId, reply);
-            } else {
-              await sendMessage(chatId, 'Anlayamadim. /yardim yazarak komutlari gorebilirsiniz.');
-            }
+            await sendMessage(chatId, reply || 'Anlayamadim. /yardim yazarak komutlari gorebilirsiniz.');
           } catch (e) {
-            await sendMessage(chatId, 'AI yanit veremedi. /yardim yazarak komutlari gorebilirsiniz.');
+            await sendMessage(chatId, 'Anlayamadim. /yardim yazarak komutlari gorebilirsiniz.');
           }
-        } else {
-          await sendMessage(chatId, '/yardim yazarak komutlari gorebilirsiniz.');
         }
+        break;
+      }
     }
   } catch (err) {
     console.error('[telegramBot] Command error:', err);
