@@ -1,0 +1,24 @@
+# Environment — contains secrets, API keys, credentials
+.env
+
+# Database — local SQLite data
+server/data/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# n8n local data
+.n8n/
+faz3-kurulum-notlari.md

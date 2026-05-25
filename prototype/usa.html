@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>United States — Crosslane Global</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    /* Market Overview */
+    .mkt-overview {
+      background: #1a1a1a;
+      padding: 72px 0 64px;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .mkt-overview-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 60px;
+    }
+    .overview-top {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center; margin-bottom: 56px;
+    }
+    .overview-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500; color: #fff;
+      margin: 0; line-height: 1.1;
+    }
+    .overview-headline em { font-style: italic; color: #B87A2A; }
+    .overview-desc {
+      color: rgba(255,255,255,0.55);
+      font-size: 15px; line-height: 1.85; margin: 0;
+    }
+    .overview-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .ov-stat {
+      padding: 28px 24px;
+      background: rgba(255,255,255,0.03);
+    }
+    .ov-stat strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; color: #B87A2A;
+      margin-bottom: 6px; font-weight: 500;
+    }
+    .ov-stat span { color: rgba(255,255,255,0.55); font-size: 13px; line-height: 1.5; }
+
+    /* Sector Grid */
+    .sector-section { padding: 80px 0; background: #fff; border-bottom: 1px solid #e8e4dc; }
+    .sector-inner { max-width: 1100px; margin: 0 auto; padding: 0 60px; }
+    .sector-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; margin-top: 48px;
+    }
+    .sector-card {
+      border: 1px solid #e8e4dc; border-radius: 3px;
+      padding: 32px 28px; position: relative;
+      background: #fff; transition: box-shadow 0.2s;
+    }
+    .sector-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.07); }
+    .sector-card.hot { border-color: #B87A2A; }
+    .sector-card.hot::before {
+      content: '★ Turkish advantage';
+      position: absolute; top: -1px; right: 20px;
+      background: #B87A2A; color: #fff;
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      padding: 4px 10px; border-radius: 0 0 3px 3px;
+    }
+    .sector-card.hot.tr-badge::before { content: '★ Türk avantajı'; }
+    .sector-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+    .sector-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 500; color: #1a1a1a;
+      margin: 0 0 6px;
+    }
+    .sector-spend {
+      font-size: 22px; font-weight: 600; color: #B87A2A;
+      font-family: 'Playfair Display', serif;
+      display: block; margin-bottom: 10px;
+    }
+    .sector-agencies {
+      font-size: 12px; color: #aaa;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .sector-desc { font-size: 13px; color: #666; line-height: 1.7; margin: 0; }
+
+    /* Opportunities by Sector */
+    .opps-section { padding: 80px 0; background: #faf9f7; border-bottom: 1px solid #e8e4dc; }
+    .opps-inner { max-width: 1100px; margin: 0 auto; padding: 0 60px; }
+    .sector-group { margin-bottom: 48px; }
+    .sector-group:last-child { margin-bottom: 0; }
+    .sector-group-label {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px; padding-bottom: 16px;
+      border-bottom: 1px solid #e8e4dc;
+    }
+    .sector-group-label span {
+      font-size: 10px; text-transform: uppercase;
+      letter-spacing: 0.25em; font-weight: 600; color: #B87A2A;
+    }
+    .sector-group-label strong {
+      font-size: 13px; color: #aaa; font-weight: 400;
+    }
+    .opps-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .opp-tile {
+      background: #fff; border: 1px solid #e0dbd2;
+      border-radius: 3px; padding: 24px;
+    }
+    .opp-top {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; margin-bottom: 10px; gap: 8px;
+    }
+    .opp-agency { font-size: 11px; color: #B87A2A; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; }
+    .opp-due { font-size: 11px; color: #bbb; white-space: nowrap; }
+    .opp-tile h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 500; color: #1a1a1a;
+      margin: 0 0 8px; line-height: 1.3;
+    }
+    .opp-meta { font-size: 12px; color: #666; margin-bottom: 8px; }
+    .opp-tile p { font-size: 13px; color: #888; line-height: 1.65; margin: 0; }
+
+    .briefing-bar {
+      background: #1a1a1a; border-radius: 3px;
+      padding: 24px 32px; margin-top: 40px;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .briefing-bar p { color: rgba(255,255,255,0.6); font-size: 13px; margin: 0; }
+    .briefing-bar strong { color: #fff; font-size: 15px; display: block; margin-bottom: 4px; }
+    .btn-gold-sm {
+      background: #B87A2A; color: #fff;
+      padding: 11px 22px; border-radius: 2px;
+      text-decoration: none; font-size: 12px;
+      font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.12em; white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .btn-gold-sm:hover { opacity: 0.85; color: #fff; }
+
+    /* News */
+    .news-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+    .news-item { border-top: 2px solid #B87A2A; padding-top: 18px; }
+    .news-cat { font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #B87A2A; font-weight: 600; margin: 0 0 12px; }
+    .news-item h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; font-weight: 500; color: #1a1a1a;
+      margin: 0 0 10px; line-height: 1.3;
+    }
+    .news-item p { font-size: 13px; color: #777; line-height: 1.75; margin: 0 0 12px; }
+    .news-source { font-size: 11px; color: #bbb; }
+
+    /* SLED Section */
+    .sled-section { padding: 80px 0; background: #fff; border-bottom: 1px solid #e8e4dc; }
+    .sled-inner { max-width: 1100px; margin: 0 auto; padding: 0 60px; }
+    .sled-intro {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: center; margin: 48px 0 56px;
+    }
+    .sled-big-stat {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(52px, 7vw, 88px);
+      font-weight: 500; color: #B87A2A; line-height: 1;
+      margin: 0 0 12px;
+    }
+    .sled-stat-label {
+      font-size: 14px; color: #888; text-transform: uppercase;
+      letter-spacing: 0.2em; font-weight: 600;
+    }
+    .sled-intro-text { font-size: 15px; color: #555; line-height: 1.85; margin: 0; }
+    .state-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin-bottom: 56px;
+    }
+    .state-card {
+      border: 1px solid #e8e4dc; border-radius: 3px;
+      padding: 24px 20px; background: #faf9f7;
+    }
+    .state-flag { font-size: 22px; margin-bottom: 10px; display: block; }
+    .state-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 500; color: #1a1a1a;
+      margin: 0 0 6px;
+    }
+    .state-spend {
+      font-size: 22px; font-weight: 600; color: #B87A2A;
+      font-family: 'Playfair Display', serif;
+      display: block; margin-bottom: 6px;
+    }
+    .state-portal { font-size: 10px; color: #B87A2A; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; margin-bottom: 8px; display: block; }
+    .state-note { font-size: 12px; color: #888; line-height: 1.6; margin: 0; }
+    .sled-sub-label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em;
+      font-weight: 600; color: #B87A2A; margin-bottom: 20px; display: block;
+    }
+    .sled-example-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .sled-example {
+      background: #faf9f7; border: 1px solid #e0dbd2;
+      border-radius: 3px; padding: 22px;
+    }
+    .sled-ex-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+    .sled-ex-agency { font-size: 10px; color: #B87A2A; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; }
+    .sled-ex-value { font-size: 12px; font-weight: 600; color: #1a1a1a; white-space: nowrap; }
+    .sled-example h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px; font-weight: 500; color: #1a1a1a;
+      margin: 0 0 6px; line-height: 1.3;
+    }
+    .sled-example p { font-size: 12px; color: #888; line-height: 1.65; margin: 0; }
+    .sled-bar {
+      background: #1a1a1a; border-radius: 3px;
+      padding: 32px 40px; margin-top: 48px;
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: center; gap: 40px;
+    }
+    .sled-bar h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 500; color: #fff;
+      margin: 0 0 10px; line-height: 1.2;
+    }
+    .sled-bar p { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.75; margin: 0; }
+    .sled-levels { display: flex; gap: 8px; flex-wrap: wrap; }
+    .sled-level {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px; padding: 12px 18px; text-align: center; min-width: 120px;
+    }
+    .sled-level strong { display: block; color: #B87A2A; font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+    .sled-level span { font-size: 10px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.4; display: block; }
+
+    @media (max-width: 900px) {
+      .overview-top { grid-template-columns: 1fr; gap: 28px; }
+      .overview-stats { grid-template-columns: 1fr 1fr; }
+      .sector-grid { grid-template-columns: 1fr 1fr; }
+      .opps-row { grid-template-columns: 1fr; }
+      .news-grid { grid-template-columns: 1fr; }
+      .mkt-overview-inner, .sector-inner, .opps-inner, .sled-inner { padding: 0 32px; }
+      .state-grid { grid-template-columns: 1fr 1fr; }
+      .sled-example-row { grid-template-columns: 1fr; }
+      .sled-intro { grid-template-columns: 1fr; gap: 28px; }
+      .sled-bar { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 580px) {
+      .sector-grid { grid-template-columns: 1fr; }
+      .overview-stats { grid-template-columns: 1fr 1fr; }
+      .state-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<!-- HERO -->
+<header class="subhero" style="background: linear-gradient(180deg, rgba(26,26,26,0.42) 0%, rgba(26,26,26,0.65) 100%), url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1920&q=80') center/cover no-repeat;">
+  <div class="container">
+    <div class="crumb"><a href="why-us-canada.html" style="color:inherit;text-decoration:none;" data-en>← Our Markets</a><a href="why-us-canada.html" style="color:inherit;text-decoration:none;" data-tr>← Piyasalarımız</a></div>
+    <h1>🇺🇸 <span data-en>United States.</span><span data-tr>Amerika Birleşik Devletleri.</span></h1>
+    <p class="lead" data-en>The world's largest economy — and our home base. U.S. federal contracts don't stop at the border. They follow the flag: military bases in Germany, Japan, and Korea; embassies and consulates on every continent; installations across 50 states and beyond. A U.S.-registered company can bid on all of it. We help you get there.</p>
+    <p class="lead" data-tr>Dünyanın en büyük ekonomisi — ve ana üssümüz. ABD federal sözleşmeleri sınırda bitmiyor. Bayrağı takip eder: Almanya, Japonya ve Kore'deki askeri üsler; her kıtadaki büyükelçilikler ve konsolosluklar; 50 eyalet ve ötesindeki tesisler. ABD'de kayıtlı bir şirket bunların tümüne teklif verebilir. Oraya ulaşmanıza biz yardım ediyoruz.</p>
+  </div>
+</header>
+
+<!-- MARKET OVERVIEW -->
+<section class="mkt-overview">
+  <div class="mkt-overview-inner">
+    <div class="overview-top">
+      <h2 class="overview-headline" data-en>The U.S. federal government spends <em>$750B+</em> on contracts every year.</h2>
+      <h2 class="overview-headline" data-tr>ABD federal hükümeti her yıl sözleşmeler için <em>750 milyar dolar+</em> harcıyor.</h2>
+      <p class="overview-desc" data-en>That's not just defense. It spans IT, construction, healthcare, logistics, and professional services — across 50 states, and at every U.S. military base, embassy, and consulate worldwide. Germany, Japan, Korea, Turkey, Qatar — wherever the U.S. flag flies, federal contracts follow. Any U.S.-registered company can bid. We help you win.</p>
+      <p class="overview-desc" data-tr>Bu sadece savunma değil. BT, inşaat, sağlık, lojistik ve profesyonel hizmetleri kapsıyor — 50 eyalet ve dünyanın dört bir yanındaki her ABD askeri üssü, büyükelçilik ve konsoloslukta. Almanya, Japonya, Kore, Türkiye, Katar — ABD bayrağının dalgalandığı her yerde federal sözleşmeler var. ABD'de kayıtlı herhangi bir şirket teklif verebilir. Kazanmanıza biz yardım ediyoruz.</p>
+    </div>
+    <div class="overview-stats">
+      <div class="ov-stat">
+        <strong>$750B+</strong>
+        <span data-en>Annual federal procurement</span><span data-tr>Yıllık federal tedarik</span>
+      </div>
+      <div class="ov-stat">
+        <strong>$160B+</strong>
+        <span data-en>Reserved for small businesses</span><span data-tr>Küçük işletmelere ayrılan</span>
+      </div>
+      <div class="ov-stat">
+        <strong>400+</strong>
+        <span data-en>Federal agencies buying</span><span data-tr>Satın alan federal ajans</span>
+      </div>
+      <div class="ov-stat">
+        <strong>170+</strong>
+        <span data-en>Countries where U.S. federal contracts are active</span><span data-tr>ABD federal sözleşmelerinin aktif olduğu ülke</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTOR BREAKDOWN -->
+<section class="sector-section">
+  <div class="sector-inner">
+    <span class="section-tag" data-en>Where the money flows</span>
+    <span class="section-tag" data-tr>Para nereye akıyor</span>
+    <h2 class="section-title" data-en>Federal spend by sector — and where Turkish companies compete best.</h2>
+    <h2 class="section-title" data-tr>Sektöre göre federal harcama — ve Türk şirketlerinin en iyi rekabet ettiği alanlar.</h2>
+
+    <div class="sector-grid">
+
+      <div class="sector-card hot">
+        <span class="sector-icon">🏗️</span>
+        <h4 data-en>Construction &amp; Infrastructure</h4>
+        <h4 data-tr>İnşaat &amp; Altyapı</h4>
+        <span class="sector-spend">$65B+ / year</span>
+        <p class="sector-agencies">GSA · Army Corps · DoT · DoD</p>
+        <p class="sector-desc" data-en>Federal buildings, roads, and energy infrastructure — plus military bases, embassies, and consulates worldwide. Army Corps of Engineers and Navy NAVFAC manage construction contracts on U.S. installations across Europe, the Middle East, and Asia. Turkey's contractors know this work better than most.</p>
+        <p class="sector-desc" data-tr>Federal binalar, yollar, enerji altyapısı — artı dünya genelinde askeri üsler, büyükelçilikler ve konsolosluklar. Ordu Mühendis Birlikleri ve NAVFAC, Avrupa, Orta Doğu ve Asya'daki ABD tesislerinde inşaat sözleşmelerini yönetiyor. Türk müteahhitler bu işi çoğundan daha iyi biliyor.</p>
+      </div>
+
+      <div class="sector-card hot">
+        <span class="sector-icon">💻</span>
+        <h4 data-en>IT &amp; Digital Services</h4>
+        <h4 data-tr>BT &amp; Dijital Hizmetler</h4>
+        <span class="sector-spend">$100B+ / year</span>
+        <p class="sector-agencies">DoD · VA · DHS · IRS · HHS</p>
+        <p class="sector-desc" data-en>Software development, cybersecurity, cloud migration, data analytics, and IT modernization. The fastest-growing procurement category — and accessible to small businesses with the right clearances.</p>
+        <p class="sector-desc" data-tr>Yazılım geliştirme, siber güvenlik, bulut geçişi, veri analitiği ve BT modernizasyonu. En hızlı büyüyen tedarik kategorisi — ve doğru izinlere sahip küçük işletmeler için erişilebilir.</p>
+      </div>
+
+      <div class="sector-card hot">
+        <span class="sector-icon">🚛</span>
+        <h4 data-en>Supply Chain &amp; Logistics</h4>
+        <h4 data-tr>Tedarik Zinciri &amp; Lojistik</h4>
+        <span class="sector-spend">$35B+ / year</span>
+        <p class="sector-agencies">DLA · USPS · DoD · GSA</p>
+        <p class="sector-desc" data-en>Military supply chains, government fleet management, warehousing, and distribution. Turkey's geographic position and logistics sector create natural expertise for U.S. federal logistics contracts.</p>
+        <p class="sector-desc" data-tr>Askeri tedarik zincirleri, hükümet filo yönetimi, depolama ve dağıtım. Türkiye'nin coğrafi konumu ve lojistik sektörü, ABD federal lojistik sözleşmeleri için doğal uzmanlık yaratıyor.</p>
+      </div>
+
+      <div class="sector-card">
+        <span class="sector-icon">🛡️</span>
+        <h4 data-en>Defense &amp; Security</h4>
+        <h4 data-tr>Savunma &amp; Güvenlik</h4>
+        <span class="sector-spend">$140B+ / year</span>
+        <p class="sector-agencies">DoD · DHS · CISA · NSA</p>
+        <p class="sector-desc" data-en>Defense equipment, security services, intelligence support, and base operations. Many sub-categories don't require security clearances and are open to small businesses. High value, long-term contracts.</p>
+        <p class="sector-desc" data-tr>Savunma ekipmanları, güvenlik hizmetleri, istihbarat desteği ve üs operasyonları. Pek çok alt kategori güvenlik izni gerektirmiyor ve küçük işletmelere açık. Yüksek değerli, uzun vadeli sözleşmeler.</p>
+      </div>
+
+      <div class="sector-card">
+        <span class="sector-icon">🏥</span>
+        <h4 data-en>Healthcare &amp; Medical</h4>
+        <h4 data-tr>Sağlık &amp; Tıbbi</h4>
+        <span class="sector-spend">$50B+ / year</span>
+        <p class="sector-agencies">VA · HHS · DoD · NIH</p>
+        <p class="sector-desc" data-en>Medical supplies, healthcare IT, clinical services, and pharmaceutical procurement. VA alone spends over $20B annually — much of it on medical equipment and supplies accessible to international suppliers.</p>
+        <p class="sector-desc" data-tr>Tıbbi malzemeler, sağlık BT'si, klinik hizmetler ve ilaç tedariki. Sadece VA yılda 20 milyar dolardan fazla harcıyor — büyük bölümü uluslararası tedarikçilere erişilebilir tıbbi ekipman ve malzemelerde.</p>
+      </div>
+
+      <div class="sector-card">
+        <span class="sector-icon">📋</span>
+        <h4 data-en>Professional Services</h4>
+        <h4 data-tr>Profesyonel Hizmetler</h4>
+        <span class="sector-spend">$80B+ / year</span>
+        <p class="sector-agencies">All agencies · State · Treasury</p>
+        <p class="sector-desc" data-en>Management consulting, training, research, translation, and program management. One of the most accessible categories for newly formed U.S. companies — including foreign-owned entities.</p>
+        <p class="sector-desc" data-tr>Yönetim danışmanlığı, eğitim, araştırma, çeviri ve program yönetimi. Yabancı sahipli şirketler dahil yeni kurulan ABD şirketleri için en erişilebilir kategorilerden biri.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVE OPPORTUNITIES BY SECTOR -->
+<section class="opps-section">
+  <div class="opps-inner">
+    <span class="section-tag" data-en>Active tenders · SAM.gov · Updated weekly</span>
+    <span class="section-tag" data-tr>Aktif ihaleler · SAM.gov · Haftalık güncellenir</span>
+    <h2 class="section-title" data-en>Contracts we're tracking right now.</h2>
+    <h2 class="section-title" data-tr>Şu an takip ettiğimiz sözleşmeler.</h2>
+    <p style="color:var(--text-secondary);font-size:15px;margin:-4px 0 40px;max-width:680px" data-en>These contracts span U.S. domestic agencies and overseas installations — military bases, embassies, and consulates worldwide. All are open to U.S.-registered companies. Engaged clients receive weekly briefings with full bid analysis and our go/no-go recommendation.</p>
+    <p style="color:var(--text-secondary);font-size:15px;margin:-4px 0 40px;max-width:680px" data-tr>Bu sözleşmeler ABD iç ajanslarını ve yurt dışı tesislerini — dünya genelindeki askeri üsleri, büyükelçilikleri ve konsoloslukları kapsamaktadır. Tümü ABD kayıtlı şirketlere açıktır. Aktif müşterilerimiz tam teklif analizi ve katılım/katılmama önerimizle haftalık brifinglar alır.</p>
+
+    <!-- Construction -->
+    <div class="sector-group">
+      <div class="sector-group-label">
+        <span>🏗️ <span data-en>Construction &amp; Infrastructure</span><span data-tr>İnşaat &amp; Altyapı</span></span>
+        <strong data-en>$65B+ annual federal spend</strong><strong data-tr>Yıllık $65B+ federal harcama</strong>
+      </div>
+      <div class="opps-row">
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">GSA Mid-Atlantic</span>
+            <span class="opp-due">Due Jun 18</span>
+          </div>
+          <h5 data-en>Embassy Compound Renovation — Multiple Locations</h5>
+          <h5 data-tr>Büyükelçilik Bina Renovasyonu — Çok Lokasyonlu</h5>
+          <p class="opp-meta"><strong>$12M</strong> · HUBZone set-aside · NAICS 236220</p>
+          <p data-en>Infrastructure and interior upgrades across State Department facilities. Work spans multiple embassy compounds in Europe and the Middle East. Experience with occupied diplomatic facilities preferred.</p>
+          <p data-tr>Dışişleri Bakanlığı tesislerinde altyapı ve iç mekan yükseltmeleri. Avrupa ve Orta Doğu'daki birden fazla büyükelçilik kompleksini kapsıyor. İşlek diplomatik tesisler konusunda deneyim tercih edilir.</p>
+        </div>
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">Army Corps of Engineers</span>
+            <span class="opp-due">Due Jul 3</span>
+          </div>
+          <h5 data-en>Military Base Maintenance &amp; Repair — OCONUS</h5>
+          <h5 data-tr>Askeri Üs Bakım &amp; Onarım — Yurt Dışı Tesisler</h5>
+          <p class="opp-meta"><strong>$18M</strong> · Small business set-aside · NAICS 236210</p>
+          <p data-en>Ongoing maintenance and repair for U.S. military installations outside the continental U.S. (OCONUS) — covering bases in Europe and the Middle East. Multi-year base contract with options. Strong fit for contractors with prior overseas military project experience.</p>
+          <p data-tr>Kıta dışındaki ABD askeri tesisleri (OCONUS) için süregelen bakım ve onarım — Avrupa ve Orta Doğu'daki üsleri kapsıyor. Opsiyon yıllı çok yıllı temel sözleşme. Önceki yurt dışı askeri proje deneyimine sahip müteahhitler için güçlü uyum.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- IT & Digital -->
+    <div class="sector-group">
+      <div class="sector-group-label">
+        <span>💻 <span data-en>IT &amp; Digital Services</span><span data-tr>BT &amp; Dijital Hizmetler</span></span>
+        <strong data-en>$100B+ annual federal spend</strong><strong data-tr>Yıllık $100B+ federal harcama</strong>
+      </div>
+      <div class="opps-row">
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">Dept. of Veterans Affairs</span>
+            <span class="opp-due">Due Jun 14</span>
+          </div>
+          <h5 data-en>IT Modernization Support — Claims Processing Systems</h5>
+          <h5 data-tr>BT Modernizasyon Desteği — Talep İşlem Sistemleri</h5>
+          <p class="opp-meta"><strong>$25M–$40M</strong> · 8(a) set-aside · NAICS 541512</p>
+          <p data-en>Multi-year IDIQ for legacy system overhaul and cloud migration. Past performance in federal cloud environments preferred.</p>
+          <p data-tr>Eski sistem yenileme ve bulut geçişi için çok yıllı IDIQ. Federal bulut ortamlarında geçmiş performans tercih edilir.</p>
+        </div>
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">DHS CISA</span>
+            <span class="opp-due">Due May 30</span>
+          </div>
+          <h5 data-en>Cybersecurity Operations Support — SOC Services</h5>
+          <h5 data-tr>Siber Güvenlik Operasyon Desteği — SOC Hizmetleri</h5>
+          <p class="opp-meta"><strong>$8M</strong> · SDVOSB · NAICS 541519</p>
+          <p data-en>SOC operations, threat monitoring, and incident response. 5-year base + options. Reliability security clearance required.</p>
+          <p data-tr>SOC operasyonları, tehdit izleme ve olay müdahalesi. 5 yıl + opsiyonlar. Güvenilirlik güvenlik izni gerekli.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Supply Chain & Logistics -->
+    <div class="sector-group">
+      <div class="sector-group-label">
+        <span>🚛 <span data-en>Supply Chain &amp; Logistics</span><span data-tr>Tedarik Zinciri &amp; Lojistik</span></span>
+        <strong data-en>$35B+ annual federal spend</strong><strong data-tr>Yıllık $35B+ federal harcama</strong>
+      </div>
+      <div class="opps-row">
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">Defense Logistics Agency</span>
+            <span class="opp-due">Due Jun 28</span>
+          </div>
+          <h5 data-en>Warehouse &amp; Distribution Services — Mid-Atlantic Region</h5>
+          <h5 data-tr>Depo &amp; Dağıtım Hizmetleri — Orta Atlantik Bölgesi</h5>
+          <p class="opp-meta"><strong>$22M</strong> · Open competition · NAICS 493110</p>
+          <p data-en>Warehousing, inventory management, and distribution for military parts and equipment. 3-year base contract with 2 option years.</p>
+          <p data-tr>Askeri parçalar ve ekipman için depolama, envanter yönetimi ve dağıtım. 2 opsiyon yıllı 3 yıllık temel sözleşme.</p>
+        </div>
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">GSA Fleet Management</span>
+            <span class="opp-due">Due Jul 10</span>
+          </div>
+          <h5 data-en>Vehicle Maintenance &amp; Fleet Support — Overseas Federal Facilities</h5>
+          <h5 data-tr>Araç Bakımı &amp; Filo Desteği — Yurt Dışı Federal Tesisler</h5>
+          <p class="opp-meta"><strong>$9M</strong> · Small business · NAICS 811111</p>
+          <p data-en>Preventive maintenance, repair, and fleet management support for vehicle fleets at U.S. embassies and consulates abroad. Multiple performance locations across Europe and the Middle East.</p>
+          <p data-tr>Yurt dışındaki ABD büyükelçilikleri ve konsolosluklarındaki araç filoları için önleyici bakım, onarım ve filo yönetimi desteği. Avrupa ve Orta Doğu'da çok sayıda iş yeri.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Professional Services -->
+    <div class="sector-group">
+      <div class="sector-group-label">
+        <span>📋 <span data-en>Professional Services</span><span data-tr>Profesyonel Hizmetler</span></span>
+        <strong data-en>$80B+ annual federal spend</strong><strong data-tr>Yıllık $80B+ federal harcama</strong>
+      </div>
+      <div class="opps-row">
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">HHS · Healthcare Analytics</span>
+            <span class="opp-due">Due May 30</span>
+          </div>
+          <h5 data-en>Population Health Data Analytics Platform — HHS</h5>
+          <h5 data-tr>Nüfus Sağlığı Veri Analitiği Platformu — HHS</h5>
+          <p class="opp-meta"><strong>$8M</strong> · NAICS 541511 · 5-year contract</p>
+          <p data-en>Analytics platform for population health monitoring. Past performance in CMS or Medicaid data environments preferred.</p>
+          <p data-tr>Nüfus sağlığı izleme için analitik platform. CMS veya Medicaid veri ortamlarında geçmiş performans tercih edilir.</p>
+        </div>
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">Dept. of State</span>
+            <span class="opp-due">Due Jun 22</span>
+          </div>
+          <h5 data-en>Program Management &amp; Translation Services — State Dept.</h5>
+          <h5 data-tr>Program Yönetimi &amp; Çeviri Hizmetleri — Dışişleri Bakanlığı</h5>
+          <p class="opp-meta"><strong>$5M</strong> · Small business · NAICS 541930</p>
+          <p data-en>Multilingual program support, translation (Turkish, Arabic, Farsi among others), and international program management. Ideal for bilingual teams.</p>
+          <p data-tr>Çok dilli program desteği, çeviri (Türkçe, Arapça, Farsça dahil) ve uluslararası program yönetimi. İki dilli ekipler için ideal.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="briefing-bar">
+      <div>
+        <strong data-en>Receive the full weekly briefing — with go/no-go analysis for each opportunity.</strong>
+        <strong data-tr>Tam haftalık brifingi alın — her fırsat için katılım/katılmama analiziyle.</strong>
+        <p data-en>Source: SAM.gov · Curated and analyzed by our team each week</p>
+        <p data-tr>Kaynak: SAM.gov · Her hafta ekibimiz tarafından derlenir ve analiz edilir</p>
+      </div>
+      <a href="contact.html" class="btn-gold-sm">
+        <span data-en>Request a briefing →</span><span data-tr>Brifing talep et →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STATE & LOCAL -->
+<section class="sled-section">
+  <div class="sled-inner">
+    <span class="section-tag" data-en>Beyond SAM.gov — state &amp; local procurement</span>
+    <span class="section-tag" data-tr>SAM.gov'un Ötesi — eyalet ve yerel ihaleler</span>
+    <h2 class="section-title" data-en>State and local governments spend more than the federal government. Almost no one tracks it.</h2>
+    <h2 class="section-title" data-tr>Eyalet ve yerel yönetimler federal hükümetten daha fazla harcıyor. Neredeyse kimse bunu takip etmiyor.</h2>
+
+    <div class="sled-intro">
+      <div>
+        <p class="sled-big-stat">$1.5T</p>
+        <p class="sled-stat-label" data-en>Annual state &amp; local procurement — U.S.</p>
+        <p class="sled-stat-label" data-tr>Yıllık eyalet &amp; yerel ihale — ABD</p>
+      </div>
+      <p class="sled-intro-text" data-en>SAM.gov covers federal contracts. But 100,000+ state agencies, cities, counties, and school districts each run their own procurement — construction, IT, maintenance, catering, professional services. Combined, they spend roughly twice what the federal government does. Tracking them is complex: every agency has its own portal, its own timeline, its own rules. Most foreign investors don't even know this market exists. We track it — and we brief our clients on it weekly.</p>
+      <p class="sled-intro-text" data-tr>SAM.gov federal sözleşmeleri kapsar. Ancak 100.000'den fazla eyalet kurumu, şehir, ilçe ve okul bölgesi kendi ihalelerini yönetiyor — inşaat, BT, bakım, catering, profesyonel hizmetler. Toplamda federal hükümetten yaklaşık iki kat fazla harcıyorlar. Takibi karmaşık: her kurumun kendi portalı, kendi takvimi, kendi kuralları var. Yabancı yatırımcıların çoğu bu pazarın varlığından bile haberdar değil. Biz takip ediyoruz — ve müşterilerimizi haftalık olarak bilgilendiriyoruz.</p>
+    </div>
+
+    <span class="sled-sub-label" data-en>Key states — estimated annual SLED procurement</span>
+    <span class="sled-sub-label" data-tr>Önemli eyaletler — tahmini yıllık SLED ihalesi</span>
+
+    <div class="state-grid">
+      <div class="state-card">
+        <span class="state-flag">🌴</span>
+        <p class="state-name">California</p>
+        <span class="state-spend">~$300B</span>
+        <span class="state-portal">Cal eProcure</span>
+        <p class="state-note" data-en>Largest SLED market in the nation. Infrastructure, green energy, digital transformation, healthcare — all actively procured.</p>
+        <p class="state-note" data-tr>Ülkedeki en büyük SLED pazarı. Altyapı, yeşil enerji, dijital dönüşüm, sağlık — hepsi aktif olarak satın alınıyor.</p>
+      </div>
+      <div class="state-card">
+        <span class="state-flag">🌊</span>
+        <p class="state-name">Florida</p>
+        <span class="state-spend">~$160B</span>
+        <span class="state-portal">MyFloridaMarketPlace</span>
+        <p class="state-note" data-en>High volume of contracts in construction, emergency management, and education technology. Fast-moving procurement cycles.</p>
+        <p class="state-note" data-tr>İnşaat, acil durum yönetimi ve eğitim teknolojisinde yüksek hacimli sözleşmeler. Hızlı tedarik döngüleri.</p>
+      </div>
+      <div class="state-card">
+        <span class="state-flag">⭐</span>
+        <p class="state-name">Texas</p>
+        <span class="state-spend">~$150B</span>
+        <span class="state-portal">Texas SmartBuy</span>
+        <p class="state-note" data-en>Massive infrastructure and energy pipeline. Strong demand for construction, IT, and professional services at state and county level.</p>
+        <p class="state-note" data-tr>Büyük altyapı ve enerji iş akışı. Eyalet ve ilçe düzeyinde inşaat, BT ve profesyonel hizmetlere güçlü talep.</p>
+      </div>
+      <div class="state-card">
+        <span class="state-flag">🗽</span>
+        <p class="state-name">New York</p>
+        <span class="state-spend">~$150B</span>
+        <span class="state-portal">NY Contract Reporter</span>
+        <p class="state-note" data-en>MTA's $51B capital plan, affordable housing, smart cities. Urban development and transit dominate the procurement landscape.</p>
+        <p class="state-note" data-tr>MTA'nın 51 milyar dolarlık sermaye planı, uygun fiyatlı konut, akıllı şehirler. Kentsel gelişim ve ulaşım ihalelerini domine ediyor.</p>
+      </div>
+      <div class="state-card">
+        <span class="state-flag">🏛️</span>
+        <p class="state-name">Virginia</p>
+        <span class="state-spend">~$100B</span>
+        <span class="state-portal">eVA · eva.virginia.gov</span>
+        <p class="state-note" data-en>Our home state. Strong crossover with federal contracting. Leading market for cybersecurity, data centers, defense tech, and infrastructure.</p>
+        <p class="state-note" data-tr>Ana eyaletimiz. Federal ihaleyle güçlü örtüşme. Siber güvenlik, veri merkezleri, savunma teknolojisi ve altyapıda öncü pazar.</p>
+      </div>
+      <div class="state-card">
+        <span class="state-flag">🌆</span>
+        <p class="state-name">Illinois</p>
+        <span class="state-spend">~$70B</span>
+        <span class="state-portal">Illinois Procurement Bulletin</span>
+        <p class="state-note" data-en>Road, rail, and airport upgrades, Medicaid modernization, and smart city initiatives. Chicago area alone drives significant procurement volume.</p>
+        <p class="state-note" data-tr>Yol, demiryolu ve havalimanı yükseltmeleri, Medicaid modernizasyonu ve akıllı şehir girişimleri. Chicago bölgesi tek başına önemli ihale hacmi yaratıyor.</p>
+      </div>
+    </div>
+
+    <span class="sled-sub-label" data-en>Example local contracts — the kind most investors never find</span>
+    <span class="sled-sub-label" data-tr>Örnek yerel sözleşmeler — çoğu yatırımcının hiç bulamadığı türden</span>
+
+    <div class="sled-example-row">
+      <div class="sled-example">
+        <div class="sled-ex-top">
+          <span class="sled-ex-agency">Fairfax County, VA</span>
+          <span class="sled-ex-value">$2.8M</span>
+        </div>
+        <h5 data-en>County Government Buildings — Maintenance &amp; Repair</h5>
+        <h5 data-tr>İlçe Hükümet Binaları — Bakım &amp; Onarım</h5>
+        <p data-en>HVAC, electrical, and structural maintenance for county administration buildings. Annual contract, renewable. Open to any licensed contractor registered in Virginia.</p>
+        <p data-tr>İlçe idare binaları için HVAC, elektrik ve yapısal bakım. Yıllık sözleşme, yenilenebilir. Virginia'da kayıtlı lisanslı herhangi bir müteahhide açık.</p>
+      </div>
+      <div class="sled-example">
+        <div class="sled-ex-top">
+          <span class="sled-ex-agency">Arlington County, VA</span>
+          <span class="sled-ex-value">$1.5M</span>
+        </div>
+        <h5 data-en>IT Help Desk &amp; Support Services — County Government</h5>
+        <h5 data-tr>BT Yardım Masası &amp; Destek Hizmetleri — İlçe Yönetimi</h5>
+        <p data-en>End-user IT support, hardware maintenance, and system troubleshooting for county staff. Multi-year standing offer. Accessible to small businesses — no security clearance required.</p>
+        <p data-tr>İlçe personeli için son kullanıcı BT desteği, donanım bakımı ve sistem sorun giderme. Çok yıllık standing offer. Güvenlik izni gerekmez — küçük işletmeler için erişilebilir.</p>
+      </div>
+      <div class="sled-example">
+        <div class="sled-ex-top">
+          <span class="sled-ex-agency">Virginia Beach City</span>
+          <span class="sled-ex-value">$950K</span>
+        </div>
+        <h5 data-en>Catering &amp; Food Services — Municipal Facilities</h5>
+        <h5 data-tr>Catering &amp; Yemek Hizmetleri — Belediye Tesisleri</h5>
+        <p data-en>Full catering services for city events, employee cafeterias, and public facilities. Annual contract with extensions. One of hundreds of similar local tenders we track across the DMV region.</p>
+        <p data-tr>Şehir etkinlikleri, çalışan kafeteryaları ve kamu tesisleri için tam catering hizmetleri. Uzatmalı yıllık sözleşme. DMV bölgesinde takip ettiğimiz yüzlerce benzer yerel ihaleden biri.</p>
+      </div>
+    </div>
+
+    <div class="sled-bar">
+      <div>
+        <h4 data-en>We track federal, state, and local contracts — all three levels.</h4>
+        <h4 data-tr>Federal, eyalet ve yerel sözleşmeleri takip ediyoruz — üç seviyenin tamamını.</h4>
+        <p data-en>Most investors can navigate SAM.gov on their own. What they can't do is monitor 100,000+ state and local agencies across 50 states. We do — and we surface what's relevant for your sector, your size, and your goals.</p>
+        <p data-tr>Çoğu yatırımcı SAM.gov'u kendi başına yönetebilir. Yapamadıkları şey 50 eyaletteki 100.000'den fazla eyalet ve yerel kurumu izlemek. Biz yapıyoruz — sektörünüz, büyüklüğünüz ve hedefleriniz için neyin alakalı olduğunu sunuyoruz.</p>
+      </div>
+      <div class="sled-levels">
+        <div class="sled-level">
+          <strong>$750B+</strong>
+          <span data-en>Federal (SAM.gov)</span><span data-tr>Federal (SAM.gov)</span>
+        </div>
+        <div class="sled-level">
+          <strong>$1.5T+</strong>
+          <span data-en>State &amp; Local (SLED)</span><span data-tr>Eyalet &amp; Yerel (SLED)</span>
+        </div>
+        <div class="sled-level">
+          <strong>$2.25T+</strong>
+          <span data-en>Total market we track</span><span data-tr>Takip ettiğimiz toplam pazar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section>
+  <div class="container">
+    <div class="split">
+      <div>
+        <span class="section-tag" data-en>Why the U.S.</span>
+        <span class="section-tag" data-tr>Neden ABD</span>
+        <h2 data-en>The world's most active FDI destination — 13 years running.</h2>
+        <h2 data-tr>Dünyanın en aktif FDI destinasyonu — 13 yıl üst üste.</h2>
+        <p style="margin-top:18px" data-en>The United States leads Kearney's FDI Confidence Index for the 13th consecutive year. With 50 states each offering distinct incentive programs, a mature legal system, and unmatched market size, the U.S. remains the benchmark destination for international capital.</p>
+        <p style="margin-top:18px" data-tr>ABD, Kearney FDI Güven Endeksi'nde 13. kez üst üste lider. 50 eyaletin farklı teşvik programları, olgun hukuk sistemi ve eşsiz pazar büyüklüğüyle ABD, uluslararası sermaye için referans destinasyon olmaya devam ediyor.</p>
+        <p style="font-size:13px;color:var(--text-muted);margin-top:16px" data-en>Source: trade.gov/selectusa · Kearney FDI Confidence Index 2025</p>
+        <p style="font-size:13px;color:var(--text-muted);margin-top:16px" data-tr>Kaynak: trade.gov/selectusa · Kearney FDI Güven Endeksi 2025</p>
+      </div>
+      <div>
+        <ul class="checklist">
+          <li><strong>$25 trillion</strong> — <span data-en>GDP, world's largest</span><span data-tr>GSYİH, dünyanın en büyüğü</span></li>
+          <li><strong>#1 for 13 years</strong> — <span data-en>Kearney FDI Confidence Index</span><span data-tr>Kearney FDI Güven Endeksi</span></li>
+          <li><strong>$750B+</strong> — <span data-en>annual government procurement</span><span data-tr>yıllık kamu ihalesi</span></li>
+          <li><strong>50 states</strong> — <span data-en>each with distinct incentive programs</span><span data-tr>her biri farklı teşvik programlarıyla</span></li>
+          <li><strong>Tysons Corner, VA</strong> — <span data-en>our office, minutes from federal agencies</span><span data-tr>ofisimiz, federal ajanslara dakikalar mesafede</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISA TEASER -->
+<section class="section-light">
+  <div class="container">
+    <span class="section-tag" data-en>Investor visas</span>
+    <span class="section-tag" data-tr>Yatırımcı vizeleri</span>
+    <h2 class="section-title" data-en>Your path to U.S. residency through investment.</h2>
+    <h2 class="section-title" data-tr>Yatırım yoluyla ABD oturumuna giden yollar.</h2>
+    <div class="features-grid">
+      <div class="feature">
+        <h4>EB-5 <span data-en>Immigrant Investor</span><span data-tr>Göçmen Yatırımcı</span></h4>
+        <p data-en>Direct path to U.S. green card through qualifying investment. We manage the full process alongside licensed immigration counsel.</p>
+        <p data-tr>Uygun yatırım yoluyla ABD green card'ına doğrudan yol. Lisanslı göç avukatlarıyla tüm süreci yönetiyoruz.</p>
+      </div>
+      <div class="feature">
+        <h4>E-2 <span data-en>Treaty Investor</span><span data-tr>Anlaşma Yatırımcısı</span></h4>
+        <p data-en>Turkey is a treaty country. The E-2 allows you to live and operate your business in the U.S. — renewable, no fixed minimum investment.</p>
+        <p data-tr>Türkiye anlaşma ülkesi. E-2 ABD'de yaşayıp işletmenizi yönetmenize olanak tanır — yenilenebilir, sabit asgari yatırım yok.</p>
+      </div>
+      <div class="feature">
+        <h4>L-1A <span data-en>Intracompany Transfer</span><span data-tr>Şirket İçi Transfer</span></h4>
+        <p data-en>Transfer executives and senior managers from your overseas company to a U.S. entity — a strong pathway to permanent residency.</p>
+        <p data-tr>Yöneticileri ve üst düzey müdürleri yurt dışındaki şirketinizden ABD şirketine transfer edin — kalıcı ikamet için güçlü bir yol.</p>
+      </div>
+      <div class="feature">
+        <h4>O-1 <span data-en>Extraordinary Ability</span><span data-tr>Olağanüstü Yetenek</span></h4>
+        <p data-en>For individuals with demonstrated expertise in business, science, or technology. No capital minimum required.</p>
+        <p data-tr>İş, bilim veya teknolojide kanıtlanmış uzmanlığa sahip bireyler için. Sermaye asgari tutarı gerekmiyor.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="investor-visas.html" class="btn btn-outline">
+        <span data-en>Full Visa &amp; Tax Guide →</span><span data-tr>Tam Vize &amp; Vergi Rehberi →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- DMV PRESENCE -->
+<section class="section-dark">
+  <div class="container">
+    <div class="split">
+      <div>
+        <span class="section-tag" data-en>Our base</span>
+        <span class="section-tag" data-tr>Üssümüz</span>
+        <h2 data-en>We're based in Tysons Corner, Virginia.</h2>
+        <h2 data-tr>Tysons Corner, Virginia'dayız.</h2>
+        <p style="margin-top:18px" data-en>Our headquarters — in the heart of the DMV corridor, minutes from federal agencies, defense contractors, and major law firms. But the work we do for clients is national and global: from procurement in Germany and Japan to company formation across all 50 states. The HQ gives us the relationships. The relationships reach everywhere.</p>
+        <p style="margin-top:18px" data-tr>Genel merkezimiz — DMV koridorunun kalbinde, federal ajanslara, savunma müteahhitlerine ve büyük hukuk firmalarına dakikalar mesafede. Ancak müşterilerimiz için yaptığımız iş ulusal ve küresel: Almanya ve Japonya'daki tedarikten tüm 50 eyalette şirket kuruluşuna kadar. Merkez bize ilişkiler sağlar. İlişkiler her yere uzanır.</p>
+      </div>
+      <div>
+        <ul class="checklist">
+          <li data-en>Minutes from Washington D.C.</li><li data-tr>Washington D.C.'ye dakikalar mesafede</li>
+          <li data-en>Major federal agencies within the metro area</li><li data-tr>Metro bölgesinde büyük federal ajanslar</li>
+          <li data-en>Home to Fortune 500 defense contractors</li><li data-tr>Fortune 500 savunma müteahhitlerinin yuvası</li>
+          <li data-en>Active startup and investment ecosystem</li><li data-tr>Aktif girişim ve yatırım ekosistemi</li>
+          <li data-en>Dulles International Airport — direct flights to Istanbul</li><li data-tr>Dulles Uluslararası Havalimanı — İstanbul'a doğrudan uçuşlar</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section>
+  <div class="container">
+    <span class="section-tag" data-en>Market intelligence</span>
+    <span class="section-tag" data-tr>Piyasa istihbaratı</span>
+    <h2 class="section-title" data-en>What's happening in the U.S. market.</h2>
+    <h2 class="section-title" data-tr>ABD pazarında neler oluyor.</h2>
+    <div class="news-grid">
+      <div class="news-item">
+        <p class="news-cat">Government Contracting</p>
+        <h4 data-en>SBA raises small business size standards for key sectors</h4>
+        <h4 data-tr>SBA, temel sektörler için küçük işletme büyüklük standartlarını yükseltti</h4>
+        <p data-en>Updated thresholds mean more companies qualify for 8(a), HUBZone, and SDVOSB set-asides — including recently formed foreign-owned U.S. entities.</p>
+        <p data-tr>Güncellenen eşikler, yeni kurulan yabancı sahipli ABD şirketleri dahil daha fazla şirketin set-aside'lara uygun olduğu anlamına geliyor.</p>
+        <span class="news-source">May 2026 · SBA.gov</span>
+      </div>
+      <div class="news-item">
+        <p class="news-cat">Investment</p>
+        <h4 data-en>Opportunity Zone rural expansion adds 1,700+ new areas</h4>
+        <h4 data-tr>Fırsat Bölgesi kırsal genişlemesi 1.700+ yeni alan ekledi</h4>
+        <p data-en>New zones across Virginia, Texas, and the Midwest. Several DMV-area zones now eligible for the first time — extending capital gains deferral for qualifying investments.</p>
+        <p data-tr>Virginia, Texas ve Ortabatı'daki yeni bölgeler. DMV bölgesindeki bazı alanlar ilk kez uygun hale geldi — uygun yatırımlar için sermaye kazancı ertelemesi uzatıldı.</p>
+        <span class="news-source">Apr 2026 · Treasury.gov</span>
+      </div>
+      <div class="news-item">
+        <p class="news-cat">Visa &amp; Immigration</p>
+        <h4 data-en>E-2 processing times improving for Turkish nationals</h4>
+        <h4 data-tr>Türk vatandaşları için E-2 süreleri iyileşiyor</h4>
+        <p data-en>Embassy appointment availability has improved significantly. Average processing now under 60 days at select posts — down from 4–6 month backlogs in 2024.</p>
+        <p data-tr>Büyükelçilik randevu müsaitliği önemli ölçüde iyileşti. Seçili postlarda ortalama işlem süresi 60 günün altına düştü.</p>
+        <span class="news-source">May 2026 · travel.state.gov</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2 data-en>Ready to enter the U.S. market?</h2>
+    <h2 data-tr>ABD pazarına girmeye hazır mısınız?</h2>
+    <p data-en>We'll map out your entry plan — company structure, visa pathway, and your first contract opportunities.</p>
+    <p data-tr>Giriş planınızı hazırlayacağız — şirket yapısı, vize yolu ve ilk sözleşme fırsatlarınız.</p>
+    <a href="contact.html" class="btn btn-primary">
+      <span data-en>Book a consultation</span><span data-tr>Danışma randevusu al</span>
+    </a>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

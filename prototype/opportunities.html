@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Opportunities — Crosslane Global</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; font-size: 16px; color: #1a1a1a; background: #fff; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 500; }
+    section { padding: 80px 0; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+    /* HERO */
+    .subhero { background: #1a1a1a; padding: 140px 0 80px; }
+    .subhero .crumb { font-size: 12px; color: #B87A2A; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; }
+    .subhero h1 { font-size: clamp(38px, 5vw, 56px); color: #fff; margin-bottom: 16px; max-width: 700px; }
+    .subhero p { font-size: 17px; color: rgba(255,255,255,0.55); max-width: 560px; line-height: 1.8; }
+
+    /* STATS */
+    .stats-bar { background: #1a1a1a; border-top: 1px solid #2a2a2a; padding: 40px 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .stat .num { font-family: 'Playfair Display', serif; font-size: 36px; color: #B87A2A; margin-bottom: 4px; }
+    .stat .lbl { font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
+
+    /* FILTERS */
+    .filter-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 40px; }
+    .filter-chip { padding: 10px 20px; font-size: 12px; border: 1px solid #d5d1ca; border-radius: 3px; background: #fff; color: #555; cursor: pointer; transition: all 0.2s; font-family: inherit; font-weight: 500; }
+    .filter-chip:hover, .filter-chip.active { border-color: #8E5A1A; color: #8E5A1A; }
+    .filter-chip.active { background: #faf8f4; }
+    .filter-select { padding: 10px 32px 10px 12px; font-family: inherit; font-size: 12px; border: 1px solid #d5d1ca; border-radius: 3px; background: #fff; color: #1a1a1a; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
+
+    /* CARDS */
+    .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .card { background: #fff; border: 1px solid #e8e4dc; border-radius: 3px; padding: 36px; transition: box-shadow 0.2s; display: flex; flex-direction: column; }
+    .card:hover { box-shadow: 0 2px 20px rgba(0,0,0,0.04); }
+    .card .meta { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px; font-weight: 500; }
+    .card h3 { font-size: 20px; margin-bottom: 12px; line-height: 1.3; }
+    .card .desc { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 24px; flex: 1; }
+    .card .row { display: flex; justify-content: space-between; align-items: flex-end; padding-top: 20px; border-top: 1px solid #f0ece6; }
+    .card .row .val { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; }
+    .card .row .lbl { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+    .card .lock { margin-top: 20px; padding: 12px; background: #faf9f7; border: 1px solid #f0ece6; border-radius: 3px; text-align: center; font-size: 12px; color: #999; }
+    .card .lock a { color: #8E5A1A; font-weight: 600; cursor: pointer; text-decoration: none; }
+    .card .lock a:hover { text-decoration: underline; }
+
+    /* PRIVATE DEALS */
+    .private { background: #1a1a1a; text-align: center; }
+    .private .tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #B87A2A; font-weight: 600; margin-bottom: 16px; }
+    .private h2 { font-size: clamp(28px, 4vw, 44px); color: #fff; margin-bottom: 14px; }
+    .private p { color: rgba(255,255,255,0.5); font-size: 16px; max-width: 500px; margin: 0 auto 32px; line-height: 1.8; }
+
+    .btn-gold { display: inline-block; padding: 14px 32px; background: #8E5A1A; color: #fff; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 2px; text-decoration: none; font-family: inherit; }
+    .btn-gold:hover { opacity: 0.85; color: #fff; }
+
+    @media (max-width: 768px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .container { padding: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<!-- ═══ HERO ═══ -->
+<header class="subhero">
+  <div class="container">
+    <div class="crumb" data-en>Procurement Intelligence</div>
+    <div class="crumb" data-tr>Tedarik İstihbaratı</div>
+    <h1 data-en>Active government tenders, worldwide.</h1>
+    <h1 data-tr>Dünya çapında aktif kamu ihaleleri.</h1>
+    <p data-en>A curated selection of U.S. federal contracts, Canadian public tenders, and global procurement opportunities — reviewed by our team.</p>
+    <p data-tr>ABD federal sözleşmeleri, Kanada kamu ihaleleri ve küresel tedarik fırsatlarından seçilmiş bir koleksiyon — ekibimiz tarafından incelenmiştir.</p>
+  </div>
+</header>
+
+<!-- ═══ STATS ═══ -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat"><div class="num">—</div><div class="lbl" data-en>Active Tenders</div><div class="lbl" data-tr>Aktif İhale</div></div>
+      <div class="stat"><div class="num">—</div><div class="lbl" data-en>Total Value</div><div class="lbl" data-tr>Toplam Değer</div></div>
+      <div class="stat"><div class="num">—</div><div class="lbl" data-en>Top Sector</div><div class="lbl" data-tr>Öne Çıkan Sektör</div></div>
+      <div class="stat"><div class="num">—</div><div class="lbl" data-en>Countries</div><div class="lbl" data-tr>Ülke</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FILTERS + CARDS ═══ -->
+<section>
+  <div class="container">
+    <div class="filter-row">
+      <button class="filter-chip active" data-region="">🌐 <span data-en>All</span><span data-tr>Tümü</span></button>
+      <button class="filter-chip" data-region="US">🇺🇸 <span data-en>USA</span></button>
+      <button class="filter-chip" data-region="Canada">🇨🇦 <span data-en>Canada</span></button>
+      <select class="filter-select" id="sectorFilter" style="min-width:160px">
+        <option value="">All Sectors / Tum Sektorler</option>
+      </select>
+    </div>
+
+    <div id="cardsContainer">
+      <div class="cards-grid" id="cardsGrid"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:48px" id="loadMore" hidden>
+      <button class="btn-gold" id="loadMoreBtn" data-en>View More</button>
+      <button class="btn-gold" id="loadMoreBtnTr" data-tr>Daha Fazla</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRIVATE DEALS ═══ -->
+<section class="private">
+  <div class="container">
+    <p class="tag" data-en>Exclusive</p><p class="tag" data-tr>Özel</p>
+    <h2 data-en>Private Investment Opportunities</h2>
+    <h2 data-tr>Özel Yatırım Fırsatları</h2>
+    <p data-en>Infrastructure funds, real estate syndications, and M&A mandates. For qualified institutional investors and family offices.</p>
+    <p data-tr>Altyapı fonları, gayrimenkul sendikasyonları, şirket birleşme ve satın alma yetkileri. Nitelikli kurumsal yatırımcılar ve aile ofisleri için.</p>
+    <a href="contact.html" class="btn-gold" data-en>Request Access</a>
+    <a href="contact.html" class="btn-gold" data-tr>Erişim Talep Et</a>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/access-modal.js"></script>
+<script>
+(function(){
+  let state = { region: '', sector: '', offset: 0, limit: 10, total: 0 };
+
+  function fmtBudget(min,max,cur){if(min==null&&max==null)return'';const c=cur==='CAD'?'C$':'$';const f=n=>n>=1e9?(n/1e9).toFixed(1)+'B':n>=1e6?(n/1e6).toFixed(0)+'M':n>=1e3?(n/1e3).toFixed(0)+'K':String(n);if(min&&max)return c+f(min)+' - '+c+f(max);return c+f(min||max);}
+  function fmtDate(d){if(!d)return'';return new Date(d+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+  function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
+
+  function buildCard(o){
+    const budget=fmtBudget(o.budget_min,o.budget_max,o.currency);
+    const deadline=fmtDate(o.deadline);
+    const desc=o.executive_summary_tr||o.executive_summary_en||'';
+    const flag=o.region==='Canada'?'🇨🇦':'🇺🇸';
+    const loc=o.location_display||'';
+    return `<div class="card">
+      <div class="meta">${flag} ${esc(o.procurement_category||o.industry||'')}${loc?' · '+esc(loc):''}</div>
+      <h3>${esc(o.title||'')}</h3>
+      <p class="desc">${esc(desc)}</p>
+      <div class="row">
+        ${budget?`<div><div class="lbl" data-en>Budget</div><div class="lbl" data-tr>Bütçe</div><div class="val">${budget}</div></div>`:'<div></div>'}
+        ${deadline?`<div style="text-align:right"><div class="lbl" data-en>Due Date</div><div class="lbl" data-tr>Son Tarih</div><div class="val" style="font-size:17px">${deadline}</div></div>`:''}
+      </div>
+      <div class="lock">🔒 <a data-access-btn data-access-id="${esc(o.id)}" data-access-title="${esc(o.title)}"><span data-en>Register to see agency details</span><span data-tr>Ajans detayları için kaydolun</span></a></div>
+    </div>`;
+  }
+
+  function render(opps, append){
+    const grid=document.getElementById('cardsGrid');
+    if(!append) grid.innerHTML='';
+    opps.forEach(o=>grid.insertAdjacentHTML('beforeend',buildCard(o)));
+    document.getElementById('loadMore').hidden=state.offset+state.limit>=state.total;
+    if(typeof wireAccessButtons==='function') wireAccessButtons();
+  }
+
+  async function load(append){
+    const p={limit:state.limit,offset:state.offset};
+    if(state.region) p.region=state.region;
+    if(state.sector) p.sector=state.sector;
+    try{
+      const d=await api.getOpportunities(p);
+      state.total=d.total;
+      render(d.opportunities||[],append);
+    }catch(e){console.error(e);}
+  }
+
+  async function loadStats(){
+    try{
+      const r=await fetch('/api/opportunities/teaser');
+      const d=await r.json();
+      const fmt=v=>v>=1e9?'$'+(v/1e9).toFixed(1)+'B':v>=1e6?'$'+(v/1e6).toFixed(0)+'M':String(v);
+      document.getElementById('statsGrid').innerHTML=
+        `<div class="stat"><div class="num">${d.total_opportunities||0}+</div><div class="lbl" data-en>Active Tenders</div><div class="lbl" data-tr>Aktif İhale</div></div>
+         <div class="stat"><div class="num">${fmt(d.total_value_usd||0)}</div><div class="lbl" data-en>Total Value</div><div class="lbl" data-tr>Toplam Değer</div></div>
+         <div class="stat"><div class="num">${d.top_sector||'—'}</div><div class="lbl" data-en>Top Sector</div><div class="lbl" data-tr>Öne Çıkan Sektör</div></div>
+         <div class="stat"><div class="num">${(d.execution_countries||[]).length||0}</div><div class="lbl" data-en>Countries</div><div class="lbl" data-tr>Ülke</div></div>`;
+      const sel=document.getElementById('sectorFilter');
+      (d.sectors||[]).forEach(s=>{if(s.name){const o=document.createElement('option');o.value=s.name;o.textContent=s.name+' ('+s.count+')';sel.appendChild(o);}});
+    }catch(e){}
+  }
+
+  document.querySelectorAll('[data-region]').forEach(b=>b.addEventListener('click',function(){
+    document.querySelectorAll('[data-region]').forEach(c=>c.classList.remove('active'));
+    this.classList.add('active');
+    state.region=this.getAttribute('data-region');
+    state.offset=0;
+    load(false);
+  }));
+
+  document.getElementById('sectorFilter').addEventListener('change',function(){
+    state.sector=this.value;
+    state.offset=0;
+    load(false);
+  });
+
+  document.getElementById('loadMoreBtn').addEventListener('click',function(){
+    state.offset+=state.limit;
+    load(true);
+  });
+
+  loadStats();
+  load(false);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investor Visa & Tax Guide — Crosslane Global</title>
+  <meta name="description" content="EB-5, E-2, L-1A visas and Opportunity Zone tax advantages explained for international investors entering the U.S. and Canada." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    .visa-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+    .visa-card.green-card { border-top-color: var(--green-partner); }
+    .visa-card.temp { border-top-color: var(--gold); }
+    .visa-card.canada { border-top-color: #c8102e; }
+    .visa-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-bottom: 16px;
+    }
+    .badge-gc { background: #e8f7f2; color: var(--green-partner); }
+    .badge-temp { background: var(--gold-light); color: var(--gold-deep); }
+    .badge-ca { background: #fdecea; color: #c8102e; }
+    .visa-card h3 { font-size: 22px; margin-bottom: 8px; }
+    .visa-card .visa-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; letter-spacing: 0.02em; }
+    .visa-card .visa-amount {
+      font-family: var(--serif);
+      font-size: 32px;
+      color: var(--gold);
+      line-height: 1;
+      margin: 20px 0 6px;
+    }
+    .visa-card .visa-amount-note { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; }
+    .visa-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    @media (max-width: 768px) { .visa-grid { grid-template-columns: 1fr; } }
+
+    .tax-zone {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .tax-zones-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 960px) { .tax-zones-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .tax-zones-grid { grid-template-columns: 1fr; } }
+
+    .timeline { position: relative; padding-left: 32px; margin-top: 32px; }
+    .timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+    .timeline-step { position: relative; margin-bottom: 28px; }
+    .timeline-step::before {
+      content: '';
+      position: absolute;
+      left: -28px;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .timeline-step h5 { font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+    .timeline-step p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+
+    .alert-box {
+      background: #fef9ec;
+      border: 1px solid #f0d070;
+      border-left: 4px solid #e6b800;
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin-bottom: 32px;
+    }
+    .alert-box p { font-size: 14px; color: #7a5c00; margin: 0; }
+    .alert-box strong { color: #5a4000; }
+
+    .oz-benefit {
+      background: var(--dark-bg);
+      border-radius: var(--radius);
+      padding: 28px;
+      text-align: center;
+    }
+    .oz-benefit .years { font-family: var(--serif); font-size: 48px; color: var(--gold); line-height: 1; margin-bottom: 8px; }
+    .oz-benefit h5 { color: var(--white); font-size: 15px; margin-bottom: 8px; }
+    .oz-benefit p { color: rgba(255,255,255,0.65); font-size: 13px; margin: 0; }
+    .oz-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 768px) { .oz-grid { grid-template-columns: 1fr; } }
+
+    .state-row { display: flex; align-items: flex-start; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+    .state-row:last-child { border-bottom: none; }
+    .state-flag { font-size: 28px; flex-shrink: 0; }
+    .state-row h5 { font-family: var(--sans); font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .state-row p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+
+    .comparison-table th { white-space: nowrap; }
+    .comparison-table td { vertical-align: top; }
+
+    .source-note { font-size: 12px; color: var(--text-muted); margin-top: 16px; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<!-- ============ HERO ============ -->
+<header class="subhero" style="background: linear-gradient(180deg, rgba(26,26,26,0.42) 0%, rgba(26,26,26,0.65) 100%), url('https://images.unsplash.com/photo-1436491865332-0a1dd7228f2d?w=1920&q=80') center/cover no-repeat;">
+  <div class="container">
+    <div class="crumb" data-en>Investor Resources</div>
+    <div class="crumb" data-tr>Yatırımcı Kaynakları</div>
+    <h1 data-en>Visa & Tax Guide for International Investors.</h1>
+    <h1 data-tr>Yabancı Yatırımcılar için Vize & Vergi Rehberi.</h1>
+    <p class="lead" data-en>Which visa matches your investment type. Which regions offer the best tax treatment. What leads to a green card and what doesn't — explained without the jargon.</p>
+    <p class="lead" data-tr>Hangi vize yatırım türünüze uyuyor. Hangi bölgeler en iyi vergi avantajını sunuyor. Neyin green card'a götürdüğü neyin götürmediği — jargonsuz açıklaması.</p>
+  </div>
+</header>
+
+<!-- ============ INTRO ============ -->
+<section>
+  <div class="container" style="max-width:820px">
+    <span class="section-tag" data-en>The core question</span>
+    <span class="section-tag" data-tr>Temel soru</span>
+    <h2 class="section-title" data-en>The right visa depends on the right investment structure.</h2>
+    <h2 class="section-title" data-tr>Doğru vize, doğru yatırım yapısına bağlıdır.</h2>
+    <p data-en>Most international investors focus on the investment first and the visa second. This is the wrong order. In the U.S. and Canada, the investment structure determines which immigration pathways are available, how the income is taxed, and whether permanent residency is even on the table. The guide below covers the four most relevant visa categories for investors entering North American markets — with real numbers, not glossy brochure language.</p>
+    <p data-en style="margin-top:16px">Every situation is different. The information below is drawn from official government sources (USCIS, IRS, IRCC) and is accurate as of May 2026. It is not legal advice. We work alongside immigration attorneys and tax advisors — this is context so you can ask the right questions.</p>
+    <p data-tr>Uluslararası yatırımcıların çoğu önce yatırıma, sonra vizeye odaklanır. Bu sıralama yanlış. ABD ve Kanada'da yatırım yapısı; hangi göç yollarının açık olduğunu, gelirin nasıl vergilendirileceğini ve daimi ikamet izninin masada olup olmadığını belirler. Aşağıdaki rehber, Kuzey Amerika pazarlarına giren yatırımcılar için en ilgili dört vize kategorisini ele alır — gerçek rakamlarla, parlak broşür diliyle değil.</p>
+    <p data-tr style="margin-top:16px">Her durum farklıdır. Aşağıdaki bilgiler resmi hükümet kaynaklarından (USCIS, IRS, IRCC) alınmıştır ve Mayıs 2026 itibarıyla günceldir. Hukuki tavsiye niteliği taşımaz. Göçmenlik avukatları ve vergi danışmanlarıyla birlikte çalışıyoruz — bu içerik, doğru soruları sorabilmeniz için bağlam sağlar.</p>
+  </div>
+</section>
+
+<!-- ============ US VISA CARDS ============ -->
+<section class="section-light">
+  <div class="container">
+    <span class="section-tag" data-en>🇺🇸 United States — Visa Options</span>
+    <span class="section-tag" data-tr>🇺🇸 ABD — Vize Seçenekleri</span>
+    <h2 class="section-title" data-en>Four pathways. Very different outcomes.</h2>
+    <h2 class="section-title" data-tr>Dört yol. Birbirinden çok farklı sonuçlar.</h2>
+    <p class="section-lead" data-en>Two lead to a green card. Two are temporary with renewable status. The investment threshold, job creation requirement, and business structure differ significantly across each.</p>
+    <p class="section-lead" data-tr>İkisi green card'a götürür. İkisi yenilenebilir geçici statüdür. Yatırım eşiği, iş yaratma şartı ve iş yapısı her birinde önemli ölçüde farklılaşır.</p>
+
+    <div class="visa-grid">
+
+      <!-- EB-5 -->
+      <div class="visa-card green-card">
+        <span class="visa-badge badge-gc" data-en>🟢 Green Card Path</span>
+        <span class="visa-badge badge-gc" data-tr>🟢 Green Card Yolu</span>
+        <h3>EB-5</h3>
+        <div class="visa-sub" data-en>Immigrant Investor Program · Permanent Residency</div>
+        <div class="visa-sub" data-tr>Göçmen Yatırımcı Programı · Daimi İkamet</div>
+
+        <div class="visa-amount">$800K</div>
+        <div class="visa-amount-note" data-en>minimum in a Targeted Employment Area (TEA) — rural or high-unemployment zone</div>
+        <div class="visa-amount-note" data-tr>Hedefli İstihdam Alanı'nda (TEA) minimum — kırsal veya yüksek işsizlik bölgesi</div>
+
+        <ul class="checklist">
+          <li><span data-en>$1,050,000 minimum in non-TEA areas</span><span data-tr>TEA dışı bölgelerde $1,050,000 minimum</span></li>
+          <li><span data-en>Must create 10 full-time jobs for U.S. workers</span><span data-tr>ABD çalışanları için 10 tam zamanlı iş yaratılmalı</span></li>
+          <li><span data-en>Investment via Regional Center or direct investment</span><span data-tr>Bölgesel Merkez veya doğrudan yatırım</span></li>
+          <li><span data-en>Conditional green card → permanent after 2 years</span><span data-tr>Şartlı green card → 2 yıl sonra kalıcı</span></li>
+          <li><span data-en>Spouse and children under 21 included</span><span data-tr>Eş ve 21 yaş altı çocuklar dahil</span></li>
+          <li><span data-en>No language requirement, no age restriction</span><span data-tr>Dil şartı yok, yaş sınırı yok</span></li>
+        </ul>
+        <p class="source-note" data-en>Source: <a href="https://www.uscis.gov/working-in-the-united-states/permanent-workers/eb-5-immigrant-investor-program" target="_blank">USCIS EB-5 Program</a> · EB-5 Reform & Integrity Act 2022</p>
+        <p class="source-note" data-tr>Kaynak: <a href="https://www.uscis.gov/working-in-the-united-states/permanent-workers/eb-5-immigrant-investor-program" target="_blank">USCIS EB-5 Programı</a> · EB-5 Reform & Integrity Act 2022</p>
+      </div>
+
+      <!-- E-2 -->
+      <div class="visa-card temp">
+        <span class="visa-badge badge-temp" data-en>🟡 Renewable · Not a Green Card</span>
+        <span class="visa-badge badge-temp" data-tr>🟡 Yenilenebilir · Green Card Değil</span>
+        <h3>E-2</h3>
+        <div class="visa-sub" data-en>Treaty Investor Visa · Temporary (renewable indefinitely)</div>
+        <div class="visa-sub" data-tr>Anlaşma Yatırımcı Vizesi · Geçici (süresiz yenilenebilir)</div>
+
+        <div class="visa-amount" style="font-size:22px; margin-top:20px;" data-en>No fixed minimum</div>
+        <div class="visa-amount" style="font-size:22px; margin-top:20px;" data-tr>Sabit minimum yok</div>
+        <div class="visa-amount-note" data-en>"Substantial" investment — in practice typically $100K–$500K depending on business type</div>
+        <div class="visa-amount-note" data-tr>"Önemli" yatırım — pratikte iş türüne göre genellikle $100K–$500K</div>
+
+        <ul class="checklist">
+          <li><span data-en>Türkiye has an E-2 treaty with the U.S. ✓</span><span data-tr>Türkiye-ABD E-2 anlaşması mevcut ✓</span></li>
+          <li><span data-en>You must direct and develop the enterprise</span><span data-tr>İşletmeyi yönetmeli ve geliştirmelisiniz</span></li>
+          <li><span data-en>Enterprise must not be "marginal" — must support more than just the investor's family</span><span data-tr>İşletme "marjinal" olmamalı — yalnızca yatırımcı ailesini geçindirenden fazlasını üretmeli</span></li>
+          <li><span data-en>2-year initial stay, extensions every 2 years — no limit</span><span data-tr>2 yıl ilk ikamet, 2 yılda bir uzatma — sınırsız</span></li>
+          <li><span data-en>Spouse can receive work authorization (EAD)</span><span data-tr>Eş çalışma izni alabilir (EAD)</span></li>
+          <li><span data-en>Does NOT directly lead to a green card</span><span data-tr>Doğrudan green card'a götürmez</span></li>
+        </ul>
+        <p class="source-note"><a href="https://www.uscis.gov/working-in-the-united-states/temporary-workers/e-2-treaty-investors" target="_blank">USCIS E-2 Treaty Investors</a> · <a href="https://travel.state.gov/content/travel/en/us-visas/employment/treaty-trader-investor-visa-e.html" target="_blank">State Dept. Treaty Countries</a></p>
+      </div>
+
+      <!-- L-1A -->
+      <div class="visa-card green-card">
+        <span class="visa-badge badge-gc" data-en>🟢 Green Card Bridge (EB-1C)</span>
+        <span class="visa-badge badge-gc" data-tr>🟢 Green Card Köprüsü (EB-1C)</span>
+        <h3>L-1A</h3>
+        <div class="visa-sub" data-en>Intracompany Transferee (Executive / Manager)</div>
+        <div class="visa-sub" data-tr>Şirket İçi Transfer (Yönetici / Müdür)</div>
+
+        <div class="visa-amount" style="font-size:22px; margin-top:20px;" data-en>No investment minimum</div>
+        <div class="visa-amount" style="font-size:22px; margin-top:20px;" data-tr>Yatırım minimumu yok</div>
+        <div class="visa-amount-note" data-en>Requires a qualifying relationship between a foreign and U.S. entity</div>
+        <div class="visa-amount-note" data-tr>Yabancı ve ABD şirketi arasında uygun bir ilişki gerektirir</div>
+
+        <ul class="checklist">
+          <li><span data-en>Must have worked abroad for the company for 1 of the last 3 years</span><span data-tr>Son 3 yılın 1'inde yurt dışındaki şirkette çalışmış olmalı</span></li>
+          <li><span data-en>Executive or manager role required</span><span data-tr>Yönetici veya müdür pozisyonu gerekli</span></li>
+          <li><span data-en>Initial stay: 3 years (new office: 1 year)</span><span data-tr>İlk ikamet: 3 yıl (yeni ofis: 1 yıl)</span></li>
+          <li><span data-en>Strong pathway to EB-1C green card (no annual cap)</span><span data-tr>EB-1C green card'a güçlü yol (yıllık kota yok)</span></li>
+          <li><span data-en>Ideal for investors who already have a foreign company</span><span data-tr>Zaten yurt dışı şirketi olan yatırımcılar için ideal</span></li>
+          <li><span data-en>Spouse can work with EAD authorization</span><span data-tr>Eş EAD ile çalışabilir</span></li>
+        </ul>
+        <p class="source-note"><a href="https://www.uscis.gov/working-in-the-united-states/temporary-workers/l-1a-intracompany-transferee-executive-or-manager" target="_blank">USCIS L-1A</a></p>
+      </div>
+
+      <!-- O-1 -->
+      <div class="visa-card temp">
+        <span class="visa-badge badge-temp" data-en>🟡 Renewable · Specialty Cases</span>
+        <span class="visa-badge badge-temp" data-tr>🟡 Yenilenebilir · Özel Durumlar</span>
+        <h3>O-1</h3>
+        <div class="visa-sub" data-en>Extraordinary Ability · Business / Science / Arts</div>
+        <div class="visa-sub" data-tr>Olağanüstü Yetenek · İş / Bilim / Sanat</div>
+
+        <div class="visa-amount" style="font-size:22px; margin-top:20px;" data-en>No investment minimum</div>
+        <div class="visa-amount" style="font-size:22px; margin-top:20px;" data-tr>Yatırım minimumu yok</div>
+        <div class="visa-amount-note" data-en>Based on demonstrated expertise and recognition in your field</div>
+        <div class="visa-amount-note" data-tr>Alanında kanıtlanmış uzmanlık ve tanınırlığa dayalı</div>
+
+        <ul class="checklist">
+          <li><span data-en>Must demonstrate sustained national or international acclaim</span><span data-tr>Ulusal veya uluslararası sürekli tanınırlık kanıtlanmalı</span></li>
+          <li><span data-en>Criteria: awards, publications, high salary, critical role, media coverage</span><span data-tr>Kriterler: ödüller, yayınlar, yüksek maaş, kritik rol, medya ilgisi</span></li>
+          <li><span data-en>Must satisfy at least 3 of 8 evidentiary criteria</span><span data-tr>8 kanıt kriterinden en az 3'ü sağlanmalı</span></li>
+          <li><span data-en>1-year initial stay, extendable in 1-year increments</span><span data-tr>1 yıllık ilk ikamet, 1'er yıllık uzatmalar</span></li>
+          <li><span data-en>Can transition to EB-1A green card if criteria are met</span><span data-tr>Kriterler sağlanırsa EB-1A green card'a geçiş mümkün</span></li>
+          <li><span data-en>Suitable for high-profile entrepreneurs and executives</span><span data-tr>Yüksek profilli girişimciler ve yöneticiler için uygun</span></li>
+        </ul>
+        <p class="source-note"><a href="https://www.uscis.gov/working-in-the-united-states/temporary-workers/o-1-visa-individuals-with-extraordinary-ability-or-achievement" target="_blank">USCIS O-1 Visa</a></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPARISON TABLE ============ -->
+<section>
+  <div class="container">
+    <span class="section-tag" data-en>Quick comparison</span>
+    <span class="section-tag" data-tr>Hızlı karşılaştırma</span>
+    <h2 class="section-title" data-en>Which visa fits your situation?</h2>
+    <h2 class="section-title" data-tr>Hangi vize durumunuza uyuyor?</h2>
+
+    <div style="overflow-x:auto">
+      <table class="data-table comparison-table">
+        <thead>
+          <tr>
+            <th><span data-en>Visa</span><span data-tr>Vize</span></th>
+            <th><span data-en>Min. Investment</span><span data-tr>Min. Yatırım</span></th>
+            <th><span data-en>Job Creation</span><span data-tr>İş Yaratma</span></th>
+            <th><span data-en>Duration</span><span data-tr>Süre</span></th>
+            <th><span data-en>Green Card?</span><span data-tr>Green Card?</span></th>
+            <th><span data-en>Best for</span><span data-tr>Kimler için</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>EB-5</strong></td>
+            <td>$800K (TEA)<br>$1.05M (standard)</td>
+            <td><span class="yes" data-en>Required — 10 FT jobs</span><span class="yes" data-tr>Zorunlu — 10 tam zaman</span></td>
+            <td><span data-en>Conditional 2yr → permanent</span><span data-tr>Şartlı 2 yıl → kalıcı</span></td>
+            <td><span class="yes" data-en>✓ Direct path</span><span class="yes" data-tr>✓ Doğrudan yol</span></td>
+            <td><span data-en>Passive investors, real estate, Regional Centers</span><span data-tr>Pasif yatırımcılar, gayrimenkul, Bölgesel Merkezler</span></td>
+          </tr>
+          <tr>
+            <td><strong>E-2</strong></td>
+            <td><span data-en>No fixed minimum (~$100K+)</span><span data-tr>Sabit min. yok (~$100K+)</span></td>
+            <td><span data-en>Not required (enterprise must not be marginal)</span><span data-tr>Zorunlu değil (marjinal olmayan işletme)</span></td>
+            <td><span data-en>2 yrs, renewable indefinitely</span><span data-tr>2 yıl, süresiz yenilenebilir</span></td>
+            <td><span style="color:var(--text-muted)" data-en>✗ Not direct</span><span style="color:var(--text-muted)" data-tr>✗ Doğrudan değil</span></td>
+            <td><span data-en>Active business owners, Turkey treaty nationals</span><span data-tr>Aktif işletme sahipleri, Türk vatandaşları</span></td>
+          </tr>
+          <tr>
+            <td><strong>L-1A</strong></td>
+            <td><span data-en>No minimum</span><span data-tr>Min. yok</span></td>
+            <td><span data-en>Not required</span><span data-tr>Zorunlu değil</span></td>
+            <td><span data-en>3 yrs (1 yr new office)</span><span data-tr>3 yıl (yeni ofis 1 yıl)</span></td>
+            <td><span class="yes" data-en>✓ Via EB-1C</span><span class="yes" data-tr>✓ EB-1C üzerinden</span></td>
+            <td><span data-en>Investors with existing foreign company, executives</span><span data-tr>Yurt dışı şirketi olanlar, yöneticiler</span></td>
+          </tr>
+          <tr>
+            <td><strong>O-1</strong></td>
+            <td><span data-en>No minimum</span><span data-tr>Min. yok</span></td>
+            <td><span data-en>Not required</span><span data-tr>Zorunlu değil</span></td>
+            <td><span data-en>1 yr, annually renewable</span><span data-tr>1 yıl, yıllık yenilenebilir</span></td>
+            <td><span style="color:var(--text-muted)" data-en>~ Via EB-1A (difficult)</span><span style="color:var(--text-muted)" data-tr>~ EB-1A üzerinden (zor)</span></td>
+            <td><span data-en>High-profile founders, executives, media/arts figures</span><span data-tr>Yüksek profilli kurucular, yöneticiler, medya/sanat isimleri</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="source-note" style="text-align:right"><span data-en>Source:</span><span data-tr>Kaynak:</span> USCIS.gov · Updated May 2026</p>
+  </div>
+</section>
+
+<!-- ============ CANADA ============ -->
+<section class="section-light">
+  <div class="container">
+    <span class="section-tag" data-en>🇨🇦 Canada — Immigration Pathways</span>
+    <span class="section-tag" data-tr>🇨🇦 Kanada — Göç Yolları</span>
+    <h2 class="section-title" data-en>Canada's business immigration landscape — as of 2026.</h2>
+    <h2 class="section-title" data-tr>Kanada'nın iş göçü ortamı — 2026 itibarıyla.</h2>
+
+    <div class="alert-box">
+      <p><strong data-en>Important update (December 2025):</strong><strong data-tr>Önemli güncelleme (Aralık 2025):</strong> <span data-en>Canada's Start-up Visa Program stopped accepting new applications as of December 19, 2025. Applicants who received a valid commitment certificate before December 31, 2025 must apply by June 30, 2026. If you are planning a Canada business immigration strategy, the Provincial Nominee Program (PNP) and Quebec programs are now the primary active pathways.</span><span data-tr>Kanada Start-up Vize Programı, 19 Aralık 2025 itibarıyla yeni başvuru kabul etmeyi durdurdu. 31 Aralık 2025 öncesi geçerli taahhüt sertifikası alan başvurucuların 30 Haziran 2026'ya kadar başvurması gerekiyor. Kanada iş göçü stratejisi planlıyorsanız, Eyalet Aday Programı (PNP) ve Quebec programları şu anda birincil aktif yollar.</span></p>
+    </div>
+
+    <div class="visa-grid">
+
+      <div class="visa-card canada">
+        <span class="visa-badge badge-ca" data-en>🍁 Permanent Residency Path</span>
+        <span class="visa-badge badge-ca" data-tr>🍁 Daimi İkamet Yolu</span>
+        <h3 data-en>Provincial Nominee Program (PNP)</h3>
+        <h3 data-tr>Eyalet Aday Programı (PNP)</h3>
+        <div class="visa-sub" data-en>Each of Canada's 10 provinces runs its own business immigration stream</div>
+        <div class="visa-sub" data-tr>Kanada'nın 10 eyaletinin her biri kendi iş göçü akışını yönetir</div>
+        <ul class="checklist">
+          <li><span data-en>Ontario, BC, Alberta, Manitoba each have entrepreneur streams</span><span data-tr>Ontario, BC, Alberta, Manitoba'nın girişimci akışları var</span></li>
+          <li><span data-en>Typical requirements: net worth $300K–$1.5M CAD, business plan, active management</span><span data-tr>Tipik şartlar: $300K–$1.5M CAD net değer, iş planı, aktif yönetim</span></li>
+          <li><span data-en>Leads to permanent residency (landed immigrant status)</span><span data-tr>Daimi ikamete götürür (landed immigrant statüsü)</span></li>
+          <li><span data="en">Processing times vary: 12–24 months typically</span><span data-tr>İşlem süresi değişir: genellikle 12–24 ay</span></li>
+          <li><span data-en>You must intend to live and operate the business in the nominating province</span><span data-tr>Aday gösteren eyalette yaşamayı ve işletmeyi yönetmeyi planlamalısınız</span></li>
+        </ul>
+        <p class="source-note"><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/provincial-nominees.html" target="_blank">IRCC — Provincial Nominee Program</a></p>
+      </div>
+
+      <div class="visa-card canada">
+        <span class="visa-badge badge-ca" data-en>🍁 Quebec — Separate System</span>
+        <span class="visa-badge badge-ca" data-tr>🍁 Quebec — Ayrı Sistem</span>
+        <h3 data-en>Quebec Business Immigration</h3>
+        <h3 data-tr>Quebec İş Göçü</h3>
+        <div class="visa-sub" data-en>Quebec operates independently from the federal PNP</div>
+        <div class="visa-sub" data-tr>Quebec, federal PNP'den bağımsız çalışır</div>
+        <ul class="checklist">
+          <li><span data-en>Three streams: Investor, Entrepreneur, Self-Employed</span><span data-tr>Üç akış: Yatırımcı, Girişimci, Serbest Çalışan</span></li>
+          <li><span data-en>Investor stream: $1.2M CAD net worth, $1.2M 5-year deposit (returned interest-free)</span><span data-tr>Yatırımcı akışı: $1.2M CAD net değer, $1.2M 5 yıllık depozit (faizsiz iade)</span></li>
+          <li><span data-en>First step: obtain Certificat de sélection du Québec (CSQ)</span><span data-tr>İlk adım: Certificat de sélection du Québec (CSQ) almak</span></li>
+          <li><span data-en>French language knowledge is an advantage but not always required</span><span data-tr>Fransızca bilgisi avantaj sağlar ama her zaman zorunlu değil</span></li>
+          <li><span data-en>CSQ leads to federal permanent residency application</span><span data-tr>CSQ, federal daimi ikamet başvurusuna zemin hazırlar</span></li>
+        </ul>
+        <p class="source-note"><a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/quebec-business.html" target="_blank">IRCC — Quebec Business Programs</a></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPPORTUNITY ZONES ============ -->
+<section class="section-dark">
+  <div class="container">
+    <span class="section-tag" data-en>🇺🇸 Tax Advantage #1</span>
+    <span class="section-tag" data-tr>🇺🇸 Vergi Avantajı #1</span>
+    <h2 class="section-title" data-en>Opportunity Zones — Defer and eliminate capital gains tax.</h2>
+    <h2 class="section-title" data-tr>Opportunity Zones — Sermaye kazancı vergisini erteleyin ve sıfırlayın.</h2>
+    <p class="section-lead" data-en>Established by the 2017 Tax Cuts and Jobs Act, Opportunity Zones are one of the most powerful tax tools available to foreign investors in U.S. real estate and businesses. 8,764 designated zones across all 50 states — including distressed urban neighborhoods and rural counties.</p>
+    <p class="section-lead" data-tr>2017 Vergi Kesintileri ve İşler Yasası ile kurulan Opportunity Zones, ABD gayrimenkul ve işletmelerine yatırım yapan yabancı yatırımcılar için mevcut en güçlü vergi araçlarından biridir. Tüm 50 eyalette 8.764 belirlenmiş bölge — dezavantajlı kentsel mahalleler ve kırsal ilçeler dahil.</p>
+
+    <div class="oz-grid" style="margin-bottom:48px">
+      <div class="oz-benefit">
+        <div class="years">5</div>
+        <h5 data-en>Years held</h5>
+        <h5 data-tr>Yıl tutulursa</h5>
+        <p data-en>10% reduction in deferred gain recognized — your taxable basis increases by 10%</p>
+        <p data-tr>Ertelenen kazancın %10'u azalır — vergilendirilebilir tabanınız %10 artar</p>
+      </div>
+      <div class="oz-benefit">
+        <div class="years">7</div>
+        <h5 data-en>Years held</h5>
+        <h5 data-tr>Yıl tutulursa</h5>
+        <p data-en>15% reduction in deferred gain — basis increases to 15% of original gain</p>
+        <p data-tr>Ertelenen kazancın %15'i azalır — taban orijinal kazancın %15'ine çıkar</p>
+      </div>
+      <div class="oz-benefit" style="border: 2px solid var(--gold);">
+        <div class="years">10</div>
+        <h5 data-en>Years held</h5>
+        <h5 data-tr>Yıl tutulursa</h5>
+        <p data-en><strong style="color:var(--gold)">All appreciation tax-free.</strong> Basis steps up to fair market value on sale date — no capital gains on growth</p>
+        <p data-tr><strong style="color:var(--gold)">Tüm değer artışı vergisiz.</strong> Taban, satış tarihindeki piyasa değerine yükselir — büyüme üzerinde sermaye kazancı vergisi yok</p>
+      </div>
+    </div>
+
+    <div class="split">
+      <div>
+        <h4 style="color:var(--white); margin-bottom:16px" data-en>How it works</h4>
+        <h4 style="color:var(--white); margin-bottom:16px" data-tr>Nasıl çalışır</h4>
+        <div class="timeline">
+          <div class="timeline-step">
+            <h5 data-en>You sell an asset with a capital gain</h5>
+            <h5 data-tr>Sermaye kazancıyla bir varlık satıyorsunuz</h5>
+            <p data-en>Any capital gain — from stock, real estate, business sale — is eligible</p>
+            <p data-tr>Herhangi bir sermaye kazancı — hisse, gayrimenkul, işletme satışı — uygun</p>
+          </div>
+          <div class="timeline-step">
+            <h5 data-en>Invest the gain into a Qualified Opportunity Fund (QOF)</h5>
+            <h5 data-tr>Kazancı Nitelikli Fırsat Fonu'na (QOF) yatırın</h5>
+            <p data-en>Must be done within 180 days of the sale</p>
+            <p data-tr>Satıştan itibaren 180 gün içinde yapılmalı</p>
+          </div>
+          <div class="timeline-step">
+            <h5 data-en>Tax on the original gain is deferred</h5>
+            <h5 data-tr>Orijinal kazanç vergisi ertelenir</h5>
+            <p data-en>Until December 31, 2026 or when you exit the QOF — whichever comes first</p>
+            <p data-tr>31 Aralık 2026'ya veya QOF'tan çıkışa kadar — hangisi önce gelirse</p>
+          </div>
+          <div class="timeline-step">
+            <h5 data-en>Hold for 10 years → all new growth tax-free</h5>
+            <h5 data-tr>10 yıl tut → tüm yeni büyüme vergisiz</h5>
+            <p data-en>The most powerful benefit: appreciation inside the QOF is not taxed on exit</p>
+            <p data-tr>En güçlü avantaj: QOF içindeki değer artışı çıkışta vergilendirilmez</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4 style="color:var(--white); margin-bottom:16px" data-en>2025 Rural Zone Update</h4>
+        <h4 style="color:var(--white); margin-bottom:16px" data-tr>2025 Kırsal Bölge Güncellemesi</h4>
+        <p style="color:rgba(255,255,255,0.7); margin-bottom:16px" data-en>As of July 4, 2025, the "substantial improvement" threshold for property in rural Opportunity Zones was reduced from 100% to 50%. This means investors in rural designated zones now need to add less capital to qualify for the full tax benefit — making rural real estate and agricultural investments significantly more attractive.</p>
+        <p style="color:rgba(255,255,255,0.7); margin-bottom:16px" data-tr>4 Temmuz 2025 itibarıyla, kırsal Opportunity Zone'larda mülk için "önemli iyileştirme" eşiği %100'den %50'ye indirildi. Bu, kırsal bölge yatırımcılarının tam vergi avantajına hak kazanmak için daha az sermaye eklemesi gerektiği anlamına geliyor — kırsal gayrimenkul ve tarımsal yatırımları önemli ölçüde daha cazip hale getiriyor.</p>
+
+        <div style="background:rgba(255,255,255,0.07); border-radius:var(--radius); padding:20px; margin-top:16px">
+          <p style="color:rgba(255,255,255,0.9); font-size:14px; margin:0" data-en><strong style="color:var(--gold)">Key figure:</strong> 8,764 designated Opportunity Zones across all 50 U.S. states, D.C., and 5 territories. Interactive map available at <a href="https://opportunityzones.hud.gov" target="_blank" style="color:var(--gold)">opportunityzones.hud.gov</a></p>
+          <p style="color:rgba(255,255,255,0.9); font-size:14px; margin:0" data-tr><strong style="color:var(--gold)">Temel rakam:</strong> Tüm 50 ABD eyaleti, D.C. ve 5 bölgede 8.764 belirlenmiş Opportunity Zone. İnteraktif harita: <a href="https://opportunityzones.hud.gov" target="_blank" style="color:var(--gold)">opportunityzones.hud.gov</a></p>
+        </div>
+        <p class="source-note" style="color:rgba(255,255,255,0.4); margin-top:12px"><a href="https://www.irs.gov/newsroom/opportunity-zones" target="_blank" style="color:rgba(255,255,255,0.4)">IRS — Opportunity Zones</a> · <a href="https://opportunityzones.hud.gov/investors" target="_blank" style="color:rgba(255,255,255,0.4)">HUD OZ Investors</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATE TAX ADVANTAGES ============ -->
+<section>
+  <div class="container">
+    <span class="section-tag" data-en>🇺🇸 Tax Advantage #2</span>
+    <span class="section-tag" data-tr>🇺🇸 Vergi Avantajı #2</span>
+    <h2 class="section-title" data-en>State-level tax advantages — where you incorporate matters.</h2>
+    <h2 class="section-title" data-tr>Eyalet bazlı vergi avantajları — nerede şirket kurduğunuz önemlidir.</h2>
+    <p class="section-lead" data-en>The U.S. has no single national business tax environment. State-level tax policy varies dramatically — and for foreign investors, state selection is a legitimate tax planning tool.</p>
+    <p class="section-lead" data-tr>ABD'de tek bir ulusal iş vergi ortamı yoktur. Eyalet bazlı vergi politikası dramatik biçimde farklılaşır — ve yabancı yatırımcılar için eyalet seçimi meşru bir vergi planlama aracıdır.</p>
+
+    <div style="max-width:860px">
+      <div class="state-row">
+        <div class="state-flag">🏛️</div>
+        <div>
+          <h5>Delaware</h5>
+          <p data-en>No state income tax on income earned outside Delaware. No sales tax. The "Court of Chancery" provides the most business-friendly legal framework in the U.S. — preferred for holding companies, investment vehicles, and entities with complex ownership structures. Over 60% of Fortune 500 companies are incorporated here. Ideal for investors who operate elsewhere but need a U.S. legal entity.</p>
+          <p data-tr>Delaware dışında elde edilen gelir için eyalet gelir vergisi yok. Satış vergisi yok. "Court of Chancery" ABD'nin en iş dostu hukuki çerçevesini sağlar — holding şirketleri, yatırım araçları ve karmaşık mülkiyet yapıları için tercih edilir. Fortune 500'ün %60'ından fazlası burada kayıtlı. Başka yerlerde faaliyet gösteren ama ABD tüzel kişiliğine ihtiyaç duyan yatırımcılar için ideal.</p>
+        </div>
+      </div>
+      <div class="state-row">
+        <div class="state-flag">🤠</div>
+        <div>
+          <h5>Texas</h5>
+          <p data-en>No personal income tax. No corporate income tax (franchise tax instead — low rate). Large federal contracting ecosystem — particularly defense, energy, and technology. Home to major military installations and federal agencies. Texas Enterprise Fund provides cash grants to businesses creating jobs. Significant real estate investment activity in Dallas, Houston, and Austin metro areas.</p>
+          <p data-tr>Kişisel gelir vergisi yok. Kurumlar vergisi yok (bunun yerine düşük oranlı franchise vergisi). Büyük federal ihale ekosistemi — özellikle savunma, enerji ve teknoloji. Büyük askeri üsler ve federal ajanslar burada. Texas Enterprise Fund, iş yaratan işletmelere nakit hibe sağlar. Dallas, Houston ve Austin bölgelerinde önemli gayrimenkul yatırım aktivitesi.</p>
+        </div>
+      </div>
+      <div class="state-row">
+        <div class="state-flag">🌴</div>
+        <div>
+          <h5>Florida</h5>
+          <p data-en>No personal income tax. No state income tax on individuals. Major gateway for Latin American and Turkish investors — large international business community in Miami. Strong real estate market (Miami, Orlando, Tampa). Growing technology sector. Port of Miami is the largest cruise port in the world. EB-5 Regional Centers are active in South Florida real estate projects.</p>
+          <p data-tr>Kişisel gelir vergisi yok. Bireyler için eyalet gelir vergisi yok. Latin Amerika ve Türk yatırımcılar için büyük kapı — Miami'de büyük uluslararası iş topluluğu. Güçlü gayrimenkul piyasası (Miami, Orlando, Tampa). Büyüyen teknoloji sektörü. Miami Limanı dünyanın en büyük kruvaziyer limanı. Güney Florida gayrimenkul projelerinde EB-5 Bölgesel Merkezleri aktif.</p>
+        </div>
+      </div>
+      <div class="state-row">
+        <div class="state-flag">⛰️</div>
+        <div>
+          <h5>Wyoming</h5>
+          <p data-en>No corporate income tax. No personal income tax. No franchise tax. Extremely low annual LLC maintenance cost ($60/year). Strong asset protection laws — single-member LLCs provide stronger protection than most states. Popular for holding companies and asset protection structures. No public disclosure of ownership required. Growing appeal for digital asset and fintech investors.</p>
+          <p data-tr>Kurumlar vergisi yok. Kişisel gelir vergisi yok. Franchise vergisi yok. Yıllık LLC bakım maliyeti son derece düşük ($60/yıl). Güçlü varlık koruma yasaları — tek üyeli LLC'ler çoğu eyaletten daha güçlü koruma sağlar. Holding şirketleri ve varlık koruma yapıları için popüler. Mülkiyet kamuya açıklama zorunluluğu yok. Dijital varlık ve fintech yatırımcıları arasında artan ilgi.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CANADA TAX ============ -->
+<section class="section-light">
+  <div class="container">
+    <span class="section-tag" data-en>🇨🇦 Canada — Tax Advantages</span>
+    <span class="section-tag" data-tr>🇨🇦 Kanada — Vergi Avantajları</span>
+    <h2 class="section-title" data-en>Canada's tax incentive landscape for foreign investors.</h2>
+    <h2 class="section-title" data-tr>Kanada'nın yabancı yatırımcılar için vergi teşvik ortamı.</h2>
+    <p class="section-lead" data-en>Canada's federal and provincial tax system offers competitive incentives — particularly for technology, clean energy, and companies building a North American footprint from a Canadian base.</p>
+    <p class="section-lead" data-tr>Kanada'nın federal ve eyalet vergi sistemi — özellikle teknoloji, temiz enerji ve Kanada üssünden Kuzey Amerika ayak izi oluşturan şirketler için — rekabetçi teşvikler sunmaktadır.</p>
+
+    <div class="tax-zones-grid">
+      <div class="tax-zone">
+        <h4 data-en>SR&ED Tax Credit</h4>
+        <h4 data-tr>SR&ED Vergi Kredisi</h4>
+        <p style="font-size:14px;margin-top:12px" data-en>Scientific Research & Experimental Development — Canada's largest federal tax incentive program. Eligible R&D spending qualifies for a 15% federal tax credit (35% for Canadian-controlled small businesses). Available to foreign-owned Canadian subsidiaries.</p>
+        <p style="font-size:14px;margin-top:12px" data-tr>Bilimsel Araştırma ve Deneysel Geliştirme — Kanada'nın en büyük federal vergi teşvik programı. Uygun AR-GE harcamaları %15 federal vergi kredisine hak kazanır (Kanada kontrolündeki küçük işletmeler için %35). Yabancı sermayeli Kanada şubelerine de uygulanır.</p>
+      </div>
+
+      <div class="tax-zone">
+        <h4 data-en>Federal Corporate Tax Rate</h4>
+        <h4 data-tr>Federal Kurumlar Vergisi Oranı</h4>
+        <p style="font-size:14px;margin-top:12px" data-en>Canada's general federal corporate tax rate is 15%. Combined with provincial tax (typically 8–12%), the blended rate is 23–27% — lower than many G7 jurisdictions. Small Business Deduction reduces rate to ~9% for eligible Canadian-controlled corporations on the first $500K CAD of active business income.</p>
+        <p style="font-size:14px;margin-top:12px" data-tr>Kanada'nın genel federal kurumlar vergisi oranı %15'tir. Eyalet vergisiyle birleştirildiğinde (genellikle %8–12) karma oran %23–27 olur — birçok G7 ülkesinden daha düşük. Küçük İşletme İndirimi, ilk $500K CAD aktif iş gelirinde uygun şirketler için oranı yaklaşık %9'a düşürür.</p>
+      </div>
+
+      <div class="tax-zone">
+        <h4 data-en>Ontario Strategic Innovation Fund</h4>
+        <h4 data-tr>Ontario Stratejik İnovasyon Fonu</h4>
+        <p style="font-size:14px;margin-top:12px" data-en>Ontario offers repayable contributions to businesses investing in R&D, technology, and manufacturing expansion. Projects typically involve $10M+ investments and must create or retain significant employment in Ontario. Targeted at companies in advanced manufacturing, life sciences, and tech sectors.</p>
+        <p style="font-size:14px;margin-top:12px" data-tr>Ontario, AR-GE, teknoloji ve üretim genişlemesine yatırım yapan işletmelere geri ödenebilir katkılar sunar. Projeler tipik olarak $10M+ yatırım içerir ve Ontario'da önemli istihdam yaratmalı veya korumalıdır. İleri üretim, yaşam bilimleri ve teknoloji sektörlerine yönelik.</p>
+      </div>
+
+      <div class="tax-zone">
+        <h4 data-en>Clean Technology Investment Tax Credit</h4>
+        <h4 data-tr>Temiz Teknoloji Yatırım Vergi Kredisi</h4>
+        <p style="font-size:14px;margin-top:12px" data-en>Canada's 2023 Budget introduced investment tax credits for clean technology and clean electricity — up to 30% credit on eligible investments in solar, wind, battery storage, and clean hydrogen. Applies to both Canadian-controlled and foreign-controlled corporations investing in eligible property in Canada.</p>
+        <p style="font-size:14px;margin-top:12px" data-tr>Kanada'nın 2023 Bütçesi, temiz teknoloji ve temiz elektrik için yatırım vergi kredisi getirdi — güneş, rüzgar, batarya depolama ve temiz hidrojen alanlarındaki uygun yatırımlarda %30'a kadar kredi. Kanada'da uygun mülke yatırım yapan hem Kanada hem yabancı kontrolündeki şirketlere uygulanır.</p>
+      </div>
+
+      <div class="tax-zone">
+        <h4 data-en>Canada–Turkey Tax Treaty</h4>
+        <h4 data-tr>Kanada–Türkiye Vergi Anlaşması</h4>
+        <p style="font-size:14px;margin-top:12px" data-en>Canada and Turkey have a tax treaty (in force since 1990) that prevents double taxation on income earned in both countries. Key provisions reduce withholding tax on dividends (15%), interest (15%), and royalties (10%) paid between the two countries. Critical for Turkish investors structuring a Canadian entity.</p>
+        <p style="font-size:14px;margin-top:12px" data-tr>Kanada ve Türkiye, her iki ülkede elde edilen gelir üzerinde çifte vergilendirmeyi önleyen bir vergi anlaşmasına sahiptir (1990'dan beri yürürlükte). Temel hükümler, iki ülke arasında ödenen temettü (%15), faiz (%15) ve telif haklarındaki (%10) stopaj vergisini düşürür. Kanada şirketi yapılandıran Türk yatırımcılar için kritik.</p>
+      </div>
+
+      <div class="tax-zone">
+        <h4 data-en>British Columbia Tech Programs</h4>
+        <h4 data-tr>British Columbia Teknoloji Programları</h4>
+        <p style="font-size:14px;margin-top:12px" data-en>BC's Interactive Digital Media Tax Credit (IDMTC) offers a 17.5% refundable tax credit on eligible labour costs. The BC Tech Fund provides equity investments to BC-based technology companies. Vancouver is one of North America's fastest-growing tech hubs, with a significant Turkish diaspora business community.</p>
+        <p style="font-size:14px;margin-top:12px" data-tr>BC'nin İnteraktif Dijital Medya Vergi Kredisi (IDMTC), uygun işgücü maliyetlerinde %17.5 iade edilebilir vergi kredisi sunar. BC Tech Fund, BC merkezli teknoloji şirketlerine özsermaye yatırımı sağlar. Vancouver, Kuzey Amerika'nın en hızlı büyüyen teknoloji merkezlerinden biri ve önemli Türk diaspora iş topluluğuna ev sahipliği yapıyor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta-section">
+  <div class="container">
+    <h2 data-en>Which structure fits your situation?</h2>
+    <h2 data-tr>Hangi yapı sizin durumunuza uyuyor?</h2>
+    <p data-en>We don't give generic advice. In a single conversation we can tell you which visa category makes sense for your profile, which state or province to consider, and what the tax picture looks like — before you spend a dollar on attorneys.</p>
+    <p data-tr>Genel tavsiye vermiyoruz. Tek bir görüşmede — avukatlara bir dolar harcamadan önce — profilinize hangi vize kategorisinin uyduğunu, hangi eyalet veya ilin değerlendirmeye alınması gerektiğini ve vergi tablosunun nasıl göründüğünü söyleyebiliriz.</p>
+    <a href="contact.html" class="btn btn-primary">
+      <span data-en>Start a Conversation</span><span data-tr>Görüşme Başlat</span>
+    </a>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

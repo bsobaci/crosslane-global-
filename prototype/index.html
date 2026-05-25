@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crosslane Global</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; font-size: 16px; color: #1a1a1a; background: #fff; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 500; }
+    section { padding: 120px 0; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+    /* NAV */
+    #nav-mount { position: relative; z-index: 100; }
+
+    /* HERO */
+    .hero { position: relative; min-height: 90vh; display: flex; align-items: center; background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=85') center/cover no-repeat; }
+    .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26,26,26,0.35) 0%, rgba(26,26,26,0.62) 100%); }
+    .hero-content { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 120px 40px; }
+    .hero .eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.35em; color: #B87A2A; font-weight: 600; margin-bottom: 28px; }
+    .hero h1 { font-size: clamp(44px, 6vw, 76px); line-height: 1.08; margin-bottom: 28px; max-width: 650px; color: #fff; }
+    .hero h1 em { font-style: italic; color: #B87A2A; }
+    .hero p { font-size: 18px; color: rgba(255,255,255,0.7); max-width: 480px; line-height: 1.8; margin-bottom: 44px; }
+    .hero .btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-dark { padding: 16px 32px; background: #B87A2A; color: #fff; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; border: none; border-radius: 2px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: background 0.2s; font-family: inherit; }
+    .btn-dark:hover { background: #8E5A1A; color: #fff; }
+    .btn-line { padding: 16px 32px; background: transparent; color: rgba(255,255,255,0.8); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid rgba(255,255,255,0.3); border-radius: 2px; text-decoration: none; transition: border-color 0.2s, color 0.2s; font-family: inherit; }
+    .btn-line:hover { border-color: #B87A2A; color: #B87A2A; }
+
+    /* INTRO */
+    .intro { background: #faf9f7; }
+    .intro .split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .intro h2 { font-size: clamp(28px, 3.5vw, 40px); line-height: 1.15; }
+    .intro h2 em { font-style: italic; color: #8E5A1A; }
+    .intro p { color: #666; font-size: 16px; line-height: 1.9; }
+
+    /* SERVICES */
+    .services h2 { font-size: clamp(28px, 3.5vw, 40px); margin-bottom: 56px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .svc-card { text-decoration: none; color: inherit; display: block; }
+    .svc-card h3 { font-size: 20px; margin-bottom: 8px; }
+    .svc-card p { font-size: 14px; color: #777; line-height: 1.7; }
+    .svc-card .num { font-size: 11px; color: #ccc; letter-spacing: 0.15em; margin-bottom: 16px; font-weight: 500; }
+
+    /* MARKETS */
+    .markets { display: grid; grid-template-columns: 1fr 1fr; }
+    .mkt { position: relative; min-height: 480px; display: flex; align-items: flex-end; overflow: hidden; text-decoration: none; }
+    .mkt-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.6s; }
+    .mkt:hover .mkt-bg { transform: scale(1.03); }
+    .mkt-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.05) 100%); }
+    .mkt-body { position: relative; z-index: 2; padding: 56px; color: #fff; }
+    .mkt-body h3 { font-size: 30px; color: #fff; margin-bottom: 8px; }
+    .mkt-body p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 20px; }
+    .mkt-body .link { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #B87A2A; font-weight: 600; }
+
+    /* PARTNER */
+    .partner { background: #1a1a1a; color: #fff; }
+    .partner h2 { font-size: clamp(28px, 4vw, 44px); color: #fff; margin-bottom: 20px; }
+    .partner h2 em { font-style: italic; color: #B87A2A; }
+    .partner p { color: rgba(255,255,255,0.55); font-size: 16px; line-height: 1.9; max-width: 520px; margin-bottom: 32px; }
+    .partner .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 3px; padding: 28px; display: inline-block; }
+    .partner .card .name { font-family: 'Playfair Display', serif; font-size: 22px; color: #fff; }
+    .partner .card .loc { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px; letter-spacing: 0.05em; }
+    .btn-gold { display: inline-block; padding: 16px 34px; background: #8E5A1A; color: #fff; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 2px; text-decoration: none; transition: opacity 0.2s; font-family: inherit; }
+    .btn-gold:hover { opacity: 0.85; color: #fff; }
+
+    /* CTA */
+    .cta { background: #1a1a1a; text-align: center; }
+    .cta h2 { font-size: clamp(30px, 5vw, 52px); color: #fff; margin-bottom: 16px; }
+    .cta p { color: rgba(255,255,255,0.5); font-size: 16px; max-width: 440px; margin: 0 auto 36px; }
+
+    @media (max-width: 768px) {
+      section { padding: 80px 0; }
+      .hero { min-height: 70vh; }
+      .intro .split { grid-template-columns: 1fr; gap: 32px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .markets { grid-template-columns: 1fr; }
+      .container { padding: 0 24px; }
+    }
+    @media (max-width: 480px) {
+      .services-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Tysons Corner, Virginia</p>
+    <h1 data-en>Your bridge to<br>North American<br><em>markets.</em></h1>
+    <h1 data-tr>Kuzey Amerika'ya<br>açılan<br><em>kapınız.</em></h1>
+    <p data-en>We help international companies and investors establish, operate, and win government contracts across the United States and Canada.</p>
+    <p data-tr>Uluslararası şirketlerin ve yatırımcıların ABD ile Kanada'da şirket kurmasına, faaliyet göstermesine ve kamu ihaleleri kazanmasına yardımcı oluyoruz.</p>
+    <div class="btns">
+      <a href="contact.html" class="btn-dark" data-en>Book a Consultation →</a>
+      <a href="contact.html" class="btn-dark" data-tr>Danışma Randevusu →</a>
+      <a href="opportunities.html" class="btn-line" data-en>View Opportunities</a>
+      <a href="opportunities.html" class="btn-line" data-tr>Fırsatları Gör</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INTRO ═══ -->
+<section class="intro">
+  <div class="container">
+    <div class="split">
+      <h2 data-en>We don't consult<br>and leave. We<br><em>stay and operate.</em></h2>
+      <h2 data-tr>Danışıp gitmiyor,<br><em>kalıp işletiyoruz.</em></h2>
+      <p data-en>A foreign company entering North America needs more than advice. It needs a registered entity, a bank account, government contracting credentials, proposal writing, and someone who shows up in every room you can't be in yourself. That is what we do.</p>
+      <p data-tr>Kuzey Amerika'ya giren yabancı bir şirketin tavsiyeden fazlasına ihtiyacı vardır. Tescilli bir şirket, banka hesabı, kamu ihale yetkileri, teklif yazımı ve sizin bulunamadığınız her odada sizi temsil edecek biri. İşte biz bunu yapıyoruz.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section class="services">
+  <div class="container">
+    <h2 data-en>What we do.</h2>
+    <h2 data-tr>Ne yapıyoruz.</h2>
+    <div class="services-grid">
+      <a href="services/company-setup.html" class="svc-card">
+        <p class="num">01</p>
+        <h3 data-en>Company Formation</h3><h3 data-tr>Şirket Kurma</h3>
+        <p data-en>US and Canadian incorporation, banking, tax registration, annual compliance.</p>
+        <p data-tr>ABD ve Kanada'da şirket kurulumu, bankacılık, vergi kaydı, yıllık uyum.</p>
+      </a>
+      <a href="services/gov-contracting.html" class="svc-card">
+        <p class="num">02</p>
+        <h3 data-en>Government Contracting</h3><h3 data-tr>Kamu İhaleleri</h3>
+        <p data-en>SAM.gov registration, opportunity scanning, proposal writing, agency relations.</p>
+        <p data-tr>SAM.gov kaydı, fırsat taraması, teklif yazımı, ajans ilişkileri.</p>
+      </a>
+      <a href="services/advisory.html" class="svc-card">
+        <p class="num">03</p>
+        <h3 data-en>Business Representation</h3><h3 data-tr>İş Temsili</h3>
+        <p data-en>We are the North American face of your company — meetings, relationships, reporting.</p>
+        <p data-tr>Kuzey Amerika'daki yüzünüzüz — toplantılar, ilişkiler, raporlama.</p>
+      </a>
+      <a href="services/investment.html" class="svc-card">
+        <p class="num">04</p>
+        <h3 data-en>Investment Advisory</h3><h3 data-tr>Yatırım Danışmanlığı</h3>
+        <p data-en>Real estate, Opportunity Zones, cross-border capital placement, due diligence.</p>
+        <p data-tr>Gayrimenkul, Fırsat Bölgeleri, sınır ötesi sermaye, durum tespiti.</p>
+      </a>
+      <a href="services/relocation.html" class="svc-card">
+        <p class="num">05</p>
+        <h3 data-en>Relocation & Establishment</h3><h3 data-tr>Yerleşim Yerlesim & Kurulus Kuruluş</h3>
+        <p data-en>Executive and family relocation, housing, schooling, office setup.</p>
+        <p data-tr>Yönetici ve aile yerleştirme, konut, okul, ofis kurulumu.</p>
+      </a>
+      <a href="services/advisory.html" class="svc-card">
+        <p class="num">06</p>
+        <h3 data-en>Legal & Financial Coordination</h3><h3 data-tr>Hukuk Hukuk & Mali Koordinasyon Mali Koordinasyon</h3>
+        <p data-en>Attorneys, CPAs, compliance — coordinated through one point of contact.</p>
+        <p data-tr>Avukatlar, muhasebeciler, uyum — tek noktadan koordinasyon.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MARKETS ═══ -->
+<div class="markets">
+  <a href="usa.html" class="mkt">
+    <div class="mkt-bg" style="background-image:url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1200&q=80')"></div>
+    <div class="mkt-overlay"></div>
+    <div class="mkt-body">
+      <h3 data-en>United States</h3><h3 data-tr>Amerika Birleşik Devletleri</h3>
+      <p data-en>$750B+ annual federal procurement. The world's largest government contracting market.</p>
+      <p data-tr>Yıllık $750B+ federal tedarik. Dünyanın en büyük kamu ihale pazarı.</p>
+      <span class="link" data-en>Explore →</span><span class="link" data-tr>Keşfet →</span>
+    </div>
+  </a>
+  <a href="canada.html" class="mkt">
+    <div class="mkt-bg" style="background-image:url('https://images.unsplash.com/photo-1517935706615-2717063c2225?w=1200&q=80')"></div>
+    <div class="mkt-overlay"></div>
+    <div class="mkt-body">
+      <h3 data-en>Canada</h3><h3 data-tr>Kanada</h3>
+      <p data-en>Stable, transparent, G7 banking leader. $85B+ combined government procurement market.</p>
+      <p data-tr>Istikrarlı, şeffaf, G7 bankacılık lideri. $85B+ birleşik kamu ihale pazarı.</p>
+      <span class="link" data-en>Explore →</span><span class="link" data-tr>Keşfet →</span>
+    </div>
+  </a>
+</div>
+
+<!-- ═══ PARTNER ═══ -->
+<section class="partner">
+  <div class="container">
+    <h2 data-en>In partnership with<br><em>Oncu Global.</em></h2>
+    <h2 data-tr><em>Oncu Global</em> ile<br>iş birliği içinde.</h2>
+    <p data-en>Oncu Global does in the United Kingdom what we do in North America. Together, we offer clients end-to-end coverage across three major markets — seamlessly coordinated.</p>
+    <p data-tr>Oncu Global, Birleşik Krallık'ta bizim Kuzey Amerika'da yaptığımızı yapıyor. Birlikte müşterilerimize üç büyük pazarda uçtan uca kapsam sunuyoruz.</p>
+    <div class="card">
+      <div class="name">Oncu Global</div>
+      <div class="loc">Coventry University Technology Park, United Kingdom</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta">
+  <div class="container">
+    <h2 data-en>The first conversation<br>is always free.</h2>
+    <h2 data-tr>İlk görüşme her<br>zaman ücretsiz.</h2>
+    <p data-en>Tell us where you want to go. We'll tell you exactly how to get there.</p>
+    <p data-tr>Nereye gitmek istediğinizi söyleyin. Oraya tam olarak nasıl ulaşacağınızı anlatalım.</p>
+    <a href="contact.html" class="btn-gold" data-en>Schedule a Consultation</a>
+    <a href="contact.html" class="btn-gold" data-tr>Danışma Randevusu Al</a>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/access-modal.js"></script>
+</body>
+</html>

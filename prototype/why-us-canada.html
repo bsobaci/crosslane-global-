@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Markets — Crosslane Global</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    .market-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 960px;
+      margin: 60px auto;
+      padding: 0 24px;
+    }
+    .market-card {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .market-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+    }
+    .market-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s ease;
+    }
+    .market-card:hover .market-card-bg {
+      transform: scale(1.04);
+    }
+    .market-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(26,26,26,0.1) 0%, rgba(26,26,26,0.75) 100%);
+    }
+    .market-card-content {
+      position: relative;
+      z-index: 2;
+      padding: 36px;
+      color: #fff;
+    }
+    .market-flag {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .market-card-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 500;
+      margin: 0 0 12px;
+      color: #fff;
+    }
+    .market-card-content p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.82);
+      margin: 0 0 24px;
+    }
+    .market-card-cta {
+      display: inline-block;
+      padding: 12px 24px;
+      background: var(--gold, #B87A2A);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .market-card:hover .market-card-cta {
+      background: #9a6520;
+    }
+    .market-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+    }
+    .market-bullets li {
+      font-size: 13px;
+      color: rgba(255,255,255,0.78);
+      padding: 4px 0;
+    }
+    .market-bullets li::before {
+      content: '→ ';
+      color: var(--gold, #B87A2A);
+    }
+    @media (max-width: 700px) {
+      .market-selector { grid-template-columns: 1fr; }
+      .market-card { min-height: 380px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<header class="subhero" style="background: linear-gradient(180deg, rgba(26,26,26,0.42) 0%, rgba(26,26,26,0.65) 100%), url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1920&q=80') center/cover no-repeat;">
+  <div class="container">
+    <div class="crumb" data-en>Our markets</div>
+    <div class="crumb" data-tr>Piyasalarımız</div>
+    <h1 data-en>Choose your market.</h1>
+    <h1 data-tr>Pazarınızı seçin.</h1>
+    <p class="lead" data-en>We operate exclusively in two of the world's most transparent and active investment markets. Select a country to explore investment pathways, visa options, and what we can do for you there.</p>
+    <p class="lead" data-tr>Dünyanın en şeffaf ve aktif iki yatırım pazarında faaliyet gösteriyoruz. Yatırım yollarını, vize seçeneklerini ve sizin için neler yapabileceğimizi keşfetmek için bir ülke seçin.</p>
+  </div>
+</header>
+
+<section style="padding: 0 0 80px;">
+  <div class="market-selector">
+
+    <!-- USA Card -->
+    <a href="usa.html" class="market-card">
+      <div class="market-card-bg" style="background-image: url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1200&q=80');"></div>
+      <div class="market-card-overlay"></div>
+      <div class="market-card-content">
+        <span class="market-flag">🇺🇸</span>
+        <h2 data-en>United States</h2>
+        <h2 data-tr>Amerika Birleşik Devletleri</h2>
+        <ul class="market-bullets">
+          <li data-en>Company formation in Virginia, Delaware, Texas, Florida</li>
+          <li data-tr>Virginia, Delaware, Texas, Florida'da şirket kurma</li>
+          <li data-en>EB-5, E-2, L-1A investor visas</li>
+          <li data-tr>EB-5, E-2, L-1A yatırımcı vizeleri</li>
+          <li data-en>Federal contracting & Opportunity Zones</li>
+          <li data-tr>Federal ihaleler ve Fırsat Bölgeleri</li>
+          <li data-en>DMV / Tysons Corner presence</li>
+          <li data-tr>DMV / Tysons Corner ofisi</li>
+        </ul>
+        <span class="market-card-cta" data-en>Explore the U.S. →</span>
+        <span class="market-card-cta" data-tr>ABD'yi Keşfet →</span>
+      </div>
+    </a>
+
+    <!-- Canada Card -->
+    <a href="canada.html" class="market-card">
+      <div class="market-card-bg" style="background-image: url('https://images.unsplash.com/photo-1517935706615-2717063c2225?w=1200&q=80');"></div>
+      <div class="market-card-overlay"></div>
+      <div class="market-card-content">
+        <span class="market-flag">🇨🇦</span>
+        <h2 data-en>Canada</h2>
+        <h2 data-tr>Kanada</h2>
+        <ul class="market-bullets">
+          <li data-en>Company formation in Ontario, BC, Quebec</li>
+          <li data-tr>Ontario, BC, Quebec'te şirket kurma</li>
+          <li data-en>Provincial Nominee Programs (PNP)</li>
+          <li data-tr>Eyalet Aday Programları (PNP)</li>
+          <li data-en>SR&ED tax credits & provincial grants</li>
+          <li data-tr>SR&ED vergi kredileri ve eyalet hibeleri</li>
+          <li data-en>G7 banking stability, OECD-leading workforce</li>
+          <li data-tr>G7 bankacılık istikrarı, OECD lider işgücü</li>
+        </ul>
+        <span class="market-card-cta" data-en>Explore Canada →</span>
+        <span class="market-card-cta" data-tr>Kanada'yı Keşfet →</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- Compare strip -->
+<section class="section-light" style="padding: 60px 0;">
+  <div class="container" style="max-width:860px; text-align:center;">
+    <span class="section-tag" data-en>Not sure which?</span>
+    <span class="section-tag" data-tr>Emin değil misiniz?</span>
+    <h2 class="section-title" data-en>Many of our clients invest in both.</h2>
+    <h2 class="section-title" data-tr>Müşterilerimizin birçoğu her iki pazara da yatırım yapıyor.</h2>
+    <p style="font-size:16px; color: var(--text-secondary); margin: 0 auto 32px; max-width:620px;" data-en>The U.S. and Canada often complement each other — a Delaware holding company with a Canadian operating entity, for example, is a common structure for international investors. We can help you design a cross-border strategy from day one.</p>
+    <p style="font-size:16px; color: var(--text-secondary); margin: 0 auto 32px; max-width:620px;" data-tr>ABD ve Kanada çoğu zaman birbirini tamamlar — örneğin Delaware holding şirketi ile Kanada operasyon şirketi, uluslararası yatırımcılar için yaygın bir yapıdır. İlk günden itibaren sınır ötesi bir strateji tasarlamanıza yardımcı olabiliriz.</p>
+    <a href="contact.html" class="btn btn-primary">
+      <span data-en>Talk to an advisor</span>
+      <span data-tr>Danışmanla görüş</span>
+    </a>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

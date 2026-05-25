@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — Crosslane Global</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    * { box-sizing: border-box; }
+
+    /* ── HERO ── */
+    .svc-hero {
+      background: #1a1a1a;
+      padding: 110px 0 90px;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .svc-hero-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 60px;
+    }
+    .eyebrow {
+      text-transform: uppercase; letter-spacing: 0.35em;
+      color: #B87A2A; font-size: 11px; font-weight: 600;
+      margin-bottom: 28px; display: block;
+    }
+    .svc-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 5vw, 68px);
+      font-weight: 500; color: #fff;
+      margin: 0 0 28px; line-height: 1.05;
+      max-width: 800px;
+    }
+    .svc-hero h1 em { font-style: italic; color: #B87A2A; }
+    .svc-hero p {
+      color: rgba(255,255,255,0.55);
+      font-size: 17px; line-height: 1.85;
+      max-width: 580px; margin: 0;
+    }
+
+    /* ── INTRO STRIP ── */
+    .intro-strip {
+      border-bottom: 1px solid #e8e4dc;
+      background: #fff;
+    }
+    .intro-strip-inner {
+      max-width: 1100px; margin: 0 auto; padding: 60px;
+      display: flex; gap: 80px; align-items: center; flex-wrap: wrap;
+    }
+    .intro-strip-left {
+      flex: 1; min-width: 260px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 2.5vw, 32px); font-weight: 500;
+      color: #1a1a1a; line-height: 1.25;
+    }
+    .intro-strip-right {
+      flex: 1.4; min-width: 260px;
+      color: #666; font-size: 15px; line-height: 1.9;
+    }
+
+    /* ── SERVICES GRID ── */
+    .all-services {
+      max-width: 1100px; margin: 0 auto; padding: 80px 60px;
+    }
+    .svc-section-label {
+      text-transform: uppercase; letter-spacing: 0.3em;
+      color: #B87A2A; font-size: 11px; font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .svc-section-h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 40px); font-weight: 500;
+      color: #1a1a1a; margin: 0 0 56px; line-height: 1.1;
+    }
+    .svc-grid-8 {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: #e8e4dc;
+      border: 1px solid #e8e4dc;
+    }
+    .svc-card {
+      background: #fff; padding: 52px 48px;
+      text-decoration: none; color: inherit; display: block;
+      transition: background 0.2s;
+      position: relative;
+    }
+    .svc-card:hover { background: #faf9f7; }
+    .svc-card:hover .svc-arrow { color: #B87A2A; letter-spacing: 0.25em; }
+    .svc-n {
+      font-size: 11px; color: #ccc;
+      letter-spacing: 0.2em; margin-bottom: 28px;
+      font-weight: 500; display: block;
+    }
+    .svc-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px; font-weight: 500;
+      color: #1a1a1a; margin: 0 0 16px; line-height: 1.2;
+    }
+    .svc-card p {
+      color: #666; font-size: 15px; line-height: 1.8;
+      margin: 0 0 32px;
+    }
+    .svc-arrow {
+      font-size: 11px; color: #ccc;
+      text-transform: uppercase; letter-spacing: 0.18em;
+      font-weight: 600; transition: color 0.2s, letter-spacing 0.2s;
+    }
+
+    /* ── HOW WE WORK ── */
+    .how-band {
+      background: #faf9f7;
+      border-top: 1px solid #e8e4dc;
+      border-bottom: 1px solid #e8e4dc;
+      padding: 90px 0;
+    }
+    .how-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 60px;
+    }
+    .how-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 48px; margin-top: 56px;
+    }
+    .how-step { }
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px; font-weight: 500;
+      color: #e8e4dc; display: block; margin-bottom: 16px;
+      line-height: 1;
+    }
+    .how-step h4 {
+      font-size: 16px; font-weight: 600; color: #1a1a1a;
+      margin: 0 0 10px;
+    }
+    .how-step p {
+      color: #777; font-size: 14px; line-height: 1.75; margin: 0;
+    }
+
+    /* ── CTA ── */
+    .cta-band {
+      background: #1a1a1a; padding: 100px 0; text-align: center;
+    }
+    .cta-band .eyebrow { color: #B87A2A; display: block; margin-bottom: 20px; }
+    .cta-band h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 4vw, 52px); font-weight: 500;
+      color: #fff; margin: 0 0 20px; line-height: 1.1;
+    }
+    .cta-band p {
+      color: rgba(255,255,255,0.55); font-size: 16px;
+      max-width: 480px; margin: 0 auto 44px; line-height: 1.85;
+    }
+    .btn-gold {
+      background: #B87A2A; color: #fff;
+      padding: 16px 34px; border-radius: 2px;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      font-size: 12px; font-weight: 600;
+      text-decoration: none; display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .btn-gold:hover { opacity: 0.85; color: #fff; }
+
+    @media (max-width: 860px) {
+      .svc-hero-inner, .intro-strip-inner, .all-services, .how-inner { padding: 0 32px; }
+      .all-services { padding: 60px 32px; }
+      .svc-hero { padding: 80px 0 60px; }
+      .svc-grid-8 { grid-template-columns: 1fr; }
+      .svc-card { padding: 40px 32px; }
+      .how-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .intro-strip-inner { flex-direction: column; gap: 20px; }
+    }
+    @media (max-width: 500px) {
+      .how-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<!-- ═══ HERO ═══ -->
+<section class="svc-hero">
+  <div class="svc-hero-inner">
+    <span class="eyebrow" data-en>What we handle for you</span>
+    <span class="eyebrow" data-tr>Sizin için neler yönetiyoruz</span>
+    <h1 data-en>Every discipline your<br>North American expansion<br>will ever <em>need.</em></h1>
+    <h1 data-tr>Kuzey Amerika genişlemenizin<br>ihtiyaç duyacağı her<br><em>disiplin.</em></h1>
+    <p data-en>From the first feasibility call to your first contract or investment close — we manage every dimension so you don't have to coordinate six advisors across two countries in a language that isn't yours.</p>
+    <p data-tr>İlk fizibilite görüşmesinden ilk sözleşme veya yatırım kapanışına kadar — iki ülkede, kendi dilinizde olmayan bir dilde altı danışmanı koordine etmek zorunda kalmadan her boyutu biz yönetiyoruz.</p>
+  </div>
+</section>
+
+<!-- ═══ INTRO STRIP ═══ -->
+<div class="intro-strip">
+  <div class="intro-strip-inner">
+    <div class="intro-strip-left" data-en>One team. Full accountability. No handoffs.</div>
+    <div class="intro-strip-left" data-tr>Tek ekip. Tam sorumluluk. Devir yok.</div>
+    <p class="intro-strip-right" data-en>Most advisory firms specialize in one area and hand you off when the work gets outside their lane. At Crosslane Global, the same principal who takes your first call manages the attorneys, coordinates filings, attends the procurement meetings, and reports back to you — in Turkish if that's what works.</p>
+    <p class="intro-strip-right" data-tr>Çoğu danışmanlık firması bir alanda uzmanlaşır ve iş kendi sahasının dışına çıktığında sizi devreder. Crosslane Global'de ilk görüşmenizi yapan aynı yönetici avukatları yönetir, başvuruları koordine eder, ihale toplantılarına katılır ve size — işe yarıyorsa Türkçe — geri bildirimde bulunur.</p>
+  </div>
+</div>
+
+<!-- ═══ ALL SERVICES ═══ -->
+<section>
+  <div class="all-services">
+    <p class="svc-section-label" data-en>Our services</p>
+    <p class="svc-section-label" data-tr>Hizmetlerimiz</p>
+    <h2 class="svc-section-h2" data-en>Everything your business needs<br>in North America.</h2>
+    <h2 class="svc-section-h2" data-tr>İşletmenizin Kuzey Amerika'da<br>ihtiyacı olan her şey.</h2>
+
+    <div class="svc-grid-8">
+
+      <a href="services/company-setup.html" class="svc-card">
+        <span class="svc-n">01</span>
+        <h3 data-en>Company Formation &amp; Ongoing Management</h3>
+        <h3 data-tr>Şirket Kurma &amp; Süregelen Yönetim</h3>
+        <p data-en>We set up your U.S. or Canadian company and keep it running — incorporation, banking, tax registration, annual filings, and compliance management. We don't hand it over; we run it with you.</p>
+        <p data-tr>ABD veya Kanada şirketinizi kuruyor ve çalışır halde tutuyoruz — tescil, bankacılık, vergi kaydı, yıllık beyanlar ve uyum yönetimi. Devretmiyoruz; sizinle birlikte yönetiyoruz.</p>
+        <span class="svc-arrow" data-en>Learn more →</span>
+        <span class="svc-arrow" data-tr>Daha fazla →</span>
+      </a>
+
+      <a href="services/gov-contracting.html" class="svc-card">
+        <span class="svc-n">02</span>
+        <h3 data-en>Government Contracting &amp; Proposal Writing</h3>
+        <h3 data-tr>Kamu İhaleleri &amp; Teklif Yazımı</h3>
+        <p data-en>We register your company, scan opportunities, develop the bid strategy, write the proposals, and manage the agency relationships — end-to-end. Winning U.S. and Canadian government contracts is a process, and we own it.</p>
+        <p data-tr>Şirketinizi kaydediyor, fırsatları tarıyor, teklif stratejisi geliştiriyor, teklifleri yazıyor ve ajans ilişkilerini yönetiyoruz — uçtan uca. ABD ve Kanada kamu ihaleleri kazanmak bir süreçtir; biz bu sürecin sahibiyiz.</p>
+        <span class="svc-arrow" data-en>Learn more →</span>
+        <span class="svc-arrow" data-tr>Daha fazla →</span>
+      </a>
+
+      <a href="services/advisory.html" class="svc-card">
+        <span class="svc-n">03</span>
+        <h3 data-en>Business Representation &amp; Local Operations</h3>
+        <h3 data-tr>İş Temsili &amp; Yerel Operasyonlar</h3>
+        <p data-en>We are the North American face of your company. We attend client meetings, hold relationships with partners and agencies, and keep your local operations moving — without you needing a full office on day one.</p>
+        <p data-tr>Şirketinizin Kuzey Amerika yüzüyüz. Müşteri toplantılarına katılıyor, ortak ve ajanslarla ilişkileri sürdürüyor ve yerel operasyonlarınızı yürütüyoruz — ilk günden tam bir ofise ihtiyaç duymadan.</p>
+        <span class="svc-arrow" data-en>Learn more →</span>
+        <span class="svc-arrow" data-tr>Daha fazla →</span>
+      </a>
+
+      <a href="services/advisory.html" class="svc-card">
+        <span class="svc-n">04</span>
+        <h3 data-en>Market Entry Strategy</h3>
+        <h3 data-tr>Pazar Giriş Stratejisi</h3>
+        <p data-en>Before you move, we map it. We assess your readiness, identify the right state and structure, build the roadmap, and tell you honestly what will work and what won't.</p>
+        <p data-tr>Harekete geçmeden önce haritalarız. Hazırlığınızı değerlendirir, doğru eyalet ve yapıyı belirler, yol haritasını oluştururuz — ve neyin işe yarayıp yaramayacağını dürüstçe söyleriz.</p>
+        <span class="svc-arrow" data-en>Learn more →</span>
+        <span class="svc-arrow" data-tr>Daha fazla →</span>
+      </a>
+
+      <a href="services/investment.html" class="svc-card">
+        <span class="svc-n">05</span>
+        <h3 data-en>Investment &amp; Real Estate</h3>
+        <h3 data-tr>Yatırım &amp; Gayrimenkul</h3>
+        <p data-en>We structure your U.S. and Canadian investments — real estate, Opportunity Zones, and cross-border capital placement — with full due diligence and local partner coordination.</p>
+        <p data-tr>ABD ve Kanada yatırımlarınızı yapılandırıyoruz — gayrimenkul, Fırsat Bölgeleri ve sınır ötesi sermaye yerleştirme — tam durum tespiti ve yerel ortak koordinasyonuyla.</p>
+        <span class="svc-arrow" data-en>Learn more →</span>
+        <span class="svc-arrow" data-tr>Daha fazla →</span>
+      </a>
+
+      <a href="investor-visas.html" class="svc-card">
+        <span class="svc-n">06</span>
+        <h3 data-en>Visa &amp; Immigration</h3>
+        <h3 data-tr>Vize &amp; Göç</h3>
+        <p data-en>We identify the right visa pathway for your goals and manage the entire process with licensed immigration counsel — on your behalf, in your language.</p>
+        <p data-tr>Hedeflerinize uygun vize yolunu belirliyor ve tüm süreci lisanslı göç avukatlarıyla sizin adınıza, dilinizde yönetiyoruz.</p>
+        <span class="svc-arrow" data-en>Learn more →</span>
+        <span class="svc-arrow" data-tr>Daha fazla →</span>
+      </a>
+
+      <a href="services/advisory.html" class="svc-card">
+        <span class="svc-n">07</span>
+        <h3 data-en>Legal &amp; Financial Coordination</h3>
+        <h3 data-tr>Hukuki &amp; Mali Koordinasyon</h3>
+        <p data-en>We coordinate your legal and financial team across both countries — attorneys, accountants, and compliance advisors — through a single point of contact. You get the result; we manage the process.</p>
+        <p data-tr>Her iki ülkedeki hukuk ve mali ekibinizi — avukatlar, muhasebeciler ve uyum danışmanları — tek bir temas noktasından koordine ediyoruz. Siz sonucu alırsınız; süreci biz yönetiriz.</p>
+        <span class="svc-arrow" data-en>Learn more →</span>
+        <span class="svc-arrow" data-tr>Daha fazla →</span>
+      </a>
+
+      <a href="services/relocation.html" class="svc-card">
+        <span class="svc-n">08</span>
+        <h3 data-en>Relocation &amp; Establishment</h3>
+        <h3 data-tr>Yerleşim &amp; Kuruluş</h3>
+        <p data-en>We handle the human side of expansion — executive and family relocation, housing, schooling, and office setup. We make North America feel manageable from day one.</p>
+        <p data-tr>Genişlemenin insani boyutunu üstleniyoruz — yönetici ve aile yerleşimi, konut, eğitim ve ofis kurulumu. Kuzey Amerika'yı ilk günden yönetilebilir hissettiriyoruz.</p>
+        <span class="svc-arrow" data-en>Learn more →</span>
+        <span class="svc-arrow" data-tr>Daha fazla →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW WE WORK ═══ -->
+<section class="how-band">
+  <div class="how-inner">
+    <p class="svc-section-label" data-en>How we work</p>
+    <p class="svc-section-label" data-tr>Nasıl çalışıyoruz</p>
+    <h2 class="svc-section-h2" data-en>Simple from the outside.<br>Thorough on the inside.</h2>
+    <h2 class="svc-section-h2" data-tr>Dışarıdan basit.<br>İçeriden titiz.</h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <span class="step-num">01</span>
+        <h4 data-en>First conversation</h4>
+        <h4 data-tr>İlk görüşme</h4>
+        <p data-en>A free 30-minute call. We listen to your situation, ask the right questions, and tell you honestly what's possible and what isn't.</p>
+        <p data-tr>Ücretsiz 30 dakikalık bir görüşme. Durumunuzu dinler, doğru soruları sorar ve dürüstçe neyin mümkün olup olmadığını söyleriz.</p>
+      </div>
+      <div class="how-step">
+        <span class="step-num">02</span>
+        <h4 data-en>Strategy &amp; scope</h4>
+        <h4 data-tr>Strateji &amp; kapsam</h4>
+        <p data-en>We develop a clear engagement plan — which services you need, in what order, and at what cost. No surprises.</p>
+        <p data-tr>Net bir iş planı hazırlıyoruz — hangi hizmetlere, hangi sırayla ve ne maliyetle ihtiyaç duyduğunuzu. Sürpriz yok.</p>
+      </div>
+      <div class="how-step">
+        <span class="step-num">03</span>
+        <h4 data-en>Execution</h4>
+        <h4 data-tr>Uygulama</h4>
+        <p data-en>We handle the work — filings, meetings, proposals, coordination. You receive regular updates in your language, without needing to chase anyone.</p>
+        <p data-tr>İşi biz üstleniyoruz — başvurular, toplantılar, teklifler, koordinasyon. Kimseyi takip etmek zorunda kalmadan kendi dilinizde düzenli güncellemeler alırsınız.</p>
+      </div>
+      <div class="how-step">
+        <span class="step-num">04</span>
+        <h4 data-en>Ongoing partnership</h4>
+        <h4 data-tr>Süregelen ortaklık</h4>
+        <p data-en>Once you're established, we stay. Compliance, market intelligence, new opportunities — we're your long-term North American partner.</p>
+        <p data-tr>Kurulduktan sonra kalıyoruz. Uyum, piyasa istihbaratı, yeni fırsatlar — uzun vadeli Kuzey Amerika ortağınızız.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-band">
+  <span class="eyebrow" data-en>Start with a conversation</span>
+  <span class="eyebrow" data-tr>Bir görüşmeyle başlayın</span>
+  <h2 data-en>Not sure which services you need?<br>That's what the first call is for.</h2>
+  <h2 data-tr>Hangi hizmetlere ihtiyacınız olduğundan emin değil misiniz?<br>İlk görüşme bunun içindir.</h2>
+  <p data-en>Most clients come in knowing their destination but not the path. We'll map it out — clearly, honestly, and without obligation.</p>
+  <p data-tr>Müşterilerimizin çoğu hedefini bilerek ama yolu bilmeden gelir. Yolu — açıkça, dürüstçe ve herhangi bir yükümlülük olmaksızın — çizeceğiz.</p>
+  <a href="contact.html" class="btn-gold">
+    <span data-en>Book a Free Consultation</span>
+    <span data-tr>Ücretsiz Danışma Rezervasyonu</span>
+  </a>
+</section>
+
+<div id="footer-mount"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

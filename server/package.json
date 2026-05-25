@@ -1,0 +1,22 @@
+{
+  "name": "crosslane-global-api",
+  "version": "1.0.0",
+  "description": "Crosslane Global — Enterprise B2B Lead Generation & Procurement Intelligence API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "seed": "node db/seed.js"
+  },
+  "dependencies": {
+    "sql.js": "^1.12.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.0",
+    "helmet": "^8.0.0",
+    "nodemailer": "^6.9.15",
+    "uuid": "^10.0.0",
+    "validator": "^13.12.0"
+  }
+}

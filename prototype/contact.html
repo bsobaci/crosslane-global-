@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Crosslane Global</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; font-size: 16px; color: #1a1a1a; background: #fff; }
+    h1, h2 { font-family: 'Playfair Display', serif; font-weight: 500; }
+    section { padding: 80px 0; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+    .subhero { background: #1a1a1a; padding: 140px 0 80px; }
+    .subhero .crumb { font-size: 12px; color: #B87A2A; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; }
+    .subhero h1 { font-size: clamp(38px, 5vw, 56px); color: #fff; margin-bottom: 16px; max-width: 700px; }
+    .subhero p { font-size: 17px; color: rgba(255,255,255,0.55); max-width: 560px; line-height: 1.8; }
+
+    .split { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: start; }
+    .split h2 { font-size: clamp(26px, 3vw, 36px); margin-bottom: 32px; }
+
+    .form-field { margin-bottom: 22px; }
+    .form-field label { display: block; font-size: 11px; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .form-field input, .form-field select, .form-field textarea { width: 100%; padding: 13px 14px; font-family: inherit; font-size: 15px; border: 1px solid #d5d1ca; border-radius: 3px; background: #fff; color: #1a1a1a; transition: border-color 0.2s; }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { outline: none; border-color: #8E5A1A; }
+    .form-field textarea { min-height: 120px; resize: vertical; }
+
+    .btn-submit { padding: 14px 36px; background: #1a1a1a; color: #fff; border: none; border-radius: 2px; font-family: inherit; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: background 0.2s; }
+    .btn-submit:hover { background: #8E5A1A; }
+
+    .contact-card { padding: 28px; border: 1px solid #e8e4dc; border-radius: 3px; margin-bottom: 16px; }
+    .contact-card .ch { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #999; margin-bottom: 8px; font-weight: 600; }
+    .contact-card .val { font-size: 16px; color: #1a1a1a; }
+
+    .hp-field { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; overflow: hidden; pointer-events: none; }
+    .err { color: #d44; font-size: 12px; margin-top: 4px; display: none; }
+    .success { color: #1D9E75; font-size: 14px; margin-top: 16px; display: none; }
+
+    @media (max-width: 768px) { .split { grid-template-columns: 1fr; gap: 40px; } .container { padding: 0 24px; } }
+  </style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<header class="subhero">
+  <div class="container">
+    <div class="crumb" data-en>Start a conversation</div>
+    <div class="crumb" data-tr>Bir gorusme baslatin</div>
+    <h1 data-en>Tell us what you're trying to do.</h1>
+    <h1 data-tr>Ne yapmaya calistiginizi anlatin.</h1>
+    <p data-en>The shortest path is a conversation. Use the form or reach us directly — whichever is fastest for you.</p>
+    <p data-tr>En kisa yol bir gorusedir. Formu kullanin ya da dogrudan ulasin — hangisi hizliysa.</p>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="split">
+      <div>
+        <h2 data-en>Send a message.</h2>
+        <h2 data-tr>Mesaj gonderin.</h2>
+        <form id="contactForm" novalidate>
+          <input type="text" name="_website" class="hp-field" tabindex="-1" autocomplete="off" />
+          <input type="email" name="_email_backup" class="hp-field" tabindex="-1" autocomplete="off" />
+
+          <div class="form-field"><label data-en>Full Name</label><label data-tr>Ad Soyad</label><input type="text" name="full_name" required /></div>
+          <div class="form-field"><label data-en>Business Email</label><label data-tr>Is E-postasi</label><input type="email" name="business_email" required placeholder="you@yourcompany.com" /></div>
+          <input type="hidden" name="phone" value="" />
+          <div class="form-field"><label data-en>Country</label><label data-tr>Ulke</label><input type="text" name="industry" /></div>
+          <div class="form-field">
+            <label data-en>Service of Interest</label><label data-tr>Ilgilendiginiz Hizmet</label>
+            <select name="areas_of_interest">
+              <option value="">—</option>
+              <option data-en>Investment & Real Estate</option><option data-tr>Yatirim & Gayrimenkul</option>
+              <option data-en>Company Formation</option><option data-tr>Sirket Kurma</option>
+              <option data-en>Government Contracting</option><option data-tr>Kamu Ihaleleri</option>
+              <option data-en>Business Representation</option><option data-tr>Is Temsili</option>
+              <option data-en>Strategic Advisory</option><option data-tr>Stratejik Danismanlik</option>
+            </select>
+          </div>
+          <div class="form-field"><label data-en>Tell us about your situation</label><label data-tr>Durumunuzu anlatin</label><textarea name="message"></textarea></div>
+          <input type="hidden" name="job_title" value="Contact Inquiry" />
+          <input type="hidden" name="company_name" value="Contact Form" />
+
+          <button type="submit" class="btn-submit"><span data-en>Request a Call</span><span data-tr>Gorusme Talep Et</span></button>
+          <p class="success" id="contactSuccess"><span data-en>Thank you. We respond within 24 hours.</span><span data-tr>Tesekkurler. 24 saat icinde yanitliyoruz.</span></p>
+          <p class="err" id="contactError"></p>
+        </form>
+      </div>
+
+      <div>
+        <h2 data-en>Other ways.</h2>
+        <h2 data-tr>Diger yollar.</h2>
+        <div class="contact-card"><div class="ch">Email</div><div class="val">info@crosslaneglobal.com</div></div>
+        <div class="contact-card"><div class="ch" data-en>Office</div><div class="ch" data-tr>Ofis</div><div class="val">Tysons Corner, Virginia<br>Washington D.C. Metro Area</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/api.js"></script>
+<script>
+(function(){
+  var form=document.getElementById('contactForm');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    document.getElementById('contactError').style.display='none';
+    document.getElementById('contactSuccess').style.display='none';
+    var fd=new FormData(form);
+    var data=Object.fromEntries(fd.entries());
+    delete data.message;
+    if(!data.full_name||data.full_name.trim().length<2){document.getElementById('contactError').textContent='Please enter your full name.';document.getElementById('contactError').style.display='block';return;}
+    if(!data.business_email||!data.business_email.includes('@')){document.getElementById('contactError').textContent='Please enter a valid business email.';document.getElementById('contactError').style.display='block';return;}
+    api.submitLead(data).then(function(){form.reset();document.getElementById('contactSuccess').style.display='block';}).catch(function(err){document.getElementById('contactError').textContent=(err.errors&&err.errors[0])?err.errors[0].message:'Something went wrong.';document.getElementById('contactError').style.display='block';});
+  });
+})();
+</script>
+</body>
+</html>

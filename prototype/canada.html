@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Canada — Crosslane Global</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    /* Market Overview */
+    .mkt-overview {
+      background: #1a1a1a;
+      padding: 72px 0 64px;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .mkt-overview-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 60px;
+    }
+    .overview-top {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center; margin-bottom: 56px;
+    }
+    .overview-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500; color: #fff;
+      margin: 0; line-height: 1.1;
+    }
+    .overview-headline em { font-style: italic; color: #B87A2A; }
+    .overview-desc {
+      color: rgba(255,255,255,0.55);
+      font-size: 15px; line-height: 1.85; margin: 0;
+    }
+    .overview-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .ov-stat {
+      padding: 28px 24px;
+      background: rgba(255,255,255,0.03);
+    }
+    .ov-stat strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; color: #B87A2A;
+      margin-bottom: 6px; font-weight: 500;
+    }
+    .ov-stat span { color: rgba(255,255,255,0.55); font-size: 13px; line-height: 1.5; }
+
+    /* Sector Grid */
+    .sector-section { padding: 80px 0; background: #fff; border-bottom: 1px solid #e8e4dc; }
+    .sector-inner { max-width: 1100px; margin: 0 auto; padding: 0 60px; }
+    .sector-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; margin-top: 48px;
+    }
+    .sector-card {
+      border: 1px solid #e8e4dc; border-radius: 3px;
+      padding: 32px 28px; position: relative;
+      background: #fff; transition: box-shadow 0.2s;
+    }
+    .sector-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.07); }
+    .sector-card.hot { border-color: #B87A2A; }
+    .sector-card.hot::before {
+      content: '★ Turkish advantage';
+      position: absolute; top: -1px; right: 20px;
+      background: #B87A2A; color: #fff;
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      padding: 4px 10px; border-radius: 0 0 3px 3px;
+    }
+    .sector-card.hot.tr-badge::before { content: '★ Türk avantajı'; }
+    .sector-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+    .sector-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 500; color: #1a1a1a;
+      margin: 0 0 6px;
+    }
+    .sector-spend {
+      font-size: 22px; font-weight: 600; color: #B87A2A;
+      font-family: 'Playfair Display', serif;
+      display: block; margin-bottom: 10px;
+    }
+    .sector-agencies {
+      font-size: 12px; color: #aaa;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .sector-desc { font-size: 13px; color: #666; line-height: 1.7; margin: 0; }
+
+    /* Opportunities by Sector */
+    .opps-section { padding: 80px 0; background: #faf9f7; border-bottom: 1px solid #e8e4dc; }
+    .opps-inner { max-width: 1100px; margin: 0 auto; padding: 0 60px; }
+    .sector-group { margin-bottom: 48px; }
+    .sector-group:last-child { margin-bottom: 0; }
+    .sector-group-label {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px; padding-bottom: 16px;
+      border-bottom: 1px solid #e8e4dc;
+    }
+    .sector-group-label span {
+      font-size: 10px; text-transform: uppercase;
+      letter-spacing: 0.25em; font-weight: 600; color: #B87A2A;
+    }
+    .sector-group-label strong {
+      font-size: 13px; color: #aaa; font-weight: 400;
+    }
+    .opps-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .opp-tile {
+      background: #fff; border: 1px solid #e0dbd2;
+      border-radius: 3px; padding: 24px;
+    }
+    .opp-top {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; margin-bottom: 10px; gap: 8px;
+    }
+    .opp-agency { font-size: 11px; color: #B87A2A; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; }
+    .opp-due { font-size: 11px; color: #bbb; white-space: nowrap; }
+    .opp-tile h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 500; color: #1a1a1a;
+      margin: 0 0 8px; line-height: 1.3;
+    }
+    .opp-meta { font-size: 12px; color: #666; margin-bottom: 8px; }
+    .opp-tile p { font-size: 13px; color: #888; line-height: 1.65; margin: 0; }
+
+    .briefing-bar {
+      background: #1a1a1a; border-radius: 3px;
+      padding: 24px 32px; margin-top: 40px;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .briefing-bar p { color: rgba(255,255,255,0.6); font-size: 13px; margin: 0; }
+    .briefing-bar strong { color: #fff; font-size: 15px; display: block; margin-bottom: 4px; }
+    .btn-gold-sm {
+      background: #B87A2A; color: #fff;
+      padding: 11px 22px; border-radius: 2px;
+      text-decoration: none; font-size: 12px;
+      font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.12em; white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .btn-gold-sm:hover { opacity: 0.85; color: #fff; }
+
+    /* News */
+    .news-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+    .news-item { border-top: 2px solid #B87A2A; padding-top: 18px; }
+    .news-cat { font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #B87A2A; font-weight: 600; margin: 0 0 12px; }
+    .news-item h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; font-weight: 500; color: #1a1a1a;
+      margin: 0 0 10px; line-height: 1.3;
+    }
+    .news-item p { font-size: 13px; color: #777; line-height: 1.75; margin: 0 0 12px; }
+    .news-source { font-size: 11px; color: #bbb; }
+
+    /* Provincial & Local Section */
+    .prov-section { padding: 80px 0; background: #fff; border-bottom: 1px solid #e8e4dc; }
+    .prov-inner { max-width: 1100px; margin: 0 auto; padding: 0 60px; }
+    .prov-intro {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: center; margin: 48px 0 56px;
+    }
+    .prov-big-stat {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 6vw, 80px);
+      font-weight: 500; color: #B87A2A; line-height: 1;
+      margin: 0 0 12px;
+    }
+    .prov-stat-label {
+      font-size: 14px; color: #888; text-transform: uppercase;
+      letter-spacing: 0.2em; font-weight: 600;
+    }
+    .prov-intro-text { font-size: 15px; color: #555; line-height: 1.85; margin: 0; }
+    .prov-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin-bottom: 56px;
+    }
+    .prov-card {
+      border: 1px solid #e8e4dc; border-radius: 3px;
+      padding: 24px 20px; background: #faf9f7;
+    }
+    .prov-flag { font-size: 22px; margin-bottom: 10px; display: block; }
+    .prov-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 500; color: #1a1a1a;
+      margin: 0 0 6px;
+    }
+    .prov-spend {
+      font-size: 22px; font-weight: 600; color: #B87A2A;
+      font-family: 'Playfair Display', serif;
+      display: block; margin-bottom: 6px;
+    }
+    .prov-portal { font-size: 10px; color: #B87A2A; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; margin-bottom: 8px; display: block; }
+    .prov-note { font-size: 12px; color: #888; line-height: 1.6; margin: 0; }
+    .prov-sub-label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em;
+      font-weight: 600; color: #B87A2A; margin-bottom: 20px; display: block;
+    }
+    .prov-example-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .prov-example {
+      background: #faf9f7; border: 1px solid #e0dbd2;
+      border-radius: 3px; padding: 22px;
+    }
+    .prov-ex-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+    .prov-ex-agency { font-size: 10px; color: #B87A2A; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; }
+    .prov-ex-value { font-size: 12px; font-weight: 600; color: #1a1a1a; white-space: nowrap; }
+    .prov-example h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px; font-weight: 500; color: #1a1a1a;
+      margin: 0 0 6px; line-height: 1.3;
+    }
+    .prov-example p { font-size: 12px; color: #888; line-height: 1.65; margin: 0; }
+    .prov-bar {
+      background: #1a1a1a; border-radius: 3px;
+      padding: 32px 40px; margin-top: 48px;
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: center; gap: 40px;
+    }
+    .prov-bar h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 500; color: #fff;
+      margin: 0 0 10px; line-height: 1.2;
+    }
+    .prov-bar p { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.75; margin: 0; }
+    .prov-levels { display: flex; gap: 8px; flex-wrap: wrap; }
+    .prov-level {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px; padding: 12px 18px; text-align: center; min-width: 110px;
+    }
+    .prov-level strong { display: block; color: #B87A2A; font-family: 'Playfair Display', serif; font-size: 16px; margin-bottom: 4px; }
+    .prov-level span { font-size: 10px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.4; display: block; }
+
+    @media (max-width: 900px) {
+      .overview-top { grid-template-columns: 1fr; gap: 28px; }
+      .overview-stats { grid-template-columns: 1fr 1fr; }
+      .sector-grid { grid-template-columns: 1fr 1fr; }
+      .opps-row { grid-template-columns: 1fr; }
+      .news-grid { grid-template-columns: 1fr; }
+      .mkt-overview-inner, .sector-inner, .opps-inner, .prov-inner { padding: 0 32px; }
+      .prov-intro { grid-template-columns: 1fr; gap: 28px; }
+      .prov-grid { grid-template-columns: 1fr 1fr; }
+      .prov-example-row { grid-template-columns: 1fr; }
+      .prov-bar { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 580px) {
+      .sector-grid { grid-template-columns: 1fr; }
+      .overview-stats { grid-template-columns: 1fr 1fr; }
+      .prov-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<!-- HERO -->
+<header class="subhero" style="background: linear-gradient(180deg, rgba(26,26,26,0.42) 0%, rgba(26,26,26,0.65) 100%), url('https://images.unsplash.com/photo-1517935706615-2717063c2225?w=1920&q=80') center/cover no-repeat;">
+  <div class="container">
+    <div class="crumb"><a href="why-us-canada.html" style="color:inherit;text-decoration:none;" data-en>← Our Markets</a><a href="why-us-canada.html" style="color:inherit;text-decoration:none;" data-tr>← Piyasalarımız</a></div>
+    <h1>🇨🇦 <span data-en>Canada.</span><span data-tr>Kanada.</span></h1>
+    <p class="lead" data-en>Stable, transparent, and built for international business. Canada's federal government buys over CAD $25 billion in goods and services each year — and it's open to any Canadian-registered company, including foreign-owned ones. We help you register, bid, and win.</p>
+    <p class="lead" data-tr>İstikrarlı, şeffaf ve uluslararası işletmeler için inşa edilmiş. Kanada federal hükümeti her yıl 25 milyar CAD'dan fazla mal ve hizmet satın alıyor — ve bu, yabancı sahipli olanlar dahil Kanada kayıtlı tüm şirketlere açık. Kayıt olmanıza, teklif vermenize ve kazanmanıza biz yardım ediyoruz.</p>
+  </div>
+</header>
+
+<!-- MARKET OVERVIEW -->
+<section class="mkt-overview">
+  <div class="mkt-overview-inner">
+    <div class="overview-top">
+      <h2 class="overview-headline" data-en>The Canadian federal government spends <em>CAD $25B+</em> on contracts every year.</h2>
+      <h2 class="overview-headline" data-tr>Kanada federal hükümeti her yıl sözleşmeler için <em>25 milyar CAD+</em> harcıyor.</h2>
+      <p class="overview-desc" data-en>IT, construction, defense, healthcare, and professional services — across 10 provinces and federal departments. Canada's procurement system is transparent, rules-based, and accessible via CanadaBuys. Any Canadian-incorporated company can bid, regardless of who owns it. We handle the registration, the proposals, and the relationships.</p>
+      <p class="overview-desc" data-tr>BT, inşaat, savunma, sağlık ve profesyonel hizmetler — 10 eyalet ve federal departmanlar genelinde. Kanada'nın tedarik sistemi şeffaf, kurallara dayalı ve CanadaBuys üzerinden erişilebilir. Sahibi kim olursa olsun herhangi bir Kanada tescilli şirket teklif verebilir. Kayıt, teklifler ve ilişkileri biz yönetiyoruz.</p>
+    </div>
+    <div class="overview-stats">
+      <div class="ov-stat">
+        <strong>CAD $25B+</strong>
+        <span data-en>Annual federal procurement</span><span data-tr>Yıllık federal tedarik</span>
+      </div>
+      <div class="ov-stat">
+        <strong>CAD $8B+</strong>
+        <span data-en>Defense & security contracts</span><span data-tr>Savunma & güvenlik sözleşmeleri</span>
+      </div>
+      <div class="ov-stat">
+        <strong>100+</strong>
+        <span data-en>Federal departments buying</span><span data-tr>Satın alan federal departman</span>
+      </div>
+      <div class="ov-stat">
+        <strong>10</strong>
+        <span data-en>Provinces — each with open tenders</span><span data-tr>Eyalet — her birinde açık ihaleler</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTOR BREAKDOWN -->
+<section class="sector-section">
+  <div class="sector-inner">
+    <span class="section-tag" data-en>Where the money flows</span>
+    <span class="section-tag" data-tr>Para nereye akıyor</span>
+    <h2 class="section-title" data-en>Federal spend by sector — and where Turkish companies compete best.</h2>
+    <h2 class="section-title" data-tr>Sektöre göre federal harcama — ve Türk şirketlerinin en iyi rekabet ettiği alanlar.</h2>
+
+    <div class="sector-grid">
+
+      <div class="sector-card hot">
+        <span class="sector-icon">🏗️</span>
+        <h4 data-en>Construction &amp; Infrastructure</h4>
+        <h4 data-tr>İnşaat &amp; Altyapı</h4>
+        <span class="sector-spend">CAD $5B+ / year</span>
+        <p class="sector-agencies">PSPC · DND · Transport Canada · INFC</p>
+        <p class="sector-desc" data-en>Federal buildings, military facilities, bridges, ports, and public transit infrastructure. Canada's aging infrastructure pipeline is significant — and Turkish contractors have the scale and experience to compete at the top tier.</p>
+        <p class="sector-desc" data-tr>Federal binalar, askeri tesisler, köprüler, limanlar ve toplu taşıma altyapısı. Kanada'nın eskiyen altyapı iş akışı önemli ölçüde büyük — ve Türk müteahhitler üst kademe rekabet edecek ölçek ve deneyime sahip.</p>
+      </div>
+
+      <div class="sector-card hot">
+        <span class="sector-icon">💻</span>
+        <h4 data-en>IT &amp; Digital Services</h4>
+        <h4 data-tr>BT &amp; Dijital Hizmetler</h4>
+        <span class="sector-spend">CAD $7B+ / year</span>
+        <p class="sector-agencies">PSPC · TBS · DND · CRA · IRCC</p>
+        <p class="sector-desc" data-en>Software development, cloud migration, cybersecurity, and digital transformation across federal departments. Canada's largest procurement category — accessible through ProServices and specialized standing offers for any qualified Canadian entity.</p>
+        <p class="sector-desc" data-tr>Federal departmanlar genelinde yazılım geliştirme, bulut geçişi, siber güvenlik ve dijital dönüşüm. Kanada'nın en büyük tedarik kategorisi — ProServices ve özel standing offer'lar aracılığıyla herhangi bir nitelikli Kanada şirketi için erişilebilir.</p>
+      </div>
+
+      <div class="sector-card hot">
+        <span class="sector-icon">🚛</span>
+        <h4 data-en>Supply Chain &amp; Logistics</h4>
+        <h4 data-tr>Tedarik Zinciri &amp; Lojistik</h4>
+        <span class="sector-spend">CAD $2B+ / year</span>
+        <p class="sector-agencies">DND · PSPC · Transport Canada</p>
+        <p class="sector-desc" data-en>Military logistics, warehousing, and distribution for federal agencies. Canada's vast geography creates constant demand for reliable logistics operators — a natural fit for Turkish firms with experience in large-scale supply chain management.</p>
+        <p class="sector-desc" data-tr>Federal ajanslar için askeri lojistik, depolama ve dağıtım. Kanada'nın geniş coğrafyası güvenilir lojistik operatörlerine sürekli talep yaratıyor — büyük ölçekli tedarik zinciri yönetimi deneyimindeki Türk firmalar için doğal bir uyum.</p>
+      </div>
+
+      <div class="sector-card">
+        <span class="sector-icon">🛡️</span>
+        <h4 data-en>Defense &amp; Aerospace</h4>
+        <h4 data-tr>Savunma &amp; Havacılık</h4>
+        <span class="sector-spend">CAD $8B+ / year</span>
+        <p class="sector-agencies">DND · RCAF · Royal Canadian Navy</p>
+        <p class="sector-desc" data-en>Canada's defense budget is growing substantially. Equipment maintenance, base operations, professional services, and support contracts are open to qualified suppliers — many without requiring Canadian citizenship or security clearance above Reliability.</p>
+        <p class="sector-desc" data-tr>Kanada'nın savunma bütçesi önemli ölçüde büyüyor. Ekipman bakımı, üs operasyonları, profesyonel hizmetler ve destek sözleşmeleri nitelikli tedarikçilere açık — pek çoğu Kanada vatandaşlığı veya Reliability üzerinde güvenlik izni gerektirmiyor.</p>
+      </div>
+
+      <div class="sector-card">
+        <span class="sector-icon">🏥</span>
+        <h4 data-en>Healthcare &amp; Life Sciences</h4>
+        <h4 data-tr>Sağlık &amp; Yaşam Bilimleri</h4>
+        <span class="sector-spend">CAD $3B+ / year</span>
+        <p class="sector-agencies">Health Canada · PHAC · CIHR · VAC</p>
+        <p class="sector-desc" data-en>Medical supplies, lab services, public health program delivery, and health technology procurement. Veterans Affairs Canada alone has a significant annual procurement budget for medical equipment and support services.</p>
+        <p class="sector-desc" data-tr>Tıbbi malzemeler, laboratuvar hizmetleri, halk sağlığı programı sunumu ve sağlık teknolojisi tedariki. Gaziler İşleri Kanada'nın tek başına tıbbi ekipman ve destek hizmetleri için önemli bir yıllık tedarik bütçesi var.</p>
+      </div>
+
+      <div class="sector-card">
+        <span class="sector-icon">📋</span>
+        <h4 data-en>Professional Services</h4>
+        <h4 data-tr>Profesyonel Hizmetler</h4>
+        <span class="sector-spend">CAD $4B+ / year</span>
+        <p class="sector-agencies">All departments · GAC · PCO · TBS</p>
+        <p class="sector-desc" data-en>Management consulting, translation, program management, training, and research. Accessible through the ProServices Supply Arrangement — one of the most open federal procurement vehicles for newly incorporated Canadian companies.</p>
+        <p class="sector-desc" data-tr>Yönetim danışmanlığı, çeviri, program yönetimi, eğitim ve araştırma. ProServices Supply Arrangement aracılığıyla erişilebilir — yeni kurulan Kanada şirketleri için en açık federal tedarik araçlarından biri.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVE OPPORTUNITIES BY SECTOR -->
+<section class="opps-section">
+  <div class="opps-inner">
+    <span class="section-tag" data-en>Active tenders · CanadaBuys · Updated weekly</span>
+    <span class="section-tag" data-tr>Aktif ihaleler · CanadaBuys · Haftalık güncellenir</span>
+    <h2 class="section-title" data-en>Contracts we're tracking right now.</h2>
+    <h2 class="section-title" data-tr>Şu an takip ettiğimiz sözleşmeler.</h2>
+    <p style="color:var(--text-secondary);font-size:15px;margin:-4px 0 40px;max-width:680px" data-en>A curated selection by sector from CanadaBuys — Canada's official procurement portal. Engaged clients receive weekly briefings with full bid analysis and our go/no-go recommendation.</p>
+    <p style="color:var(--text-secondary);font-size:15px;margin:-4px 0 40px;max-width:680px" data-tr>Kanada'nın resmi ihale portalı CanadaBuys'dan sektöre göre derlenmiş seçki. Aktif müşterilerimiz tam teklif analizi ve katılım/katılmama önerimizle haftalık brifinglar alır.</p>
+
+    <!-- Construction -->
+    <div class="sector-group">
+      <div class="sector-group-label">
+        <span>🏗️ <span data-en>Construction &amp; Infrastructure</span><span data-tr>İnşaat &amp; Altyapı</span></span>
+        <strong data-en>CAD $5B+ annual federal spend</strong><strong data-tr>Yıllık CAD $5B+ federal harcama</strong>
+      </div>
+      <div class="opps-row">
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">Infrastructure Canada</span>
+            <span class="opp-due">Due Jun 20</span>
+          </div>
+          <h5 data-en>Environmental &amp; Infrastructure Assessment — National</h5>
+          <h5 data-tr>Çevresel &amp; Altyapı Değerlendirmesi — Ulusal</h5>
+          <p class="opp-meta"><strong>CAD $2.5M</strong> · Open competition · GSIN C052</p>
+          <p data-en>Feasibility and environmental impact assessment for municipal infrastructure projects across Ontario and Quebec. Multi-year contract.</p>
+          <p data-tr>Ontario ve Quebec'teki belediye altyapı projeleri için fizibilite ve çevresel etki değerlendirmesi. Çok yıllık sözleşme.</p>
+        </div>
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">PSPC · Public Works</span>
+            <span class="opp-due">Due Jul 8</span>
+          </div>
+          <h5 data-en>Federal Building Maintenance &amp; Repair — Ottawa Region</h5>
+          <h5 data-tr>Federal Bina Bakım &amp; Onarım — Ottawa Bölgesi</h5>
+          <p class="opp-meta"><strong>CAD $4M</strong> · Small business · GSIN C010</p>
+          <p data-en>Preventive maintenance, HVAC, and general repair services for federal office buildings in the National Capital Region. 3-year base with 2 option years.</p>
+          <p data-tr>Ulusal Başkent Bölgesi'ndeki federal ofis binaları için önleyici bakım, HVAC ve genel onarım hizmetleri. 2 opsiyon yıllı 3 yıllık temel.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- IT & Digital -->
+    <div class="sector-group">
+      <div class="sector-group-label">
+        <span>💻 <span data-en>IT &amp; Digital Services</span><span data-tr>BT &amp; Dijital Hizmetler</span></span>
+        <strong data-en>CAD $7B+ annual federal spend</strong><strong data-tr>Yıllık CAD $7B+ federal harcama</strong>
+      </div>
+      <div class="opps-row">
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">PSPC · IT Services</span>
+            <span class="opp-due">Due Jun 5</span>
+          </div>
+          <h5 data-en>IT Professional Services — Digital Transformation</h5>
+          <h5 data-tr>BT Profesyonel Hizmetler — Dijital Dönüşüm</h5>
+          <p class="opp-meta"><strong>CAD $5M</strong> · Standing offer · Reliability clearance</p>
+          <p data-en>Multi-year standing offer for digital transformation and enterprise application support across federal departments. Accessible via ProServices SA.</p>
+          <p data-tr>Federal departmanlar genelinde dijital dönüşüm ve kurumsal uygulama desteği için çok yıllı standing offer. ProServices SA üzerinden erişilebilir.</p>
+        </div>
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">Treasury Board Secretariat</span>
+            <span class="opp-due">Due Jun 30</span>
+          </div>
+          <h5 data-en>Cloud Migration &amp; DevOps Support — GC Digital</h5>
+          <h5 data-tr>Bulut Geçişi &amp; DevOps Desteği — GC Dijital</h5>
+          <p class="opp-meta"><strong>CAD $3.5M</strong> · Open · GSIN D302</p>
+          <p data-en>Cloud infrastructure migration and DevOps engineering for federal government systems. Experience with AWS GovCloud or Azure Government preferred.</p>
+          <p data-tr>Federal hükümet sistemleri için bulut altyapısı geçişi ve DevOps mühendisliği. AWS GovCloud veya Azure Government deneyimi tercih edilir.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Defense & Security -->
+    <div class="sector-group">
+      <div class="sector-group-label">
+        <span>🛡️ <span data-en>Defense &amp; Security</span><span data-tr>Savunma &amp; Güvenlik</span></span>
+        <strong data-en>CAD $8B+ annual federal spend</strong><strong data-tr>Yıllık CAD $8B+ federal harcama</strong>
+      </div>
+      <div class="opps-row">
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">DND · National Defence</span>
+            <span class="opp-due">Due Jun 12</span>
+          </div>
+          <h5 data-en>Cybersecurity Advisory Services — DND Units</h5>
+          <h5 data-tr>Siber Güvenlik Danışmanlık Hizmetleri — DND Birimleri</h5>
+          <p class="opp-meta"><strong>CAD $3M</strong> · Reliability clearance required</p>
+          <p data-en>Cyber risk assessments and security architecture review across DND units. 3-year contract with 2 option years. Open to qualified Canadian entities.</p>
+          <p data-tr>DND birimleri genelinde siber risk değerlendirmeleri ve güvenlik mimarisi incelemesi. 2 opsiyon yıllı 3 yıllık sözleşme. Nitelikli Kanada şirketlerine açık.</p>
+        </div>
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">RCAF · Air Force</span>
+            <span class="opp-due">Due Jul 15</span>
+          </div>
+          <h5 data-en>Aviation Parts Supply &amp; Logistics — RCAF Bases</h5>
+          <h5 data-tr>Havacılık Parça Tedariki &amp; Lojistik — RCAF Üsleri</h5>
+          <p class="opp-meta"><strong>CAD $6M</strong> · Open competition · GSIN N010</p>
+          <p data-en>Supply and logistics of aircraft parts and maintenance components for RCAF installations. Multi-year contract with strong long-term renewal history.</p>
+          <p data-tr>RCAF tesisleri için uçak parçaları ve bakım bileşenlerinin tedariki ve lojistiği. Güçlü uzun vadeli yenileme geçmişiyle çok yıllı sözleşme.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Professional Services -->
+    <div class="sector-group">
+      <div class="sector-group-label">
+        <span>📋 <span data-en>Professional Services</span><span data-tr>Profesyonel Hizmetler</span></span>
+        <strong data-en>CAD $4B+ annual federal spend</strong><strong data-tr>Yıllık CAD $4B+ federal harcama</strong>
+      </div>
+      <div class="opps-row">
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">IRCC · Immigration</span>
+            <span class="opp-due">Due Jun 18</span>
+          </div>
+          <h5 data-en>Translation &amp; Interpretation Services — Federal Departments</h5>
+          <h5 data-tr>Çeviri &amp; Tercümanlık Hizmetleri — Federal Departmanlar</h5>
+          <p class="opp-meta"><strong>CAD $1.5M</strong> · Small business · GSIN U099</p>
+          <p data-en>Multilingual translation and interpretation including Turkish, Arabic, and Farsi. Standing offer vehicle. Ideal for bilingual or multilingual Canadian entities.</p>
+          <p data-tr>Türkçe, Arapça ve Farsça dahil çok dilli çeviri ve tercümanlık. Standing offer aracı. İki dilli veya çok dilli Kanada şirketleri için ideal.</p>
+        </div>
+        <div class="opp-tile">
+          <div class="opp-top">
+            <span class="opp-agency">Global Affairs Canada</span>
+            <span class="opp-due">Due Jul 2</span>
+          </div>
+          <h5 data-en>Program Management &amp; Evaluation — International Programs</h5>
+          <h5 data-tr>Program Yönetimi &amp; Değerlendirme — Uluslararası Programlar</h5>
+          <p class="opp-meta"><strong>CAD $2M</strong> · Open · GSIN P102</p>
+          <p data-en>Program management, monitoring, and evaluation support for Global Affairs Canada's international development programs. Strong fit for bilingual firms with international operations experience.</p>
+          <p data-tr>Global Affairs Canada'nın uluslararası kalkınma programları için program yönetimi, izleme ve değerlendirme desteği. Uluslararası operasyon deneyimindeki iki dilli firmalar için güçlü uyum.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="briefing-bar">
+      <div>
+        <strong data-en>Receive the full weekly briefing — with go/no-go analysis for each opportunity.</strong>
+        <strong data-tr>Tam haftalık brifingi alın — her fırsat için katılım/katılmama analiziyle.</strong>
+        <p data-en>Source: CanadaBuys · Curated and analyzed by our team each week</p>
+        <p data-tr>Kaynak: CanadaBuys · Her hafta ekibimiz tarafından derlenir ve analiz edilir</p>
+      </div>
+      <a href="contact.html" class="btn-gold-sm">
+        <span data-en>Request a briefing →</span><span data-tr>Brifing talep et →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PROVINCIAL & LOCAL -->
+<section class="prov-section">
+  <div class="prov-inner">
+    <span class="section-tag" data-en>Beyond CanadaBuys — provincial &amp; municipal procurement</span>
+    <span class="section-tag" data-tr>CanadaBuys'ın Ötesi — eyalet ve belediye ihaleleri</span>
+    <h2 class="section-title" data-en>Provincial and municipal governments add another CAD $50B+ to the market. Almost no foreign investor tracks it.</h2>
+    <h2 class="section-title" data-tr>Eyalet ve belediye yönetimleri pazara ek CAD 50 milyar dolar ekliyor. Neredeyse hiçbir yabancı yatırımcı bunu takip etmiyor.</h2>
+
+    <div class="prov-intro">
+      <div>
+        <p class="prov-big-stat">CAD $85B+</p>
+        <p class="prov-stat-label" data-en>Total procurement across all three levels</p>
+        <p class="prov-stat-label" data-tr>Üç seviyenin tamamında toplam ihale</p>
+      </div>
+      <p class="prov-intro-text" data-en>CanadaBuys covers the federal layer — roughly CAD $37B annually. But Ontario alone procures about CAD $30B in goods and services each year. BC adds another CAD $7B. Quebec, Alberta, and the other provinces bring the total well past CAD $85B when you include municipal governments, school boards, hospitals, and transit authorities. Each province has its own portal, its own rules, and its own timeline. Foreign investors rarely navigate this. We do — and we track opportunities across all three levels for our clients.</p>
+      <p class="prov-intro-text" data-tr>CanadaBuys federal katmanı kapsıyor — yılda yaklaşık 37 milyar CAD. Ancak yalnızca Ontario her yıl yaklaşık 30 milyar CAD mal ve hizmet satın alıyor. BC ek 7 milyar CAD ekliyor. Quebec, Alberta ve diğer eyaletler; belediyeler, okul kurulları, hastaneler ve toplu taşıma kurumlarıyla birlikte toplamı 85 milyar CAD'ın çok üzerine taşıyor. Her eyaletin kendi portalı, kendi kuralları ve kendi takvimi var. Yabancı yatırımcılar bunu nadiren yönetiyor. Biz yapıyoruz — müşterilerimiz için üç seviyenin tamamındaki fırsatları takip ediyoruz.</p>
+    </div>
+
+    <span class="prov-sub-label" data-en>Key provinces — annual procurement volume</span>
+    <span class="prov-sub-label" data-tr>Önemli eyaletler — yıllık ihale hacmi</span>
+
+    <div class="prov-grid">
+      <div class="prov-card">
+        <span class="prov-flag">🏙️</span>
+        <p class="prov-name">Ontario</p>
+        <span class="prov-spend">~CAD $30B</span>
+        <span class="prov-portal">Ontario Tenders Portal</span>
+        <p class="prov-note" data-en>Canada's largest provincial economy. Toronto, Ottawa, and Hamilton drive massive procurement in IT, infrastructure, transit, and healthcare. Foreign-owned Canadian companies fully eligible.</p>
+        <p class="prov-note" data-tr>Kanada'nın en büyük eyalet ekonomisi. Toronto, Ottawa ve Hamilton; BT, altyapı, ulaşım ve sağlıkta büyük ihaleleri yönlendiriyor. Yabancı sahipli Kanada şirketleri tamamen uygun.</p>
+      </div>
+      <div class="prov-card">
+        <span class="prov-flag">🌲</span>
+        <p class="prov-name">British Columbia</p>
+        <span class="prov-spend">~CAD $7B</span>
+        <span class="prov-portal">BC Bid · bcbid.gov.bc.ca</span>
+        <p class="prov-note" data-en>Over 700 public sector organizations post on BC Bid. Strong demand in digital services, construction, and green infrastructure. Procurement Concierge Program helps new vendors connect with buyers.</p>
+        <p class="prov-note" data-tr>700'den fazla kamu kurumu BC Bid'de ihale yayınlıyor. Dijital hizmetler, inşaat ve yeşil altyapıda güçlü talep. Tedarik Danışma Programı yeni tedarikçilerin alıcılarla bağlantı kurmasına yardımcı oluyor.</p>
+      </div>
+      <div class="prov-card">
+        <span class="prov-flag">⚜️</span>
+        <p class="prov-name">Quebec</p>
+        <span class="prov-spend">CAD $10B+</span>
+        <span class="prov-portal">SEAO · seao.gouv.qc.ca</span>
+        <p class="prov-note" data-en>All provincial, municipal, healthcare, and education tenders in one portal — SEAO. Unique authorization system (AMP) for larger contracts above CAD $1-5M. French-language requirement applies.</p>
+        <p class="prov-note" data-tr>Tüm eyalet, belediye, sağlık ve eğitim ihaleleri tek portalda — SEAO. 1-5M CAD üzerindeki büyük sözleşmeler için benzersiz yetkilendirme sistemi (AMP). Fransızca dil gereksinimi geçerli.</p>
+      </div>
+      <div class="prov-card">
+        <span class="prov-flag">🛢️</span>
+        <p class="prov-name">Alberta</p>
+        <span class="prov-spend">CAD $5B+</span>
+        <span class="prov-portal">Alberta Purchasing Connection</span>
+        <p class="prov-note" data-en>Energy, construction, and professional services dominate. Alberta Purchasing Connection (APC) is the main portal, with 1GX for digital bidding. Strong appetite for construction and logistics suppliers.</p>
+        <p class="prov-note" data-tr>Enerji, inşaat ve profesyonel hizmetler baskın. Alberta Purchasing Connection (APC) ana portal, dijital teklif için 1GX. İnşaat ve lojistik tedarikçilerine güçlü iştah.</p>
+      </div>
+      <div class="prov-card">
+        <span class="prov-flag">🌾</span>
+        <p class="prov-name">Manitoba &amp; Saskatchewan</p>
+        <span class="prov-spend">CAD $3B+</span>
+        <span class="prov-portal">MERX · SaskTenders</span>
+        <p class="prov-note" data-en>Agriculture, infrastructure, and public health. Both provinces use MERX as their primary tender platform. Less competitive than major provinces — good entry points for newly registered companies.</p>
+        <p class="prov-note" data-tr>Tarım, altyapı ve halk sağlığı. Her iki eyalet de MERX'i birincil ihale platformu olarak kullanıyor. Büyük eyaletlere göre daha az rekabetçi — yeni kayıtlı şirketler için iyi giriş noktaları.</p>
+      </div>
+      <div class="prov-card">
+        <span class="prov-flag">🏘️</span>
+        <p class="prov-name">Municipal / MASH Sector</p>
+        <span class="prov-spend">CAD $15-18B</span>
+        <span class="prov-portal">MERX · local portals</span>
+        <p class="prov-note" data-en>Cities, municipalities, school boards, hospitals, and transit authorities. Toronto, Vancouver, Calgary, and Montreal each run large independent procurement programs — construction, IT, maintenance, catering.</p>
+        <p class="prov-note" data-tr>Şehirler, belediyeler, okul kurulları, hastaneler ve toplu taşıma kurumları. Toronto, Vancouver, Calgary ve Montreal her biri bağımsız büyük ihale programları yürütüyor — inşaat, BT, bakım, catering.</p>
+      </div>
+    </div>
+
+    <span class="prov-sub-label" data-en>Example provincial &amp; municipal contracts — the kind most investors never find</span>
+    <span class="prov-sub-label" data-tr>Örnek eyalet &amp; belediye sözleşmeleri — çoğu yatırımcının hiç bulamadığı türden</span>
+
+    <div class="prov-example-row">
+      <div class="prov-example">
+        <div class="prov-ex-top">
+          <span class="prov-ex-agency">City of Toronto · ON</span>
+          <span class="prov-ex-value">CAD $4.5M</span>
+        </div>
+        <h5 data-en>Facility Management &amp; Maintenance — Municipal Buildings</h5>
+        <h5 data-tr>Tesis Yönetimi &amp; Bakım — Belediye Binaları</h5>
+        <p data-en>Preventive maintenance, HVAC, and structural repair for City of Toronto-owned facilities. Annual contract renewable for 3 years. Open to any Canadian-registered company with relevant experience.</p>
+        <p data-tr>Toronto'ya ait tesisler için önleyici bakım, HVAC ve yapısal onarım. 3 yıl yenilenebilir yıllık sözleşme. İlgili deneyime sahip herhangi bir Kanada tescilli şirkete açık.</p>
+      </div>
+      <div class="prov-example">
+        <div class="prov-ex-top">
+          <span class="prov-ex-agency">Ontario MTO · Highway</span>
+          <span class="prov-ex-value">CAD $8M</span>
+        </div>
+        <h5 data-en>Road Infrastructure Maintenance — Highway 401 Corridor</h5>
+        <h5 data-tr>Yol Altyapısı Bakımı — Highway 401 Koridoru</h5>
+        <p data-en>Surface repair, signage, drainage, and winter maintenance along Ontario's busiest highway corridor. Multi-year contract. Strong fit for construction companies with large-scale road project experience.</p>
+        <p data-tr>Ontario'nun en yoğun otoyol koridorunda yüzey onarımı, tabela, drenaj ve kış bakımı. Çok yıllı sözleşme. Büyük ölçekli yol projesi deneyimindeki inşaat firmaları için güçlü uyum.</p>
+      </div>
+      <div class="prov-example">
+        <div class="prov-ex-top">
+          <span class="prov-ex-agency">City of Vancouver · BC</span>
+          <span class="prov-ex-value">CAD $2.2M</span>
+        </div>
+        <h5 data-en>IT Systems Support &amp; Managed Services — City Government</h5>
+        <h5 data-tr>BT Sistem Desteği &amp; Yönetilen Hizmetler — Şehir Yönetimi</h5>
+        <p data-en>End-user IT support, network management, and help desk services for Vancouver City Hall and municipal offices. 3-year standing offer. No security clearance required — accessible to small, newly registered Canadian companies.</p>
+        <p data-tr>Vancouver Belediye Binası ve belediye ofisleri için son kullanıcı BT desteği, ağ yönetimi ve yardım masası hizmetleri. 3 yıllık standing offer. Güvenlik izni gerekmez — küçük, yeni Kanada tescilli şirketler için erişilebilir.</p>
+      </div>
+    </div>
+
+    <div class="prov-bar">
+      <div>
+        <h4 data-en>We track federal, provincial, and municipal contracts — all three levels.</h4>
+        <h4 data-tr>Federal, eyalet ve belediye sözleşmelerini takip ediyoruz — üç seviyenin tamamını.</h4>
+        <p data-en>CanadaBuys is just the beginning. The real opportunity is in the combined market — 10 provinces, hundreds of municipalities, school boards, and hospitals, each buying year-round. We monitor all of it and surface what matters for your sector, size, and entry timeline.</p>
+        <p data-tr>CanadaBuys sadece başlangıç. Gerçek fırsat kombine pazarda — 10 eyalet, yüzlerce belediye, okul kurulu ve hastane, her biri yıl boyu satın alıyor. Hepsini izliyoruz ve sektörünüz, büyüklüğünüz ve giriş zamanlamanız için neyin önemli olduğunu sunuyoruz.</p>
+      </div>
+      <div class="prov-levels">
+        <div class="prov-level">
+          <strong>CAD $37B</strong>
+          <span data-en>Federal (CanadaBuys)</span><span data-tr>Federal (CanadaBuys)</span>
+        </div>
+        <div class="prov-level">
+          <strong>CAD $30B+</strong>
+          <span data-en>Provincial (10 provinces)</span><span data-tr>Eyalet (10 eyalet)</span>
+        </div>
+        <div class="prov-level">
+          <strong>CAD $18B+</strong>
+          <span data-en>Municipal &amp; MASH</span><span data-tr>Belediye &amp; MASH</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CANADA -->
+<section>
+  <div class="container">
+    <div class="split">
+      <div>
+        <span class="section-tag" data-en>Why Canada</span>
+        <span class="section-tag" data-tr>Neden Kanada</span>
+        <h2 data-en>Stable economy, educated workforce, open to the world.</h2>
+        <h2 data-tr>İstikrarlı ekonomi, eğitimli işgücü, dünyaya açık.</h2>
+        <p style="margin-top:18px" data-en>Canada ranks #1 in the G7 for banking-system stability and #2 in the G20 for FDI confidence. Its workforce is among the most educated in the OECD, and free-trade agreements give Canadian-based firms tariff-free access to over 1.5 billion consumers across 51 countries. For international investors, Canada offers predictability, rule of law, and a genuine welcome — alongside competitive tax incentives.</p>
+        <p style="margin-top:18px" data-tr>Kanada, G7'de bankacılık istikrarında #1 ve G20'de FDI güveninde #2. İşgücü OECD'nin en eğitimli işgüçleri arasında; serbest ticaret anlaşmaları ise Kanada merkezli firmalara 51 ülkedeki 1,5 milyar tüketiciye gümrüksüz erişim sağlıyor. Uluslararası yatırımcılar için Kanada; öngörülebilirlik, hukukun üstünlüğü ve gerçek bir açıklık sunuyor — rekabetçi vergi teşvikleriyle birlikte.</p>
+        <p style="font-size:13px;color:var(--text-muted);margin-top:16px" data-en>Source: investcanada.ca · World Bank · OECD</p>
+        <p style="font-size:13px;color:var(--text-muted);margin-top:16px" data-tr>Kaynak: investcanada.ca · Dünya Bankası · OECD</p>
+      </div>
+      <div>
+        <ul class="checklist">
+          <li><strong>#1 in G7</strong> — <span data-en>banking system stability</span><span data-tr>bankacılık sistemi istikrarı</span></li>
+          <li><strong>#2 in G20</strong> — <span data-en>FDI confidence ranking</span><span data-tr>FDI güven sıralaması</span></li>
+          <li><strong>1.5B+</strong> — <span data-en>consumers via free-trade agreements (51 countries)</span><span data-tr>serbest ticaret anlaşmalarıyla tüketici (51 ülke)</span></li>
+          <li><strong>Most educated</strong> — <span data-en>workforce in OECD</span><span data-tr>OECD'de en eğitimli işgücü</span></li>
+          <li><strong>Turkey–Canada</strong> — <span data-en>tax treaty in force</span><span data-tr>vergi anlaşması yürürlükte</span></li>
+          <li><strong>10 provinces</strong> — <span data-en>each with distinct investment programs</span><span data-tr>her biri farklı yatırım programlarıyla</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Immigration Pathways -->
+<section class="section-light">
+  <div class="container">
+    <span class="section-tag" data-en>Immigration pathways</span>
+    <span class="section-tag" data-tr>Göç yolları</span>
+    <h2 class="section-title" data-en>Residency and business immigration for investors.</h2>
+    <h2 class="section-title" data-tr>Yatırımcılar için oturma izni ve iş göçü.</h2>
+
+    <div class="features-grid">
+      <div class="feature">
+        <h4 data-en>Provincial Nominee Programs (PNP)</h4>
+        <h4 data-tr>Eyalet Aday Programları (PNP)</h4>
+        <p data-en>Each province operates its own business immigration stream for investors and entrepreneurs. Ontario, British Columbia, and Alberta are the most active. Generally faster than federal pathways — often 12–24 months to permanent residency.</p>
+        <p data-tr>Her eyalet, yatırımcılar ve girişimciler için kendi iş göçü akışını yönetir. Ontario, British Columbia ve Alberta en aktif olanlar. Federal yollardan genellikle daha hızlı — çoğunlukla 12–24 ayda daimi ikamet.</p>
+      </div>
+      <div class="feature">
+        <h4 data-en>Quebec Business Immigration</h4>
+        <h4 data-tr>Quebec İş Göçü</h4>
+        <p data-en>Quebec operates its own immigration selection system distinct from federal programs. The Quebec Investor Program requires a net worth of CAD $2M and a passive investment of CAD $1.2M. Separate language requirements apply.</p>
+        <p data-tr>Quebec, federal programlardan ayrı kendi göç seçim sistemini yönetir. Quebec Yatırımcı Programı, 2M CAD net değer ve 1,2M CAD pasif yatırım gerektirir. Ayrı dil gereksinimleri uygulanır.</p>
+      </div>
+      <div class="feature">
+        <h4 data-en>Start-up Visa Program</h4>
+        <h4 data-tr>Start-up Vize Programı</h4>
+        <p data-en>A permanent residency pathway for entrepreneurs with backing from designated Canadian investors or accelerators.</p>
+        <p data-tr>Belirlenmiş Kanada yatırımcılarından veya hızlandırıcılardan destek alan girişimciler için daimi ikamet yolu.</p>
+        <div style="background:rgba(184,122,42,0.12);border-left:3px solid var(--gold);padding:10px 14px;margin-top:12px;border-radius:2px;font-size:13px;">
+          <strong data-en>⚠️ Paused:</strong><strong data-tr>⚠️ Durduruldu:</strong>
+          <span data-en> The federal Start-up Visa was paused on December 19, 2025 due to application backlogs. Monitor IRCC for updates.</span>
+          <span data-tr> Federal Start-up Vizesi, 19 Aralık 2025'te başvuru birikimi nedeniyle durduruldu. Güncellemeler için IRCC'yi takip edin.</span>
+        </div>
+      </div>
+      <div class="feature">
+        <h4 data-en>Intra-Company Transfer (C-11)</h4>
+        <h4 data-tr>Şirket İçi Transfer (C-11)</h4>
+        <p data-en>Executives, senior managers, and specialized knowledge workers can transfer from a foreign affiliate to a Canadian entity. Often used alongside a PNP application for permanent residency.</p>
+        <p data-tr>Yöneticiler, üst düzey müdürler ve özel bilgi çalışanları, yabancı bir iştirakten Kanada şirketine transfer olabilir. Daimi ikamet için genellikle PNP başvurusuyla birlikte kullanılır.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:40px;">
+      <a href="investor-visas.html" class="btn btn-outline">
+        <span data-en>Full Visa & Tax Guide →</span>
+        <span data-tr>Tam Vize & Vergi Rehberi →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Tax & Incentives -->
+<section>
+  <div class="container">
+    <span class="section-tag" data-en>Tax & incentives</span>
+    <span class="section-tag" data-tr>Vergi & teşvikler</span>
+    <h2 class="section-title" data-en>Competitive incentives for international investors.</h2>
+    <h2 class="section-title" data-tr>Uluslararası yatırımcılar için rekabetçi teşvikler.</h2>
+
+    <div class="features-grid">
+      <div class="feature">
+        <h4 data-en>SR&ED Tax Credit</h4>
+        <h4 data-tr>SR&ED Vergi Kredisi</h4>
+        <p data-en>Scientific Research & Experimental Development — Canada's flagship R&D incentive. Up to 35% refundable federal credit for eligible R&D expenses. One of the most generous programs in the G7.</p>
+        <p data-tr>Bilimsel Araştırma ve Deneysel Geliştirme — Kanada'nın amiral gemisi AR-GE teşviki. Uygun AR-GE giderleri için %35'e kadar iade edilebilir federal kredi. G7'nin en cömert programlarından biri.</p>
+      </div>
+      <div class="feature">
+        <h4 data-en>Federal Corporate Tax</h4>
+        <h4 data-tr>Federal Kurumlar Vergisi</h4>
+        <p data-en>Federal corporate rate of <strong>15%</strong> — among the lowest in the G7. Small businesses benefit from a reduced 9% rate on the first CAD $500K of active income. Combined with provincial rates, effective rates remain competitive.</p>
+        <p data-tr><strong>%15</strong> federal kurumlar vergisi oranı — G7'nin en düşüklerinden. Küçük işletmeler, ilk 500K CAD aktif gelirde %9 indirimli orandan yararlanır. Eyalet oranlarıyla birleştirildiğinde efektif oranlar rekabetçi kalır.</p>
+      </div>
+      <div class="feature">
+        <h4 data-en>Provincial Programs</h4>
+        <h4 data-tr>Eyalet Programları</h4>
+        <p data-en><strong>Ontario</strong> — Strategic Innovation Fund, large-scale investment grants. <strong>BC</strong> — BC Tech Fund, strong startup ecosystem. <strong>Alberta</strong> — Petrochemical Diversification Program, energy sector incentives.</p>
+        <p data-tr><strong>Ontario</strong> — Stratejik İnovasyon Fonu, büyük ölçekli yatırım hibeleri. <strong>BC</strong> — BC Tech Fonu, güçlü girişim ekosistemi. <strong>Alberta</strong> — Petrokimya Çeşitlendirme Programı, enerji sektörü teşvikleri.</p>
+      </div>
+      <div class="feature">
+        <h4 data-en>Turkey–Canada Tax Treaty</h4>
+        <h4 data-tr>Türkiye–Kanada Vergi Anlaşması</h4>
+        <p data-en>A bilateral tax treaty between Turkey and Canada is in force, reducing withholding taxes on dividends, interest, and royalties. Critical for Turkish investors structuring cross-border holdings.</p>
+        <p data-tr>Türkiye ve Kanada arasındaki ikili vergi anlaşması yürürlükte; temettü, faiz ve telif haklarındaki stopaj vergilerini azaltıyor. Sınır ötesi holdingler yapılandıran Türk yatırımcılar için kritik.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Where to incorporate -->
+<section class="section-dark">
+  <div class="container">
+    <span class="section-tag" data-en>Where to incorporate</span>
+    <span class="section-tag" data-tr>Nerede şirket kurulur</span>
+    <h2 class="section-title" data-en>Canada's key business provinces.</h2>
+    <h2 class="section-title" data-tr>Kanada'nın önemli iş eyaletleri.</h2>
+
+    <div class="features-grid">
+      <div class="feature">
+        <h4>Ontario</h4>
+        <p data-en>Canada's largest economy. Toronto is the financial capital — home to the TSX and major banking sector. Strong tech ecosystem, large Turkish-Canadian community, direct flights to Istanbul.</p>
+        <p data-tr>Kanada'nın en büyük ekonomisi. Toronto, finans başkenti — TSX ve büyük bankacılık sektörüne ev sahipliği yapıyor. Güçlü teknoloji ekosistemi, büyük Türk-Kanada topluluğu, İstanbul'a doğrudan uçuşlar.</p>
+      </div>
+      <div class="feature">
+        <h4>British Columbia</h4>
+        <p data-en>Gateway to Asia-Pacific markets. Vancouver is among North America's fastest-growing tech hubs. Strong real-estate market, favorable business climate, no provincial sales tax on many services.</p>
+        <p data-tr>Asya-Pasifik pazarlarına açılan kapı. Vancouver, Kuzey Amerika'nın en hızlı büyüyen teknoloji merkezleri arasında. Güçlü gayrimenkul piyasası, elverişli iş ortamı.</p>
+      </div>
+      <div class="feature">
+        <h4>Quebec</h4>
+        <p data-en>Lowest electricity costs in North America — ideal for data centers and manufacturing. Separate immigration system. French-language environment requires planning but opens access to francophone markets globally.</p>
+        <p data-tr>Kuzey Amerika'nın en düşük elektrik maliyetleri — veri merkezleri ve üretim için ideal. Ayrı göç sistemi. Fransızca dil ortamı planlama gerektirse de küresel frankofon pazarlara erişim sağlar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section>
+  <div class="container">
+    <span class="section-tag" data-en>Market intelligence</span>
+    <span class="section-tag" data-tr>Piyasa istihbaratı</span>
+    <h2 class="section-title" data-en>What's happening in the Canadian market.</h2>
+    <h2 class="section-title" data-tr>Kanada pazarında neler oluyor.</h2>
+    <div class="news-grid">
+
+      <div class="news-item">
+        <p class="news-cat">Immigration</p>
+        <h4 data-en>Ontario PNP Entrepreneur Stream reopens with updated criteria</h4>
+        <h4 data-tr>Ontario PNP Girişimci Akışı güncel kriterlerle yeniden açıldı</h4>
+        <p data-en>Ontario's Entrepreneur Stream is accepting new applications with a revised minimum net worth threshold and updated business plan requirements — a key pathway for Turkish investors.</p>
+        <p data-tr>Ontario Girişimci Akışı, revize edilmiş asgari net değer eşiği ve güncellenmiş iş planı gereksinimleriyle yeni başvurular kabul ediyor — Türk yatırımcılar için kritik bir yol.</p>
+        <span class="news-source">May 2026 · ontario.ca</span>
+      </div>
+
+      <div class="news-item">
+        <p class="news-cat">Government Contracting</p>
+        <h4 data-en>PSPC modernizes procurement rules to open more contracts to foreign-owned Canadian entities</h4>
+        <h4 data-tr>PSPC, yabancı sahipli Kanada şirketleri için daha fazla sözleşme açmak amacıyla tedarik kurallarını modernize ediyor</h4>
+        <p data-en>New PSPC guidelines reduce barriers for foreign-owned but Canadian-incorporated companies bidding on non-sensitive federal contracts. Effective Q3 2026.</p>
+        <p data-tr>Yeni PSPC yönergeleri, yabancı sahipli ancak Kanada'da tescilli şirketlerin hassas olmayan federal sözleşmelere teklif vermesindeki engelleri azaltıyor. 2026 3. çeyrekten itibaren geçerli.</p>
+        <span class="news-source">Apr 2026 · canada.ca</span>
+      </div>
+
+      <div class="news-item">
+        <p class="news-cat">Investment</p>
+        <h4 data-en>SR&amp;ED credit claims process simplified for smaller businesses</h4>
+        <h4 data-tr>SR&amp;ED kredi talep süreci küçük işletmeler için basitleştirildi</h4>
+        <p data-en>CRA's updated SR&ED filing process reduces documentation burden for companies claiming under CAD $250K — making Canada's flagship R&D credit more accessible for newly incorporated businesses.</p>
+        <p data-tr>CRA'nın güncellenmiş SR&ED başvuru süreci, 250.000 CAD altında talep eden şirketler için belge yükünü azaltıyor — Kanada'nın amiral gemisi AR-GE kredisini yeni kurulan işletmeler için daha erişilebilir hale getiriyor.</p>
+        <span class="news-source">Mar 2026 · canada.ca/cra</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2 data-en>Ready to enter the Canadian market?</h2>
+    <h2 data-tr>Kanada pazarına girmeye hazır mısınız?</h2>
+    <p data-en>We'll map out a tailored entry plan — province selection, company structure, immigration pathway, and your first contract opportunities.</p>
+    <p data-tr>Size özel bir giriş planı hazırlayacağız — eyalet seçimi, şirket yapısı, göç yolu ve ilk sözleşme fırsatlarınız.</p>
+    <a href="contact.html" class="btn btn-primary">
+      <span data-en>Book a consultation</span>
+      <span data-tr>Danışma randevusu al</span>
+    </a>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

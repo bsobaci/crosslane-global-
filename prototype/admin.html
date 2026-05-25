@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Crosslane Global</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f4f3f0;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+    .admin-header {
+      background: #1a1a1a;
+      padding: 18px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #333;
+    }
+    .admin-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+    .admin-logo span { color: #B87A2A; }
+    .admin-nav { display: flex; gap: 16px; align-items: center; }
+    .admin-nav a { color: rgba(255,255,255,0.6); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; font-weight: 500; }
+    .admin-nav a:hover, .admin-nav a.active { color: #B87A2A; }
+    .admin-nav .logout { color: rgba(255,255,255,0.4); cursor: pointer; background: none; border: none; font: inherit; font-size: 12px; }
+    .admin-nav .logout:hover { color: #d44; }
+
+    .admin-body { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+
+    /* Tab nav */
+    .tab-nav { display: flex; gap: 0; margin-bottom: 32px; border-bottom: 2px solid #e0dbd2; }
+    .tab-btn {
+      padding: 12px 24px;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      color: #999;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { color: #1a1a1a; }
+    .tab-btn.active { color: #1a1a1a; border-bottom-color: #B87A2A; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Stats cards */
+    .stat-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+    @media (max-width: 800px) { .stat-cards { grid-template-columns: repeat(2, 1fr); } }
+    .stat-card {
+      background: #fff;
+      border: 1px solid #e0dbd2;
+      border-radius: 3px;
+      padding: 24px;
+    }
+    .stat-card .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      color: #B87A2A;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-card .stat-label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+    .stat-card .stat-sub { font-size: 11px; color: #bbb; margin-top: 4px; }
+
+    /* Tables */
+    .data-table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e0dbd2; border-radius: 3px; }
+    th {
+      background: #faf9f7;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+      padding: 12px 14px;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 1px solid #e0dbd2;
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 14px;
+      font-size: 13px;
+      border-bottom: 1px solid #f0ece6;
+      vertical-align: top;
+      color: #444;
+    }
+    tr:hover td { background: #faf9f7; }
+    td.title-cell { max-width: 280px; font-weight: 500; color: #1a1a1a; }
+    td.title-cell small { display: block; font-weight: 400; color: #999; font-size: 11px; margin-top: 2px; }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 2px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .badge-draft { background: #fef9ec; color: #8a6d14; }
+    .badge-published { background: #e8f7f2; color: #1D9E75; }
+    .badge-pending { background: #fff3e0; color: #e67e22; }
+    .badge-approved { background: #e8f7f2; color: #1D9E75; }
+    .badge-rejected { background: #fef2f2; color: #d44; }
+
+    /* Buttons */
+    .btn-sm {
+      padding: 6px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+      font-family: inherit;
+    }
+    .btn-publish { background: #1D9E75; color: #fff; }
+    .btn-publish:hover { background: #157a5c; }
+    .btn-draft { background: #888; color: #fff; }
+    .btn-draft:hover { background: #666; }
+    .btn-approve { background: #1D9E75; color: #fff; }
+    .btn-approve:hover { background: #157a5c; }
+    .btn-reject { background: #d44; color: #fff; }
+    .btn-reject:hover { background: #b33; }
+    .btn-delete { background: #d44; color: #fff; }
+    .btn-delete:hover { background: #b33; }
+    .btn-feature { background: #B87A2A; color: #fff; }
+    .btn-feature:hover { background: #8E5A1A; }
+    .btn-xs { padding: 4px 10px; font-size: 10px; margin-left: 4px; }
+
+    .td-actions { display: flex; gap: 4px; flex-wrap: wrap; }
+
+    /* Login */
+    .login-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: #1a1a1a;
+    }
+    .login-box {
+      background: #fff;
+      border-radius: 3px;
+      padding: 48px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    .login-box h1 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 6px; }
+    .login-box p { font-size: 13px; color: #888; margin-bottom: 28px; }
+    .login-box input {
+      width: 100%;
+      padding: 12px 14px;
+      font: inherit;
+      font-size: 14px;
+      border: 1px solid #d5d1ca;
+      border-radius: 3px;
+      margin-bottom: 16px;
+    }
+    .login-box input:focus { outline: none; border-color: #B87A2A; box-shadow: 0 0 0 3px rgba(184,122,42,0.1); }
+    .login-box button {
+      width: 100%;
+      padding: 13px;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+    }
+    .login-box button:hover { background: #B87A2A; }
+    .login-err { color: #d44; font-size: 12px; margin-top: 12px; display: none; }
+
+    /* Empty state */
+    .empty-state { text-align: center; padding: 60px 0; color: #bbb; }
+    .empty-state strong { display: block; color: #888; margin-bottom: 8px; font-size: 15px; }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1a1a1a;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 3px;
+      font-size: 13px;
+      z-index: 9999;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.25s;
+      pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.error { background: #d44; }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div id="loginScreen" class="login-wrap">
+  <div class="login-box">
+    <h1>Crosslane <span style="color:#B87A2A">Admin</span></h1>
+    <p>Enter your admin API key to access the dashboard.</p>
+    <input type="password" id="loginInput" placeholder="Admin API Key" autocomplete="off" />
+    <button id="loginBtn">Unlock Dashboard</button>
+    <p class="login-err" id="loginErr">Invalid admin key. Access denied.</p>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard" class="hidden">
+  <header class="admin-header">
+    <div class="admin-logo">Crosslane <span>Global</span> — Admin</div>
+    <div class="admin-nav">
+      <button class="logout" id="logoutBtn">Lock</button>
+    </div>
+  </header>
+
+  <div class="admin-body">
+    <!-- Tab Navigation -->
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="tab-dashboard">Dashboard</button>
+      <button class="tab-btn" data-tab="tab-opportunities">Opportunities</button>
+      <button class="tab-btn" data-tab="tab-leads">Leads</button>
+      <button class="tab-btn" data-tab="tab-logs">Logs</button>
+    </div>
+
+    <!-- DASHBOARD TAB -->
+    <div class="tab-panel active" id="tab-dashboard">
+      <div class="stat-cards" id="statCards"></div>
+      <h3 style="font-family:'Playfair Display',serif;margin-bottom:16px">Agent Control</h3>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px" id="agentControls">
+        <button class="btn-sm btn-feature" id="btnScan">🔄 Scan SAM.gov Now</button>
+        <button class="btn-sm btn-publish" id="btnSummarize">🤖 Summarize All Drafts</button>
+        <button class="btn-sm btn-approve" id="btnPipeline">⚡ Full Pipeline</button>
+        <span style="font-size:11px;color:#999;align-self:center;margin-left:8px" id="agentStatus">Auto-pilot: every 24h</span>
+      </div>
+
+      <h3 style="font-family:'Playfair Display',serif;margin-bottom:16px">Moderation Queue</h3>
+      <div class="data-table-wrap" id="modQueue"></div>
+    </div>
+
+    <!-- OPPORTUNITIES TAB -->
+    <div class="tab-panel" id="tab-opportunities">
+      <div style="display:flex;gap:8px;margin-bottom:20px" id="oppFilters">
+        <button class="tab-btn active" data-opp-filter="">All</button>
+        <button class="tab-btn" data-opp-filter="draft">Drafts</button>
+        <button class="tab-btn" data-opp-filter="published">Published</button>
+      </div>
+      <div class="data-table-wrap" id="oppTable"></div>
+    </div>
+
+    <!-- LEADS TAB -->
+    <div class="tab-panel" id="tab-leads">
+      <div style="display:flex;gap:8px;margin-bottom:20px" id="leadFilters">
+        <button class="tab-btn active" data-lead-filter="">All</button>
+        <button class="tab-btn" data-lead-filter="pending">Pending</button>
+        <button class="tab-btn" data-lead-filter="approved">Approved</button>
+      </div>
+      <div class="data-table-wrap" id="leadTable"></div>
+    </div>
+
+    <!-- LOGS TAB -->
+    <div class="tab-panel" id="tab-logs">
+      <div class="data-table-wrap" id="logTable"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="assets/js/api.js"></script>
+<script>
+(function () {
+  const ADMIN_API = '/api/admin';
+  let adminKey = '';
+
+  // ── Auth ────────────────────────────────────────────
+  const loginScreen = document.getElementById('loginScreen');
+  const dashboard = document.getElementById('dashboard');
+  const loginInput = document.getElementById('loginInput');
+  const loginBtn = document.getElementById('loginBtn');
+  const loginErr = document.getElementById('loginErr');
+
+  function tryAuth() {
+    const key = loginInput.value.trim();
+    if (!key) return;
+    // Verify by hitting the stats endpoint
+    fetch(`${ADMIN_API}/stats`, { headers: { 'x-admin-key': key } })
+      .then(r => {
+        if (!r.ok) throw new Error('unauthorized');
+        adminKey = key;
+        sessionStorage.setItem('cg-admin-key', key);
+        loginScreen.classList.add('hidden');
+        dashboard.classList.remove('hidden');
+        loadAll();
+      })
+      .catch(() => {
+        loginErr.style.display = 'block';
+      });
+  }
+
+  loginBtn.addEventListener('click', tryAuth);
+  loginInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryAuth(); });
+
+  // Check sessionStorage
+  const savedKey = sessionStorage.getItem('cg-admin-key');
+  if (savedKey) {
+    loginInput.value = savedKey;
+    tryAuth();
+  }
+
+  // Logout
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    adminKey = '';
+    sessionStorage.removeItem('cg-admin-key');
+    dashboard.classList.add('hidden');
+    loginScreen.classList.remove('hidden');
+    loginInput.value = '';
+    loginErr.style.display = 'none';
+  });
+
+  // ── Tabs ────────────────────────────────────────────
+  document.querySelectorAll('.tab-btn[data-tab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabName = btn.getAttribute('data-tab');
+      document.querySelectorAll('.tab-btn[data-tab]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(tabName).classList.add('active');
+      if (tabName === 'tab-logs') loadLogs();
+    });
+  });
+
+  // ── Toast ───────────────────────────────────────────
+  function toast(msg, isError) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (isError ? ' error' : '');
+    clearTimeout(t._timeout);
+    t._timeout = setTimeout(() => { t.classList.remove('show'); }, 2500);
+  }
+
+  // ── API helpers ─────────────────────────────────────
+  function adminFetch(path, opts = {}) {
+    return fetch(`${ADMIN_API}${path}`, {
+      ...opts,
+      headers: { ...opts.headers, 'x-admin-key': adminKey },
+    }).then(r => {
+      if (!r.ok) throw new Error('API error: ' + r.status);
+      return r.json();
+    });
+  }
+
+  // ── Formatting ──────────────────────────────────────
+  function fmtBudget(min, max, cur) {
+    if (min == null && max == null) return '—';
+    const c = cur === 'CAD' ? 'CAD $' : '$';
+    const f = n => n >= 1e9 ? (n/1e9).toFixed(1)+'B' : n >= 1e6 ? (n/1e6).toFixed(0)+'M' : n >= 1e3 ? (n/1e3).toFixed(0)+'K' : String(n);
+    if (min && max) return `${c}${f(min)}–${f(max)}`;
+    return `${c}${f(min||max)}`;
+  }
+
+  function fmtDate(iso) {
+    if (!iso) return '—';
+    // Handle SQLite format: "2026-05-24 00:08:44" and ISO: "2026-05-24T00:00:00"
+    const clean = iso.replace(' ', 'T');
+    const d = new Date(clean);
+    if (isNaN(d.getTime())) return iso.slice(0, 10);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  function trunc(s, n) {
+    if (!s) return '—';
+    return s.length > n ? s.slice(0, n) + '…' : s;
+  }
+
+  // ── Load all data ───────────────────────────────────
+  function loadAll() {
+    loadStats();
+    loadModQueue();
+    loadOpportunities();
+    loadLeads();
+  }
+
+  // ── Stats ───────────────────────────────────────────
+  function loadStats() {
+    adminFetch('/stats').then(d => {
+      document.getElementById('statCards').innerHTML = `
+        <div class="stat-card">
+          <div class="stat-num">${d.opportunities.total}</div>
+          <div class="stat-label">Total Opportunities</div>
+          <div class="stat-sub">${d.opportunities.published} published · ${d.opportunities.draft} drafts</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">${d.leads.total}</div>
+          <div class="stat-label">Total Leads</div>
+          <div class="stat-sub">${d.leads.pending} pending · ${d.leads.approved} approved</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">${d.agent.total_tokens_used.toLocaleString()}</div>
+          <div class="stat-label">AI Tokens Used</div>
+          <div class="stat-sub">${d.agent.error_logs} errors logged</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">${d.leads.pending}</div>
+          <div class="stat-label">Needs Review</div>
+          <div class="stat-sub">Pending leads + drafts</div>
+        </div>`;
+    }).catch(() => toast('Failed to load stats', true));
+  }
+
+  // ── Moderation Queue ────────────────────────────────
+  function loadModQueue() {
+    adminFetch('/opportunities?status=draft&limit=20').then(d => {
+      const container = document.getElementById('modQueue');
+      if (d.opportunities.length === 0) {
+        container.innerHTML = '<div class="empty-state"><strong>No drafts pending</strong>All opportunities are published.</div>';
+        return;
+      }
+      container.innerHTML = buildOppTable(d.opportunities, true);
+      wireOppButtons(container);
+    }).catch(() => {});
+  }
+
+  // ── Opportunities ───────────────────────────────────
+  let oppFilter = '';
+  document.querySelectorAll('[data-opp-filter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-opp-filter]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      oppFilter = btn.getAttribute('data-opp-filter');
+      loadOpportunities();
+    });
+  });
+
+  function loadOpportunities() {
+    const qs = oppFilter ? `?status=${oppFilter}` : '?limit=100';
+    adminFetch(`/opportunities${qs}`).then(d => {
+      const container = document.getElementById('oppTable');
+      if (d.opportunities.length === 0) {
+        container.innerHTML = '<div class="empty-state"><strong>No opportunities</strong></div>';
+        return;
+      }
+      container.innerHTML = buildOppTable(d.opportunities, false);
+      wireOppButtons(container);
+    }).catch(() => toast('Failed to load opportunities', true));
+  }
+
+  function buildOppTable(opps, isQueue) {
+    const rows = opps.map(o => `
+      <tr class="opp-row" data-opp-id="${o.id}">
+        <td class="title-cell" style="cursor:pointer" data-opp-id="${o.id}">
+          ${trunc(o.title, 70)}
+          <small>${o.agency_name ? trunc(o.agency_name, 40) : '—'} · ${o.industry || '—'}</small>
+          <div style="font-size:10px;color:#B87A2A;margin-top:4px">🔍 Tıkla — detayları göster/gizle</div>
+        </td>
+        <td><span class="badge badge-${o.status}">${o.status}</span></td>
+        <td>${o.featured ? '⭐' : ''}</td>
+        <td>${fmtBudget(o.budget_min, o.budget_max, o.currency)}</td>
+        <td>${fmtDate(o.deadline)}</td>
+        <td>${o.region || '—'}</td>
+        <td>${fmtDate(o.created_at)}</td>
+        <td class="td-actions">
+          ${o.status === 'draft' ? `<button class="btn-sm btn-publish" data-action="publish" data-id="${o.id}">Publish</button>` : `<button class="btn-sm btn-draft" data-action="draft" data-id="${o.id}">Unpublish</button>`}
+          ${!o.featured ? `<button class="btn-sm btn-feature btn-xs" data-action="feature" data-id="${o.id}">★</button>` : `<button class="btn-sm btn-draft btn-xs" data-action="unfeature" data-id="${o.id}">☆</button>`}
+          <button class="btn-sm btn-delete btn-xs" data-action="delete" data-id="${o.id}" data-title="${trunc(o.title, 40)}">×</button>
+        </td>
+      </tr>
+      <tr class="opp-detail" id="detail-${o.id}" style="display:none">
+        <td colspan="8" style="background:#faf9f7;padding:20px 24px;border-bottom:2px solid #B87A2A">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;font-size:13px">
+            <div><strong style="color:#888;font-size:10px;text-transform:uppercase;letter-spacing:0.1em">Solicitation Number</strong><br>${o.solicitation_number || '—'}</div>
+            <div><strong style="color:#888;font-size:10px;text-transform:uppercase;letter-spacing:0.1em">Notice ID / Source ID</strong><br>${o.source_id || '—'}</div>
+            <div><strong style="color:#888;font-size:10px;text-transform:uppercase;letter-spacing:0.1em">Agency Name</strong><br>${o.agency_name || '—'}</div>
+            <div><strong style="color:#888;font-size:10px;text-transform:uppercase;letter-spacing:0.1em">Performance Location</strong><br>${o.performance_location || '—'}</div>
+            <div style="grid-column:1/-1"><strong style="color:#888;font-size:10px;text-transform:uppercase;letter-spacing:0.1em">Source URL</strong><br>${o.source_url ? `<a href="${o.source_url}" target="_blank" style="color:#B87A2A">${o.source_url}</a>` : '—'}</div>
+            <div style="grid-column:1/-1"><strong style="color:#888;font-size:10px;text-transform:uppercase;letter-spacing:0.1em">Executive Summary (EN)</strong><br>${o.executive_summary_en || '—'}</div>
+            <div style="grid-column:1/-1"><strong style="color:#888;font-size:10px;text-transform:uppercase;letter-spacing:0.1em">Executive Summary (TR)</strong><br>${o.executive_summary_tr || '—'}</div>
+            <div style="grid-column:1/-1"><strong style="color:#888;font-size:10px;text-transform:uppercase;letter-spacing:0.1em">Cross-Border</strong><br>Issuing: ${o.issuing_country || '—'} → Execution: ${o.execution_country || '—'}</div>
+          </div>
+        </td>
+      </tr>`).join('');
+
+    return `<table><thead><tr>
+      <th>Title / Agency</th><th>Status</th><th>Featured</th><th>Budget</th><th>Deadline</th><th>Region</th><th>Created</th><th>Actions</th>
+    </tr></thead><tbody>${rows}</tbody></table>`;
+  }
+
+  function wireOppButtons(container) {
+    container.querySelectorAll('[data-action]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const action = btn.getAttribute('data-action');
+        const title = btn.getAttribute('data-title') || '';
+
+        if (action === 'delete') {
+          if (!confirm(`Delete "${title}"?`)) return;
+          adminFetch(`/opportunities/${id}`, { method: 'DELETE' })
+            .then(() => { toast('Opportunity deleted'); loadAll(); })
+            .catch(() => toast('Failed to delete', true));
+          return;
+        }
+
+        if (action === 'publish') {
+          adminFetch(`/opportunities/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: 'published' }) })
+            .then(() => { toast('Published'); loadAll(); })
+            .catch(() => toast('Failed to publish', true));
+        } else if (action === 'draft') {
+          adminFetch(`/opportunities/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: 'draft' }) })
+            .then(() => { toast('Unpublished'); loadAll(); })
+            .catch(() => toast('Failed to unpublish', true));
+        } else if (action === 'feature') {
+          adminFetch(`/opportunities/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ featured: 1 }) })
+            .then(() => { toast('Featured'); loadAll(); })
+            .catch(() => toast('Failed to feature', true));
+        } else if (action === 'unfeature') {
+          adminFetch(`/opportunities/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ featured: 0 }) })
+            .then(() => { toast('Unfeatured'); loadAll(); })
+            .catch(() => toast('Failed to unfeature', true));
+        }
+      });
+    });
+  }
+
+  // ── Leads ───────────────────────────────────────────
+  let leadFilter = '';
+  document.querySelectorAll('[data-lead-filter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-lead-filter]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      leadFilter = btn.getAttribute('data-lead-filter');
+      loadLeads();
+    });
+  });
+
+  function loadLeads() {
+    const qs = leadFilter ? `?verification_status=${leadFilter}&limit=100` : '?limit=100';
+    adminFetch(`/leads${qs}`).then(d => {
+      const container = document.getElementById('leadTable');
+      if (d.leads.length === 0) {
+        container.innerHTML = '<div class="empty-state"><strong>No leads</strong></div>';
+        return;
+      }
+      const rows = d.leads.map(l => `
+        <tr>
+          <td><strong>${trunc(l.full_name, 30)}</strong></td>
+          <td>${trunc(l.company_name, 25)}</td>
+          <td>${l.business_email}</td>
+          <td>${l.job_title || '—'}</td>
+          <td>${l.industry || '—'}</td>
+          <td><span class="badge badge-${l.verification_status}">${l.verification_status}</span></td>
+          <td>${fmtDate(l.created_at)}</td>
+          <td class="td-actions">
+            ${l.verification_status === 'pending' ? `<button class="btn-sm btn-approve" data-lead-action="approve" data-lead-id="${l.id}">Approve</button>` : ''}
+            ${l.verification_status !== 'rejected' ? `<button class="btn-sm btn-reject btn-xs" data-lead-action="reject" data-lead-id="${l.id}">Reject</button>` : ''}
+          </td>
+        </tr>`).join('');
+
+      container.innerHTML = `<table><thead><tr>
+        <th>Name</th><th>Company</th><th>Email</th><th>Title</th><th>Industry</th><th>Status</th><th>Submitted</th><th>Actions</th>
+      </tr></thead><tbody>${rows}</tbody></table>`;
+
+      container.querySelectorAll('[data-lead-action]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-lead-id');
+          const action = btn.getAttribute('data-lead-action');
+          const status = action === 'approve' ? 'approved' : 'rejected';
+          adminFetch(`/leads/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ verification_status: status }),
+          }).then(() => { toast(`Lead ${status}`); loadLeads(); loadStats(); })
+            .catch(() => toast('Failed to update lead', true));
+        });
+      });
+    }).catch(() => toast('Failed to load leads', true));
+  }
+
+  // ── Logs ────────────────────────────────────────────
+  function loadLogs() {
+    adminFetch('/logs?limit=100').then(d => {
+      const container = document.getElementById('logTable');
+      if (d.logs.length === 0) {
+        container.innerHTML = '<div class="empty-state"><strong>No logs</strong></div>';
+        return;
+      }
+      const rows = d.logs.map(l => `
+        <tr>
+          <td>${fmtDate(l.created_at)}</td>
+          <td><span style="color:#B87A2A;font-weight:600">${l.agent_type}</span></td>
+          <td>${l.event}</td>
+          <td><span class="badge badge-${l.status}">${l.status}</span></td>
+          <td>${l.tokens_used || '—'}</td>
+          <td>${l.duration_ms ? l.duration_ms + 'ms' : '—'}</td>
+          <td style="font-size:11px;max-width:300px">${trunc(l.details, 120)}</td>
+        </tr>`).join('');
+
+      container.innerHTML = `<table><thead><tr>
+        <th>Time</th><th>Agent</th><th>Event</th><th>Status</th><th>Tokens</th><th>Duration</th><th>Details</th>
+      </tr></thead><tbody>${rows}</tbody></table>`;
+    }).catch(() => {});
+  }
+
+  // ── Detail Toggle ──────────────────────────────────
+  document.addEventListener('click', function(e) {
+    const cell = e.target.closest('.title-cell');
+    if (!cell) return;
+    const id = cell.getAttribute('data-opp-id');
+    if (!id) return;
+    const row = document.getElementById('detail-' + id);
+    if (row) row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+  });
+
+  // ── Agent Control Buttons ────────────────────────────
+  document.getElementById('btnScan').addEventListener('click', () => {
+    document.getElementById('agentStatus').textContent = 'Scanning SAM.gov...';
+    adminFetch('/agent/scan', { method: 'POST' })
+      .then(d => { toast(d.message); document.getElementById('agentStatus').textContent = 'Scan started. Check logs.'; })
+      .catch(() => toast('Scan failed', true));
+  });
+
+  document.getElementById('btnSummarize').addEventListener('click', () => {
+    document.getElementById('agentStatus').textContent = 'Generating summaries...';
+    adminFetch('/agent/summarize', { method: 'POST' })
+      .then(d => { toast(d.message); document.getElementById('agentStatus').textContent = 'Summarization started.'; })
+      .catch(() => toast('Summarization failed', true));
+  });
+
+  document.getElementById('btnPipeline').addEventListener('click', () => {
+    document.getElementById('agentStatus').textContent = 'Full pipeline running...';
+    adminFetch('/agent/pipeline', { method: 'POST' })
+      .then(d => { toast(d.message); document.getElementById('agentStatus').textContent = 'Pipeline started. Check logs.'; })
+      .catch(() => toast('Pipeline failed', true));
+  });
+
+  // ── Bind filter tabs to behave like tab buttons ─────
+  function redelegateFilters() {
+    // Filters are re-bound in load functions
+  }
+})();
+</script>
+</body>
+</html>
