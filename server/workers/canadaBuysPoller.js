@@ -270,7 +270,9 @@ function startPolling() {
   console.log('[canadaBuys] Scheduled daily poll');
 
   // Run on startup
-  pollCanadaBuys(getDb()).catch(err => console.error('[canadaBuys] Initial poll error:', err));
+  getDb().then(db => {
+    pollCanadaBuys(db).catch(err => console.error('[canadaBuys] Initial poll error:', err));
+  });
 
   // Then daily
   pollTimer = setInterval(async () => {

@@ -33,6 +33,28 @@
     .filter-chip.active { background: #faf8f4; }
     .filter-select { padding: 10px 32px 10px 12px; font-family: inherit; font-size: 12px; border: 1px solid #d5d1ca; border-radius: 3px; background: #fff; color: #1a1a1a; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
 
+    /* LOADING STATE */
+    .loading-state { text-align: center; padding: 80px 20px; }
+    .loading-state .spinner { width: 48px; height: 48px; margin: 0 auto 24px; border: 3px solid #f0f0f0; border-top-color: #B87A2A; border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-state h3 { font-size: 22px; color: #1a1a1a; margin-bottom: 12px; }
+    .loading-state p { font-size: 15px; color: #666; line-height: 1.7; max-width: 500px; margin: 0 auto; }
+
+    /* EMPTY STATE */
+    .empty-state { text-align: center; padding: 100px 20px; background: #fafafa; border: 1px dashed #ddd; border-radius: 8px; margin: 40px 0; }
+    .empty-state svg { width: 80px; height: 80px; margin: 0 auto 24px; opacity: 0.3; }
+    .empty-state h3 { font-size: 24px; color: #1a1a1a; margin-bottom: 12px; }
+    .empty-state p { font-size: 15px; color: #666; line-height: 1.7; max-width: 480px; margin: 0 auto 32px; }
+    .empty-state .meta { font-size: 13px; color: #999; margin-top: 20px; }
+
+    /* ERROR STATE */
+    .error-state { text-align: center; padding: 80px 20px; }
+    .error-state .icon { font-size: 64px; margin-bottom: 20px; }
+    .error-state h3 { font-size: 22px; color: #d32f2f; margin-bottom: 12px; }
+    .error-state p { font-size: 15px; color: #666; max-width: 500px; margin: 0 auto 24px; }
+    .error-state button { padding: 12px 28px; background: #8E5A1A; color: #fff; border: none; border-radius: 3px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; }
+    .error-state button:hover { opacity: 0.85; }
+
     /* CARDS */
     .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .card { background: #fff; border: 1px solid #e8e4dc; border-radius: 3px; padding: 36px; transition: box-shadow 0.2s; display: flex; flex-direction: column; }
@@ -53,7 +75,7 @@
     .private h2 { font-size: clamp(28px, 4vw, 44px); color: #fff; margin-bottom: 14px; }
     .private p { color: rgba(255,255,255,0.5); font-size: 16px; max-width: 500px; margin: 0 auto 32px; line-height: 1.8; }
 
-    .btn-gold { display: inline-block; padding: 14px 32px; background: #8E5A1A; color: #fff; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 2px; text-decoration: none; font-family: inherit; }
+    .btn-gold { display: inline-block; padding: 14px 32px; background: #8E5A1A; color: #fff; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 2px; text-decoration: none; font-family: inherit; border: none; cursor: pointer; }
     .btn-gold:hover { opacity: 0.85; color: #fff; }
 
     @media (max-width: 768px) {
@@ -104,6 +126,41 @@
     </div>
 
     <div id="cardsContainer">
+      <!-- LOADING STATE -->
+      <div id="loadingState" class="loading-state">
+        <div class="spinner"></div>
+        <h3 data-en>Loading Opportunities...</h3>
+        <h3 data-tr>Fırsatlar Yükleniyor...</h3>
+        <p data-en>Our AI agents are scanning government procurement databases across 4 countries.</p>
+        <p data-tr>AI ajanlarımız 4 ülkede devlet tedarik veritabanlarını tarıyor.</p>
+      </div>
+
+      <!-- EMPTY STATE (hidden by default) -->
+      <div id="emptyState" class="empty-state" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        <h3 data-en>No Opportunities Found</h3>
+        <h3 data-tr>Fırsat Bulunamadı</h3>
+        <p data-en>Try adjusting your filters or check back later. New opportunities are added daily as our agents scan procurement systems worldwide.</p>
+        <p data-tr>Filtrelerinizi değiştirmeyi deneyin veya daha sonra tekrar kontrol edin. Ajanlarımız dünya çapında tedarik sistemlerini taradıkça günlük yeni fırsatlar eklenir.</p>
+        <button class="btn-gold" onclick="location.href='contact.html'" data-en>Get Notified</button>
+        <button class="btn-gold" onclick="location.href='contact.html'" data-tr>Bildirim Al</button>
+        <p class="meta">🤖 Powered by autonomous AI agents scanning SAM.gov, CanadaBuys, UK Tenders & ProZorro</p>
+      </div>
+
+      <!-- ERROR STATE (hidden by default) -->
+      <div id="errorState" class="error-state" hidden>
+        <div class="icon">⚠️</div>
+        <h3 data-en>Connection Error</h3>
+        <h3 data-tr>Bağlantı Hatası</h3>
+        <p data-en>Unable to load opportunities. Please check your connection and try again.</p>
+        <p data-tr>Fırsatlar yüklenemiyor. Lütfen bağlantınızı kontrol edip tekrar deneyin.</p>
+        <button onclick="window.location.reload()" data-en>Retry</button>
+        <button onclick="window.location.reload()" data-tr>Tekrar Dene</button>
+      </div>
+
+      <!-- CARDS GRID -->
       <div class="cards-grid" id="cardsGrid"></div>
     </div>
 
@@ -139,6 +196,33 @@
   function fmtDate(d){if(!d)return'';return new Date(d+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
   function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
 
+  function showLoading() {
+    document.getElementById('loadingState').hidden = false;
+    document.getElementById('emptyState').hidden = true;
+    document.getElementById('errorState').hidden = true;
+    document.getElementById('cardsGrid').innerHTML = '';
+  }
+
+  function showEmpty() {
+    document.getElementById('loadingState').hidden = true;
+    document.getElementById('emptyState').hidden = false;
+    document.getElementById('errorState').hidden = true;
+    document.getElementById('cardsGrid').innerHTML = '';
+  }
+
+  function showError() {
+    document.getElementById('loadingState').hidden = true;
+    document.getElementById('emptyState').hidden = true;
+    document.getElementById('errorState').hidden = false;
+    document.getElementById('cardsGrid').innerHTML = '';
+  }
+
+  function showCards() {
+    document.getElementById('loadingState').hidden = true;
+    document.getElementById('emptyState').hidden = true;
+    document.getElementById('errorState').hidden = true;
+  }
+
   function buildCard(o){
     const budget=fmtBudget(o.budget_min,o.budget_max,o.currency);
     const deadline=fmtDate(o.deadline);
@@ -160,20 +244,33 @@
   function render(opps, append){
     const grid=document.getElementById('cardsGrid');
     if(!append) grid.innerHTML='';
-    opps.forEach(o=>grid.insertAdjacentHTML('beforeend',buildCard(o)));
+
+    if(opps.length === 0 && !append) {
+      showEmpty();
+    } else {
+      showCards();
+      opps.forEach(o=>grid.insertAdjacentHTML('beforeend',buildCard(o)));
+    }
+
     document.getElementById('loadMore').hidden=state.offset+state.limit>=state.total;
     if(typeof wireAccessButtons==='function') wireAccessButtons();
   }
 
   async function load(append){
+    if(!append) showLoading();
+
     const p={limit:state.limit,offset:state.offset};
     if(state.region) p.region=state.region;
     if(state.sector) p.sector=state.sector;
+
     try{
       const d=await api.getOpportunities(p);
       state.total=d.total;
       render(d.opportunities||[],append);
-    }catch(e){console.error(e);}
+    }catch(e){
+      console.error('API Error:', e);
+      if(!append) showError();
+    }
   }
 
   async function loadStats(){
@@ -188,7 +285,9 @@
          <div class="stat"><div class="num">${(d.execution_countries||[]).length||0}</div><div class="lbl" data-en>Countries</div><div class="lbl" data-tr>Ülke</div></div>`;
       const sel=document.getElementById('sectorFilter');
       (d.sectors||[]).forEach(s=>{if(s.name){const o=document.createElement('option');o.value=s.name;o.textContent=s.name+' ('+s.count+')';sel.appendChild(o);}});
-    }catch(e){}
+    }catch(e){
+      console.error('Stats error:', e);
+    }
   }
 
   document.querySelectorAll('[data-region]').forEach(b=>b.addEventListener('click',function(){
@@ -206,6 +305,10 @@
   });
 
   document.getElementById('loadMoreBtn').addEventListener('click',function(){
+    state.offset+=state.limit;
+    load(true);
+  });
+  document.getElementById('loadMoreBtnTr').addEventListener('click',function(){
     state.offset+=state.limit;
     load(true);
   });
